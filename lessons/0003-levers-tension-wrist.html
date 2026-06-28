@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L3 · Levers, Tension &amp; Your Wrist</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  /* Lesson-3-specific: torque simulator, strength-curve trio, wrist toggle */
+  .sim { background:linear-gradient(180deg,#fff,#f7fbfc); border:1px solid var(--rule); border-top:4px solid var(--surface); border-radius:var(--radius); padding:1.1rem 1.2rem 1.3rem; margin:1.8rem 0; box-shadow:var(--shadow); }
+  .sim .calc-title { font-family:var(--sans); font-weight:700; font-size:.95rem; color:var(--ocean-deep); margin-bottom:.6rem; }
+  .sim-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:1rem; align-items:start; }
+  @media (max-width:42rem){ .sim-grid { grid-template-columns:1fr; } }
+  .sim svg { width:100%; height:auto; display:block; }
+  .sim .controls { font-family:var(--sans); }
+  .sim .control { margin-bottom:.9rem; }
+  .sim .control label { display:flex; justify-content:space-between; font-size:.82rem; font-weight:600; color:var(--ink-soft); margin-bottom:.25rem; }
+  .sim .control output { color:var(--ocean-deep); font-weight:700; font-variant-numeric:tabular-nums; }
+  .sim input[type=range]{ width:100%; accent-color:var(--ocean); }
+  .readout { background:var(--abyss); color:#d8f1f5; border-radius:8px; padding:.8rem .9rem; font-family:var(--sans); font-size:.86rem; line-height:1.5; }
+  .readout .row { display:flex; justify-content:space-between; gap:.6rem; padding:.12rem 0; }
+  .readout .big { color:#ffd479; font-weight:700; font-variant-numeric:tabular-nums; }
+  .meter { height:12px; background:#0a3340; border-radius:6px; overflow:hidden; margin:.5rem 0 .2rem; }
+  .meter > span { display:block; height:100%; background:linear-gradient(90deg,#2a9db0,#c1492b); width:0; transition:width .08s; }
+  .meter-lab { font-size:.72rem; color:#8fb9c6; }
+
+  .curvetrio { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.8rem; margin:1.3rem 0; }
+  @media (max-width:40rem){ .curvetrio { grid-template-columns:1fr; } }
+  .curvetrio figure { margin:0; background:#fff; border:1px solid var(--rule); border-radius:var(--radius); padding:.7rem .8rem; box-shadow:var(--shadow); }
+  .curvetrio svg { width:100%; height:auto; }
+  .curvetrio figcaption { font-family:var(--sans); font-size:.78rem; color:var(--ink-soft); margin-top:.3rem; }
+  .curvetrio figcaption b { color:var(--abyss); }
+
+  .wrist { background:#fff; border:1px solid var(--rule); border-top:4px solid var(--coral); border-radius:var(--radius); padding:1.1rem 1.2rem 1.2rem; margin:1.6rem 0; box-shadow:var(--shadow); }
+  .wrist .calc-title { font-family:var(--sans); font-weight:700; font-size:.95rem; color:var(--ocean-deep); margin-bottom:.5rem; }
+  .wrist-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:center; }
+  @media (max-width:40rem){ .wrist-grid { grid-template-columns:1fr; } }
+  .wrist svg { width:100%; height:auto; }
+  .toggle-row { display:flex; gap:.5rem; margin:.3rem 0 .7rem; font-family:var(--sans); }
+  .toggle-row button { flex:1; cursor:pointer; font-family:var(--sans); font-weight:700; font-size:.84rem; padding:.55rem .6rem; border-radius:8px; border:1.5px solid var(--rule); background:var(--paper); color:var(--ink); }
+  .toggle-row button.active { border-color:var(--ocean); background:#e7f5f7; color:var(--ocean-deep); }
+  .wrist-cap { font-family:var(--sans); font-size:.86rem; color:var(--ink-soft); min-height:3.2em; }
+  .wrist-cap.bad { color:#8d2f1a; }
+  .wrist-cap.good { color:#245c30; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">Foundations · L3 · The mechanics</p>
+  <h1 class="lesson-title">Levers, Tension &amp; Your Wrist</h1>
+  <p class="lesson-sub">Why a 10 kg dumbbell can make your muscle pull like it's holding 100 kg — and why grip
+  angle decides whether that force bends your wrist or runs safely through it.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~13 minutes</span><span class="sep">•</span>
+    <span>🛠 One interactive you can drag</span><span class="sep">•</span>
+    <span class="tag math">A little physics, no calculus</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p>Your muscles never feel "the weight" directly — they feel <em>torque</em>, set by leverage. Understand that
+    one idea and you'll know why a lift has a sticking point, why machines feel different from dumbbells, how far to
+    lower the weight, and — the personal payoff — exactly why your <a href="../reference/program-card.html">program</a>
+    keeps your wrist neutral to protect the healed scaphoid.</p>
+  </div>
+
+  <!-- ===== 1. TORQUE ===== -->
+  <h2><span class="num">1</span>Every rep is a tug-of-war of torques</h2>
+  <p>A joint doesn't respond to force, it responds to <strong>torque</strong> — a turning effort, equal to force ×
+  <a href="../reference/glossary.html#moment-arm">lever arm</a> (the perpendicular distance from the force to the
+  joint).<span class="cite"><a href="#r1">1</a></span> Two torques fight at every joint:</p>
+  <ul>
+    <li>The <strong>weight's torque</strong> = load × the <em>horizontal</em> distance from the weight to the joint.</li>
+    <li>The <strong>muscle's torque</strong> = muscle force × its tiny lever arm (the biceps pulls only ~3.5 cm from the elbow).</li>
+  </ul>
+  <p>To lift, muscle torque must beat the weight's torque. Here's the kicker: the muscle's lever (~3.5 cm) is about
+  <strong>ten times shorter</strong> than the weight's (a ~35 cm forearm). So to balance a 10 kg dumbbell, the
+  biceps must generate the pull of roughly <strong>100 kg</strong>. Your muscles always work at a mechanical
+  disadvantage — that's normal, and it's why <em>tension</em>, not the number on the dumbbell, is the real
+  stimulus from <a href="0002-how-muscle-grows.html">Lesson 2</a>.</p>
+
+  <!-- ===== 2. SIMULATOR ===== -->
+  <h2><span class="num">2</span>Drag the curl — watch the force explode</h2>
+  <p>Slide the arm through a curl. The weight never changes, but the <strong>muscle force</strong> and the
+  difficulty swing wildly with the angle — because the lever arm does.</p>
+
+  <div class="sim">
+    <div class="calc-title">💪 Biceps-curl torque simulator</div>
+    <div class="sim-grid">
+      <svg id="armSvg" viewBox="0 0 380 300" role="img" aria-label="A side view of an arm doing a dumbbell curl, showing the moment arm."></svg>
+      <div class="controls">
+        <div class="control">
+          <label for="angle">Curl position <output id="angleOut">forearm horizontal</output></label>
+          <input type="range" id="angle" min="0" max="100" step="1" value="53">
+          <div class="meter-lab">bottom (arm hanging) → top (fully curled)</div>
+        </div>
+        <div class="control">
+          <label for="weight">Dumbbell <output id="weightOut">10 kg</output></label>
+          <input type="range" id="weight" min="2.5" max="25" step="2.5" value="10">
+        </div>
+        <div class="readout">
+          <div class="row"><span>Weight's lever arm</span><span class="big" id="oArm">—</span></div>
+          <div class="row"><span>Torque at the elbow</span><span class="big" id="oTorque">—</span></div>
+          <div class="row"><span>Force the biceps must pull</span><span class="big" id="oForce">—</span></div>
+          <div class="meter"><span id="meterFill"></span></div>
+          <div class="meter-lab" id="meterLab">difficulty vs. this curl's hardest point</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-label">★ Read the simulator</div>
+    <p>Difficulty peaks when the <strong>forearm is horizontal</strong> — that's where the weight's lever arm is
+    longest, so the torque (and the muscle force) is greatest. That point is your <strong>sticking
+    point</strong>.<span class="cite"><a href="#r1">1</a></span> At the very bottom and top, the lever arm shrinks
+    toward zero and the lift feels easy. Same dumbbell, completely different demand.</p>
+  </div>
+
+  <!-- ===== 3. STRENGTH CURVES ===== -->
+  <h2><span class="num">3</span>Strength curves — and why machines feel different</h2>
+  <p>That rise-and-fall of difficulty across a movement is its <strong>strength curve</strong>. Different lifts
+  have different shapes:</p>
+
+  <div class="curvetrio">
+    <figure>
+      <svg viewBox="0 0 120 70" aria-hidden="true"><polyline points="10,58 40,42 70,28 105,14" fill="none" stroke="#0b6b7a" stroke-width="3"/><line x1="10" y1="60" x2="112" y2="60" stroke="#ddd8c8"/></svg>
+      <figcaption><b>Ascending</b> — hardest at the bottom. Squat, press, deadlift.</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 120 70" aria-hidden="true"><polyline points="10,14 45,28 75,42 105,58" fill="none" stroke="#0b6b7a" stroke-width="3"/><line x1="10" y1="60" x2="112" y2="60" stroke="#ddd8c8"/></svg>
+      <figcaption><b>Descending</b> — hardest at the start. Rows, pulldowns, pull-ups.</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 120 70" aria-hidden="true"><polyline points="10,56 35,40 60,18 85,40 110,56" fill="none" stroke="#0b6b7a" stroke-width="3"/><line x1="10" y1="60" x2="112" y2="60" stroke="#ddd8c8"/></svg>
+      <figcaption><b>Bell-shaped</b> — hardest in the middle. Curls, extensions.</figcaption>
+    </figure>
+  </div>
+
+  <p>A <strong>free weight</strong>'s resistance follows gravity's lever arm — heaviest where your limb is
+  horizontal, whether or not that's where you're strong. A <strong>cam machine</strong> reshapes the resistance
+  through the range to better match your strength curve (easing the sticking point); <strong>bands</strong> get
+  harder as they stretch, which suits ascending lifts.<span class="cite"><a href="#r2">2</a></span> None is
+  "best" — they just load the curve differently. For you, machines are also a gift for the
+  <a href="#wrist">wrist</a>: a fixed neutral handle removes the balancing demand.</p>
+
+  <!-- ===== 4. ROM ===== -->
+  <h2><span class="num">4</span>How far to move: train the stretch</h2>
+  <p>Range of motion is a real variable, not a vanity one. Across the research, <strong>full range of motion
+  produces equal or greater growth than partial range</strong>, and the most valuable part appears to be the
+  <strong>lengthened (stretched) portion</strong> of the lift — loading the muscle while it's
+  long.<span class="cite"><a href="#r3">3</a><a href="#r4">4</a></span></p>
+
+  <div class="callout note">
+    <div class="callout-label">⌗ Practical ROM rule</div>
+    <p>Lower under control through a <strong>full range</strong>, feeling a stretch in the working muscle, then
+    drive back. If you ever shorten a lift (fatigue, a cranky joint), keep the <em>stretched</em> end and cut the
+    top. <span style="color:var(--ink-faint)">(That "lengthened partials beat full range" is a promising but still
+    emerging claim<span class="cite"><a href="#r4">4</a></span> — don't over-rotate on it; just don't cut the
+    stretch.)</span></p>
+  </div>
+
+  <p>And tempo? You don't need to grind in slow motion. Rep durations anywhere from about
+  <strong>half a second to eight seconds</strong> grow muscle about the same; only deliberately <em>very</em> slow
+  reps are worse.<span class="cite"><a href="#r5">5</a></span> Control the lowering, lift with intent, don't
+  bounce.</p>
+
+  <!-- ===== 5. WRIST ===== -->
+  <h2 id="wrist"><span class="num">5</span>Your wrist: where the force goes</h2>
+  <p>Now the personal payoff. The <strong>scaphoid</strong> is a small boat-shaped bone on the thumb side of your
+  wrist that bridges the two rows of wrist bones — so it carries a lot of load and shear. Its worst direction is
+  <strong>loaded extension</strong>: the wrist bent backwards under weight (with the hand thumb-side-out), which
+  bends and shears the scaphoid.<span class="cite"><a href="#r6">6</a></span> A flat-palm push-up forces the wrist
+  to ~80–90° of extension under your bodyweight; a straight barbell does the same to keep your palm under the bar.</p>
+  <p>A <strong>neutral grip</strong> — palms facing each other, on dumbbells, a neutral handle, or your fists —
+  keeps the wrist straight, so the load runs <em>axially</em> down the forearm bones instead of bending the joint.
+  Toggle it:</p>
+
+  <div class="wrist">
+    <div class="calc-title" id="wristTitle">🤚 Wrist load path — neutral grip</div>
+    <div class="toggle-row">
+      <button id="btnNeutral" class="active">Neutral grip ✓</button>
+      <button id="btnExtended">Pressing / flat-palm</button>
+    </div>
+    <div class="wrist-grid">
+      <svg id="wristSvg" viewBox="0 0 240 220" role="img" aria-label="Schematic of a wrist under load, switching between neutral and extended positions."></svg>
+      <p class="wrist-cap good" id="wristCap">Wrist straight: the load (green) runs straight down the forearm
+      bones. The scaphoid is barely bent — this is your default for presses, rows and squats.</p>
+    </div>
+  </div>
+
+  <div class="callout build">
+    <div class="callout-label">✓ The rule this gives you</div>
+    <p>Choose tools that let the wrist stay straight: neutral-grip dumbbells, machine handles, the trap-bar,
+    landmine, goblet holds, and fists/handles for push-ups. It's not weakness to avoid the barbell bench — it's
+    routing ~100 kg of internal force away from a bone that can't take it bent. Straps remove grip load on pulls.
+    See the <a href="../reference/program-card.html">Program Card</a> for the full swap list.</p>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">6</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="Longest lever, hardest point." data-explain-wrong="Drag the simulator in §2.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">A dumbbell curl is hardest when the forearm is…</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — forearm horizontal means the weight's lever arm is longest, so torque and muscle force peak. That's the sticking point.">Horizontal, the longest lever</button>
+      <button class="opt" data-feedback="Vertical means a short lever arm and low torque — that's an easy point, not the hardest.">Vertical, the shortest lever</button>
+      <button class="opt" data-feedback="Hanging at rest, the lever arm is near zero — almost no torque. That's the easiest point.">Hanging down at full rest</button>
+      <button class="opt" data-feedback="Near the shoulder the lever arm has shrunk again, so it's easier, not harder.">Curled up near the shoulder</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Load the muscle long." data-explain-wrong="See §4.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">Best range-of-motion advice for growth?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Yes — full range, emphasising the lengthened (stretched) portion under load, is equal-or-better than partials.">Full range, loading the stretch</button>
+      <button class="opt" data-feedback="Short partials near lockout skip the most valuable stretched portion — generally worse.">Short partials near lockout only</button>
+      <button class="opt" data-feedback="Bouncing through tiny ranges loses tension and control — not the goal.">Quick bounces through tiny ranges</button>
+      <button class="opt" data-feedback="A static stretch isn't resistance training; you need loaded reps through range.">Static holds instead of reps</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Force runs axially, not bending." data-explain-wrong="See the wrist toggle in §5.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">Why does a neutral grip protect your scaphoid?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Correct — a straight wrist sends the load down the forearm bones instead of bending and shearing the scaphoid.">Load runs through the forearm</button>
+      <button class="opt" data-feedback="A neutral grip keeps the wrist straighter, not more extended — extension is the dangerous direction.">It bends the wrist back further</button>
+      <button class="opt" data-feedback="Grip force isn't the point; the wrist angle and load path are. Straps can cut grip demand.">It forces a much harder grip</button>
+      <button class="opt" data-feedback="Muscles still work hard — the grip just changes where force travels through the wrist.">It removes all load from muscle</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li>Joints feel <strong>torque = force × lever arm</strong>, so the muscle pulls ~10× the weight on the bar.</li>
+      <li>A lift is hardest where the weight's <strong>lever arm is longest</strong> — the sticking point.</li>
+      <li>Lifts have <strong>strength curves</strong>; free weights, cams and bands load them differently.</li>
+      <li>Train a <strong>full range</strong>, especially the <strong>stretched</strong> part; tempo 0.5–8 s is fine.</li>
+      <li>A <strong>neutral wrist</strong> routes force down the forearm, away from the scaphoid in extension.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">📖</div>
+    <div>
+      <div class="label">Primary source · read this next</div>
+      <div class="title"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4887540/" target="_blank" rel="noopener">Kompf &amp; Arandjelović (2016) — “Understanding and Overcoming the Sticking Point in Resistance Exercise”</a></div>
+      <div class="desc">Open-access <i>Sports Medicine</i> review on how moment arms create the sticking point — the physics behind the simulator above, with the honest caveats about real compound lifts.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want me to run the torque numbers for a squat or a row, suggest a
+    neutral-grip swap for a specific machine at your gym, or check whether a movement is safe for your wrist? Ask in
+    chat.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#moment-arm">moment arm</a>,
+    <a href="../reference/glossary.html#strength-curve">strength curve</a>,
+    <a href="../reference/glossary.html#range-of-motion">range of motion</a>,
+    <a href="../reference/glossary.html#neutral-grip">neutral grip</a>.
+    Builds on → <a href="0002-how-muscle-grows.html">L2</a>. Apply it in → the <a href="../reference/program-card.html">Program Card</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">Kompf &amp; Arandjelović (2016). Understanding and overcoming the sticking point, <i>Sports Med</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4887540/" target="_blank" rel="noopener">PMC4887540</a>.</li>
+    <li id="r2">NSCA. Forms of variable resistance / strength-curve matching (cams, bands), <i>Strength &amp; Cond J</i>. <a href="https://journals.lww.com/nsca-scj/fulltext/2009/02000/forms_of_variable_resistance_training.10.aspx" target="_blank" rel="noopener">journals.lww.com</a>.</li>
+    <li id="r3">Schoenfeld &amp; Grgic (2020). Effects of range of motion on muscle development, <i>SAGE Open Med</i>. <a href="https://pubmed.ncbi.nlm.nih.gov/32030125/" target="_blank" rel="noopener">PubMed 32030125</a>.</li>
+    <li id="r4">Kassiano et al. (2023) &amp; Wolf et al. (meta) — long-muscle-length training. <a href="https://pubmed.ncbi.nlm.nih.gov/37015016/" target="_blank" rel="noopener">PubMed 37015016</a> · <a href="https://sportrxiv.org/index.php/server/preprint/view/198" target="_blank" rel="noopener">SportRxiv</a>.</li>
+    <li id="r5">Schoenfeld, Ogborn &amp; Krieger (2015). Repetition duration &amp; hypertrophy meta-analysis, <i>Sports Med</i>. <a href="https://pubmed.ncbi.nlm.nih.gov/25601394/" target="_blank" rel="noopener">PubMed 25601394</a>.</li>
+    <li id="r6">Erhart et al. (2020). Wrist movements induce torque/shear in the scaphoid, <i>J Orthop Surg Res</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7457810/" target="_blank" rel="noopener">PMC7457810</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="0002-how-muscle-grows.html">
+      <div class="dir">← L2</div>
+      <div class="ttl">How Muscle Grows</div>
+    </a>
+    <a class="next" href="0004-muscle-glucose-sink.html">
+      <div class="dir">Next · L4</div>
+      <div class="ttl">Muscle, the Glucose Sink →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L3 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+
+<script>
+/* ===== Biceps-curl torque simulator ===== */
+(function(){
+  var svg=document.getElementById('armSvg');
+  if(!svg) return;
+  var NS='http://www.w3.org/2000/svg';
+  function el(tag,a){ var e=document.createElementNS(NS,tag); for(var k in a) e.setAttribute(k,a[k]); return e; }
+
+  // geometry (px) and physics
+  var SH={x:120,y:48}, EL={x:120,y:150}, Lpx=128;   // shoulder, elbow, forearm length px
+  var L=0.35, r=0.035, g=9.81;                       // forearm 0.35 m, biceps lever 3.5 cm
+
+  // static parts
+  svg.appendChild(el('line',{x1:SH.x,y1:SH.y,x2:EL.x,y2:EL.y,stroke:'#0a3d5c','stroke-width':9,'stroke-linecap':'round'}));
+  svg.appendChild(el('circle',{cx:SH.x,cy:SH.y,r:7,fill:'#0a3d5c'}));
+  var loa=el('line',{stroke:'#c1492b','stroke-width':1.5,'stroke-dasharray':'3 3','stroke-opacity':.6}); svg.appendChild(loa);
+  var arm=el('line',{stroke:'#0b6b7a','stroke-width':9,'stroke-linecap':'round'}); svg.appendChild(arm);
+  var marm=el('line',{stroke:'#c1492b','stroke-width':2.5}); svg.appendChild(marm);
+  var marmLab=el('text',{'font-family':'sans-serif','font-size':11,'font-weight':700,fill:'#c1492b','text-anchor':'middle'}); svg.appendChild(marmLab);
+  var grav=el('line',{stroke:'#1b2228','stroke-width':2}); svg.appendChild(grav);
+  var gravHead=el('path',{fill:'#1b2228'}); svg.appendChild(gravHead);
+  var dumb=el('circle',{r:15,fill:'#1b2228'}); svg.appendChild(dumb);
+  var elbow=el('circle',{cx:EL.x,cy:EL.y,r:8,fill:'#fff',stroke:'#0a3d5c','stroke-width':3}); svg.appendChild(elbow);
+
+  var angle=document.getElementById('angle'), weight=document.getElementById('weight');
+  var angleOut=document.getElementById('angleOut'), weightOut=document.getElementById('weightOut');
+  var oArm=document.getElementById('oArm'), oTorque=document.getElementById('oTorque'), oForce=document.getElementById('oForce');
+  var meterFill=document.getElementById('meterFill'), meterLab=document.getElementById('meterLab');
+
+  function thetaFromSlider(s){ return (-85 + (s/100)*160) * Math.PI/180; } // forearm angle above horizontal (rad)
+
+  function update(){
+    var th=thetaFromSlider(parseFloat(angle.value));
+    var m=parseFloat(weight.value), Wn=m*g;
+    var hx=EL.x + Lpx*Math.cos(th), hy=EL.y - Lpx*Math.sin(th);
+
+    arm.setAttribute('x1',EL.x); arm.setAttribute('y1',EL.y);
+    arm.setAttribute('x2',hx);   arm.setAttribute('y2',hy);
+    dumb.setAttribute('cx',hx);  dumb.setAttribute('cy',hy);
+
+    // gravity arrow from hand straight down
+    var gy=hy+46;
+    grav.setAttribute('x1',hx); grav.setAttribute('y1',hy); grav.setAttribute('x2',hx); grav.setAttribute('y2',gy);
+    gravHead.setAttribute('d','M'+(hx-5)+' '+(gy-6)+' L'+(hx+5)+' '+(gy-6)+' L'+hx+' '+(gy+2)+' Z');
+    // line of action (vertical) through hand, up past elbow level
+    loa.setAttribute('x1',hx); loa.setAttribute('y1',hy); loa.setAttribute('x2',hx); loa.setAttribute('y2',EL.y);
+    // moment arm: horizontal from elbow to hand's vertical line, at elbow height
+    marm.setAttribute('x1',EL.x); marm.setAttribute('y1',EL.y); marm.setAttribute('x2',hx); marm.setAttribute('y2',EL.y);
+    marmLab.setAttribute('x',(EL.x+hx)/2); marmLab.setAttribute('y',EL.y-7);
+    var dext=L*Math.max(0,Math.cos(th));
+    marmLab.textContent = dext>0.02 ? ('d = '+(dext*100).toFixed(0)+' cm') : '';
+
+    var torque=Wn*dext, force=torque/r;
+    oArm.textContent=(dext*100).toFixed(0)+' cm';
+    oTorque.textContent=torque.toFixed(1)+' N·m';
+    oForce.textContent=Math.round(force)+' N  (≈'+Math.round(force/g)+' kg)';
+
+    var frac=Math.max(0,Math.cos(th)); // 1 at hardest (horizontal)
+    meterFill.style.width=(frac*100).toFixed(0)+'%';
+
+    var s=parseFloat(angle.value);
+    angleOut.textContent = s<35? 'near the bottom' : s>72? 'near the top' : 'forearm horizontal';
+    weightOut.textContent = m+' kg';
+    meterLab.textContent = frac>0.92 ? 'hardest point — the sticking point' : 'difficulty vs. this curl’s hardest point';
+  }
+  angle.addEventListener('input',update);
+  weight.addEventListener('input',update);
+  update();
+})();
+
+/* ===== Wrist load-path toggle ===== */
+(function(){
+  var svg=document.getElementById('wristSvg');
+  if(!svg) return;
+  var NS='http://www.w3.org/2000/svg';
+  function el(tag,a,txt){ var e=document.createElementNS(NS,tag); for(var k in a) e.setAttribute(k,a[k]); if(txt!=null) e.textContent=txt; return e; }
+
+  var bN=document.getElementById('btnNeutral'), bE=document.getElementById('btnExtended');
+  var cap=document.getElementById('wristCap'), title=document.getElementById('wristTitle');
+
+  function draw(extended){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    // forearm (two bones) coming down to the wrist at (120,150)
+    svg.appendChild(el('line',{x1:120,y1:30,x2:120,y2:150,stroke:'#cdbf9f','stroke-width':30,'stroke-linecap':'round'}));
+    svg.appendChild(el('line',{x1:120,y1:40,x2:120,y2:150,stroke:'#e7dcc2','stroke-width':10}));
+    var wrist={x:120,y:150};
+    svg.appendChild(el('circle',{cx:wrist.x,cy:wrist.y,r:9,fill:'#fff',stroke:'#8a6d1e','stroke-width':3})); // scaphoid-ish joint
+
+    if(!extended){
+      // neutral: hand continues straight down
+      svg.appendChild(el('line',{x1:120,y1:150,x2:120,y2:210,stroke:'#cdbf9f','stroke-width':26,'stroke-linecap':'round'}));
+      // axial load arrow (green) down the forearm
+      svg.appendChild(el('line',{x1:150,y1:36,x2:150,y2:200,stroke:'#3f7d4e','stroke-width':4}));
+      svg.appendChild(el('path',{d:'M145 198 L155 198 L150 210 Z',fill:'#3f7d4e'}));
+      svg.appendChild(el('text',{x:163,y:120,'font-family':'sans-serif','font-size':11,'font-weight':700,fill:'#245c30'},'axial'));
+      svg.appendChild(el('text',{x:163,y:134,'font-family':'sans-serif','font-size':11,'font-weight':700,fill:'#245c30'},'load'));
+      svg.appendChild(el('text',{x:120,y:230,'font-family':'sans-serif','font-size':11,fill:'#76838d','text-anchor':'middle'},'wrist ≈ straight'));
+    } else {
+      // extended: hand bent back ~80° (to the right/up), load bends the joint
+      svg.appendChild(el('line',{x1:120,y1:150,x2:195,y2:120,stroke:'#cdbf9f','stroke-width':26,'stroke-linecap':'round'}));
+      // bodyweight/load pressing straight down onto the bent hand
+      svg.appendChild(el('line',{x1:195,y1:70,x2:195,y2:116,stroke:'#1b2228','stroke-width':3}));
+      svg.appendChild(el('path',{d:'M189 112 L201 112 L195 122 Z',fill:'#1b2228'}));
+      // red shear/bend arc at the joint
+      svg.appendChild(el('path',{d:'M104 138 A22 22 0 0 1 140 132',fill:'none',stroke:'#c1492b','stroke-width':4}));
+      svg.appendChild(el('path',{d:'M138 126 L143 133 L134 136 Z',fill:'#c1492b'}));
+      svg.appendChild(el('text',{x:70,y:118,'font-family':'sans-serif','font-size':11,'font-weight':700,fill:'#8d2f1a'},'bend +'));
+      svg.appendChild(el('text',{x:70,y:132,'font-family':'sans-serif','font-size':11,'font-weight':700,fill:'#8d2f1a'},'shear'));
+      svg.appendChild(el('text',{x:120,y:200,'font-family':'sans-serif','font-size':11,fill:'#8d2f1a','text-anchor':'middle'},'wrist ≈ 80° extended'));
+    }
+  }
+
+  function setMode(extended){
+    bN.classList.toggle('active',!extended);
+    bE.classList.toggle('active',extended);
+    title.textContent = extended ? '🤚 Wrist load path — flat-palm / pressing' : '🤚 Wrist load path — neutral grip';
+    cap.className = 'wrist-cap ' + (extended?'bad':'good');
+    cap.textContent = extended
+      ? 'Wrist bent ~80° under load: force bends and shears the scaphoid (red). This is the flat push-up / barbell-press position you avoid.'
+      : 'Wrist straight: the load (green) runs straight down the forearm bones. The scaphoid is barely bent — this is your default for presses, rows and squats.';
+    draw(extended);
+  }
+  bN.addEventListener('click',function(){setMode(false);});
+  bE.addEventListener('click',function(){setMode(true);});
+  setMode(false);
+})();
+</script>
+</body>
+</html>

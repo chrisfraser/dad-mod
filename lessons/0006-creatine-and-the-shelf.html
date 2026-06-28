@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L9 · Creatine &amp; the Evidence-Based Shelf</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  /* Lesson-9-specific: saturation chart + the supplement shelf */
+  .chart-card { background:linear-gradient(180deg,#fff,#f7fbfc); border:1px solid var(--rule); border-top:4px solid var(--surface); border-radius:var(--radius); padding:1.1rem 1.2rem 1.3rem; margin:1.8rem 0; box-shadow:var(--shadow); }
+  .chart-card .calc-title { font-family:var(--sans); font-weight:700; font-size:.95rem; color:var(--ocean-deep); margin-bottom:.6rem; }
+  .chart-card svg { width:100%; height:auto; display:block; }
+  .scrub { display:flex; align-items:center; gap:.8rem; margin-top:.7rem; font-family:var(--sans); font-size:.82rem; }
+  .scrub input[type=range]{ flex:1; accent-color:var(--ocean); }
+  .chart-read { margin-top:.9rem; padding:.85rem 1rem; background:var(--abyss); color:#d8f1f5; border-radius:8px; font-family:var(--sans); font-size:.9rem; line-height:1.55; }
+  .chart-read b { color:#ffd479; }
+  .lgnd { display:flex; gap:1.1rem; flex-wrap:wrap; font-family:var(--sans); font-size:.76rem; color:var(--ink-soft); margin-top:.5rem; }
+  .lgnd span::before { content:"■ "; }
+  .lgnd .l-load::before { color:#c1492b; }
+  .lgnd .l-daily::before { color:#0b6b7a; }
+
+  .shelf { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin:1.4rem 0; }
+  @media (max-width:40rem){ .shelf { grid-template-columns:1fr; } }
+  .item { background:#fff; border:1px solid var(--rule); border-left:4px solid var(--rule); border-radius:var(--radius); padding:.8rem .9rem; box-shadow:var(--shadow); }
+  .item .nm { font-family:var(--sans); font-weight:700; font-size:.92rem; color:var(--abyss); }
+  .item .opts { display:flex; gap:.35rem; margin:.5rem 0 0; }
+  .item .opts button { flex:1; cursor:pointer; font-family:var(--sans); font-weight:700; font-size:.72rem; padding:.35rem .3rem; border-radius:6px; border:1.5px solid var(--rule); background:var(--paper); color:var(--ink-soft); }
+  .item .opts button:hover { border-color:var(--ocean); }
+  .item.done .opts button { cursor:default; opacity:.5; }
+  .item.done .opts button.picked-right, .item.done .opts button.answer { opacity:1; }
+  .item .verdict { font-family:var(--sans); font-size:.8rem; margin:.55rem 0 0; display:none; line-height:1.45; }
+  .item.done .verdict { display:block; }
+  .item.t-worth { border-left-color:var(--kelp); }
+  .item.t-worth .opts button.answer { background:#eef7ef; color:#245c30; border-color:#cfe6d3; }
+  .item.t-situational { border-left-color:var(--sand); }
+  .item.t-situational .opts button.answer { background:#fff7e6; color:#8a6d1e; border-color:#ecdcae; }
+  .item.t-skip { border-left-color:var(--coral); }
+  .item.t-skip .opts button.answer { background:#fdf0ec; color:#8d2f1a; border-color:#f0cfc4; }
+  .shelf-score { font-family:var(--sans); font-size:.84rem; font-weight:700; color:var(--ink-soft); margin:.3rem 0 0; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">Fuel &amp; Recover · L9</p>
+  <h1 class="lesson-title">Creatine &amp; the Evidence-Based Shelf</h1>
+  <p class="lesson-sub">The one supplement that's genuinely worth your money — how it works, how to take it, why it's
+  safe — plus a sort through everything else on the shelf.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~13 minutes</span><span class="sep">•</span>
+    <span>💊 Two things to play with</span><span class="sep">•</span>
+    <span class="tag ocean">Cutting through the hype</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p>The supplement aisle is 95% marketing. You asked for the science on creatine — here it is, with the rest of
+    the shelf sorted honestly. The punchline up front: for your goals, the entire evidence-based stack is basically
+    <strong>creatine + enough protein + (optional) caffeine + vitamin D only if you're low</strong>. Everything
+    else is situational or noise.</p>
+  </div>
+
+  <!-- ===== 1. WHAT IT IS ===== -->
+  <h2><span class="num">1</span>What creatine actually does</h2>
+  <p>Your muscles store creatine as <strong>phosphocreatine</strong>, a rechargeable battery for
+  <a href="../reference/glossary.html#creatine">ATP</a> — the fuel for short, hard efforts. During a heavy set,
+  phosphocreatine instantly tops ATP back up, so you can squeeze out roughly <strong>one more rep</strong> or hold a
+  touch more force.<span class="cite"><a href="#r1">1</a></span> That's the whole trick: creatine does <em>not</em>
+  build muscle directly. It lets you train slightly harder, and that extra work, accumulated over months, becomes
+  more muscle and strength.</p>
+
+  <!-- ===== 2. EFFECTS ===== -->
+  <h2><span class="num">2</span>How big is the effect — and the "water weight"</h2>
+  <p>Across meta-analyses, adding creatine to resistance training gives about <strong>an extra ~1 kg of lean
+  mass</strong> and a modest strength bump beyond training alone.<span class="cite"><a href="#r1">1</a><a href="#r5">5</a></span>
+  Real, worthwhile, but an <em>amplifier</em> — not a transformation in a tub.</p>
+  <div class="callout note">
+    <div class="callout-label">⌗ The early 1–2 kg is water — the good kind</div>
+    <p>In the first week you may gain 1–2 kg on the scale. That's water pulled <em>inside</em> your muscle cells
+    (it travels in with the creatine), not under-skin "bloat" and not fat.<span class="cite"><a href="#r2">2</a></span>
+    It's part of how it works, and it makes muscles look fuller, not puffier.</p>
+  </div>
+
+  <!-- ===== 3. SATURATION ===== -->
+  <h2><span class="num">3</span>How to take it: just 3–5 g, every day</h2>
+  <p>The goal is to <strong>saturate</strong> your muscle stores, then keep them topped up. You can rush it or
+  cruise it — <em>both arrive at the same place</em>. Scrub the days:</p>
+
+  <div class="chart-card">
+    <div class="calc-title">📈 Muscle creatine saturation — loading vs. just 3–5 g/day</div>
+    <svg id="satChart" viewBox="0 0 640 320" role="img" aria-label="Two curves rising to the same 100% saturation plateau; loading is faster, daily dosing reaches the same point by about day 28."></svg>
+    <div class="lgnd">
+      <span class="l-load">Loading (20 g/day for ~6 days)</span>
+      <span class="l-daily">Just 3–5 g/day</span>
+    </div>
+    <div class="scrub">
+      <label for="daySlider">Day</label>
+      <input type="range" id="daySlider" min="0" max="30" step="1" value="7">
+      <output id="dayOut">7</output>
+    </div>
+    <div class="chart-read" id="satRead">—</div>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-label">★ The simplest protocol that works</div>
+    <p><strong>3–5 g of creatine monohydrate, every single day, forever.</strong> No loading needed — it just buys a
+    couple of weeks of speed (and the faster water gain). <strong>Timing doesn't matter</strong> — pick a time you'll
+    remember. Consistency is the only rule.<span class="cite"><a href="#r1">1</a><a href="#r3">3</a></span></p>
+  </div>
+
+  <!-- ===== 4. FORM ===== -->
+  <h2><span class="num">4</span>Buy the boring one: monohydrate</h2>
+  <p>Creatine <strong>monohydrate</strong> is the most-studied (hundreds of trials), the cheapest, and the
+  reference standard.<span class="cite"><a href="#r1">1</a></span> The fancy versions — hydrochloride (HCl), ethyl
+  ester, buffered "Kre-Alkalyn", nitrate — have <strong>no proven advantage</strong> and cost more. You'd be paying
+  for the label. Plain monohydrate powder is the answer.</p>
+
+  <!-- ===== 5. SAFETY ===== -->
+  <h2><span class="num">5</span>Is it safe? Yes — and the kidney scare is a myth</h2>
+  <p>Creatine is one of the most-studied supplements in existence, with safety shown at up to
+  <strong>30 g/day for five years</strong> in healthy and clinical groups.<span class="cite"><a href="#r1">1</a></span></p>
+  <div class="callout note">
+    <div class="callout-label">⌗ "It raises creatinine, so it harms kidneys" — no</div>
+    <p>Creatine naturally breaks down into <em>creatinine</em>, the very thing kidney blood tests measure — so the
+    number ticks up <strong>without any actual kidney damage</strong>. Controlled trials show normal kidney function
+    (GFR).<span class="cite"><a href="#r4">4</a></span> Two practical notes: if you have <em>pre-existing</em> kidney
+    disease (or you're pregnant), ask your doctor first; and mention you take creatine before any blood test so a
+    raised creatinine isn't misread. The hair-loss rumour rests on one tiny study that never even measured
+    hair.<span class="cite"><a href="#r2">2</a></span></p>
+  </div>
+
+  <!-- ===== 6. WHO / COGNITION ===== -->
+  <h2><span class="num">6</span>Who benefits most — and a bonus to watch</h2>
+  <p>The lower your starting stores, the bigger the jump — so <strong>vegetarians and vegans</strong> (creatine comes
+  from meat and fish) often respond most, and <strong>older adults</strong> get a real anti-ageing benefit for muscle
+  when they pair it with lifting.<span class="cite"><a href="#r5">5</a></span> At 40 and beyond, that's squarely in
+  your favour.</p>
+  <p><strong>Emerging, not settled:</strong> creatine may modestly help <em>cognition</em> — especially memory and
+  thinking <em>under stress or sleep deprivation</em>.<span class="cite"><a href="#r6">6</a></span> Promising, not a
+  reason on its own, but a nice possible bonus for a busy 40-year-old.</p>
+
+  <!-- ===== 7. THE SHELF ===== -->
+  <h2><span class="num">7</span>Sort the shelf</h2>
+  <p>Here's the rest of the aisle. For each one, guess the verdict — <strong>Worth it</strong>,
+  <strong>Situational</strong>, or <strong>Skip</strong> — then see the evidence.</p>
+
+  <div class="shelf" id="shelf"></div>
+  <p class="shelf-score" id="shelfScore">0 / 9 sorted</p>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">8</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="It's an amplifier." data-explain-wrong="See §1.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">How does creatine help you build muscle?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — it tops up ATP so you train slightly harder; the extra work over time becomes muscle. It isn't muscle itself.">Indirectly, by letting you train harder</button>
+      <button class="opt" data-feedback="It isn't muscle tissue and doesn't add tissue directly — it improves your training.">Directly — it becomes muscle tissue</button>
+      <button class="opt" data-feedback="It doesn't burn fat. It recharges ATP for harder efforts.">By burning the fat around muscle</button>
+      <button class="opt" data-feedback="You still need protein for raw material — creatine doesn't replace it.">By replacing your need for protein</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Same plateau." data-explain-wrong="See the saturation chart in §3.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">Do you need a "loading phase"?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Correct — 3–5 g/day reaches the same saturation by ~day 28. Loading only saturates faster.">No; daily dosing reaches the same plateau</button>
+      <button class="opt" data-feedback="It still works without loading — you just saturate a couple of weeks slower.">Yes; without loading it won't work</button>
+      <button class="opt" data-feedback="Loading doesn't raise the ceiling; both protocols hit the same maximum.">Yes; loading raises the final ceiling</button>
+      <button class="opt" data-feedback="Daily dosing does saturate — fully by about day 28.">No; but daily dosing never saturates</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Boring and best." data-explain-wrong="See §4.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">Which form should you buy?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Yes — monohydrate is the cheapest, most-studied, and as effective as anything. The fancy forms add cost, not results.">Monohydrate, cheapest and best-proven</button>
+      <button class="opt" data-feedback="HCl has no proven absorption advantage over monohydrate for results.">Hydrochloride, it absorbs better</button>
+      <button class="opt" data-feedback="Ethyl ester is newer but not better — arguably worse. Monohydrate wins.">Ethyl ester, newer and stronger</button>
+      <button class="opt" data-feedback="Buffered 'Kre-Alkalyn' shows no advantage over plain monohydrate.">Buffered, gentler and superior</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li>Creatine recharges ATP so you <strong>train slightly harder</strong> — an amplifier, ~+1 kg lean mass, not a direct builder.</li>
+      <li>Take <strong>3–5 g monohydrate daily, forever</strong>; loading is optional and timing doesn't matter.</li>
+      <li>The early <strong>1–2 kg is intracellular water</strong>, not fat or bloat.</li>
+      <li>It's <strong>safe</strong>; the kidney scare is a measurement artefact (tell your doctor you take it before a test).</li>
+      <li>The whole worthwhile shelf: <strong>creatine + protein + (optional) caffeine + vitamin&nbsp;D if low</strong>.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">📖</div>
+    <div>
+      <div class="label">Primary source · read this next</div>
+      <div class="title"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5469049/" target="_blank" rel="noopener">ISSN Position Stand — Kreider et al. (2017): Creatine supplementation</a></div>
+      <div class="desc">The authoritative, free, fully-referenced summary: efficacy, dosing, monohydrate superiority, and the safety data. The companion "<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7871530/" target="_blank" rel="noopener">Common questions &amp; misconceptions</a>" (Antonio 2021) debunks the myths directly.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want a brand-agnostic buying steer (what "creatine monohydrate"
+    label to look for), whether caffeine is worth it given your sleep, or which blood tests tell you if vitamin D is
+    low? Ask in chat.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#creatine">creatine</a>,
+    <a href="../reference/glossary.html#muscle-protein-synthesis">muscle protein synthesis</a>.
+    Builds on → <a href="0005-protein-without-obsession.html">L8 Protein</a>. Next → <a href="0007-sleep-recovery-deficit.html">L10 Sleep, Recovery &amp; the Small Deficit</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">Kreider et al. (2017). ISSN Position Stand: Creatine, <i>JISSN</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5469049/" target="_blank" rel="noopener">PMC5469049</a>.</li>
+    <li id="r2">Antonio et al. (2021). Common questions &amp; misconceptions about creatine, <i>JISSN</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7871530/" target="_blank" rel="noopener">PMC7871530</a>.</li>
+    <li id="r3">Hultman et al. (1996). Muscle creatine loading in men, <i>J Appl Physiol</i> (loading vs 3 g/day → same plateau). <a href="https://pubmed.ncbi.nlm.nih.gov/8828669/" target="_blank" rel="noopener">PubMed 8828669</a>.</li>
+    <li id="r4">“Requiem for creatine-induced kidney failure” (2023) — the kidney-myth review. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10054094/" target="_blank" rel="noopener">PMC10054094</a>.</li>
+    <li id="r5">Chilibeck et al. (2017). Creatine + resistance training, older adults — meta-analysis. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5679696/" target="_blank" rel="noopener">PMC5679696</a>.</li>
+    <li id="r6">Xu et al. (2024). Creatine &amp; cognition — meta-analysis (emerging). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11275561/" target="_blank" rel="noopener">PMC11275561</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="0005-protein-without-obsession.html">
+      <div class="dir">← L8</div>
+      <div class="ttl">Protein Without Obsession</div>
+    </a>
+    <a class="next" href="0007-sleep-recovery-deficit.html">
+      <div class="dir">Next · L10</div>
+      <div class="ttl">Sleep, Recovery &amp; the Deficit →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L9 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+
+<script>
+/* ===== Creatine saturation scrubber ===== */
+(function(){
+  var svg=document.getElementById('satChart');
+  if(!svg) return;
+  var NS='http://www.w3.org/2000/svg';
+  var W=640,H=320,m={l:48,r:20,t:20,b:44},pw=W-m.l-m.r,ph=H-m.t-m.b,maxX=30,maxY=100;
+  function X(d){return m.l+(d/maxX)*pw;}
+  function Y(p){return m.t+(1-p/maxY)*ph;}
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function interp(an){return function(x){if(x<=an[0][0])return an[0][1];for(var i=1;i<an.length;i++){if(x<=an[i][0]){var a=an[i-1],b=an[i],t=(x-a[0])/(b[0]-a[0]);return a[1]+t*(b[1]-a[1]);}}return an[an.length-1][1];};}
+  var load=interp([[0,0],[1,30],[2,50],[3,68],[4,82],[5,92],[6,98],[7,100],[30,100]]);
+  var daily=interp([[0,0],[3,12],[7,28],[10,40],[14,55],[18,70],[21,80],[24,88],[28,96],[30,100]]);
+  function samp(fn){var p=[];for(var d=0;d<=maxX+0.001;d+=0.5)p.push([X(d),Y(fn(d))]);return p;}
+  function pd(p){return p.map(function(q,i){return(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1);}).join(' ');}
+
+  for(var g=0;g<=100;g+=25){
+    svg.appendChild(el('line',{x1:m.l,y1:Y(g),x2:W-m.r,y2:Y(g),stroke:'#e3ded2'}));
+    var yl=el('text',{x:m.l-8,y:Y(g)+4,'text-anchor':'end','font-family':'sans-serif','font-size':11,fill:'#76838d'});yl.textContent=g+'%';svg.appendChild(yl);
+  }
+  for(var dx=0;dx<=30;dx+=5){var xl=el('text',{x:X(dx),y:H-m.b+20,'text-anchor':'middle','font-family':'sans-serif','font-size':11,fill:'#76838d'});xl.textContent='d'+dx;svg.appendChild(xl);}
+  // 100% plateau dashed
+  svg.appendChild(el('line',{x1:m.l,y1:Y(100),x2:W-m.r,y2:Y(100),stroke:'#9ec9a6','stroke-width':1.5,'stroke-dasharray':'4 4'}));
+  svg.appendChild(el('path',{d:pd(samp(daily)),fill:'none',stroke:'#0b6b7a','stroke-width':3}));
+  svg.appendChild(el('path',{d:pd(samp(load)),fill:'none',stroke:'#c1492b','stroke-width':3}));
+  // "same destination" note near day 28
+  var note=el('text',{x:X(22),y:Y(100)-8,'font-family':'sans-serif','font-size':11,'font-weight':700,fill:'#3f7d4e'});note.textContent='both reach 100%';svg.appendChild(note);
+
+  var mk=el('line',{stroke:'#444','stroke-width':1.5,'stroke-dasharray':'4 3'});svg.appendChild(mk);
+  var dL=el('circle',{r:5,fill:'#c1492b',stroke:'#fff','stroke-width':1.5});svg.appendChild(dL);
+  var dD=el('circle',{r:5,fill:'#0b6b7a',stroke:'#fff','stroke-width':1.5});svg.appendChild(dD);
+
+  var sl=document.getElementById('daySlider'),out=document.getElementById('dayOut'),read=document.getElementById('satRead');
+  function up(){
+    var d=parseInt(sl.value,10);out.textContent=d;
+    var lv=load(d),dv=daily(d);
+    mk.setAttribute('x1',X(d));mk.setAttribute('x2',X(d));mk.setAttribute('y1',m.t);mk.setAttribute('y2',Y(0));
+    dL.setAttribute('cx',X(d));dL.setAttribute('cy',Y(lv));
+    dD.setAttribute('cx',X(d));dD.setAttribute('cy',Y(dv));
+    var tail = d>=28 ? ' Both are now full — from here they’re identical.' :
+               d===0 ? ' Day zero — empty stores; pick a routine and just be consistent.' :
+               ' Loading is ahead for now, but the daily route catches up by ~day 28.';
+    read.innerHTML='Day <b>'+d+'</b>: loading ≈ <b>'+Math.round(lv)+'%</b> saturated, 3–5 g/day ≈ <b>'+Math.round(dv)+'%</b>.'+tail;
+  }
+  sl.addEventListener('input',up);up();
+})();
+
+/* ===== Sort-the-supplement shelf ===== */
+(function(){
+  var root=document.getElementById('shelf');
+  if(!root) return;
+  var scoreEl=document.getElementById('shelfScore');
+  var TIERS={worth:'Worth it',situational:'Situational',skip:'Skip'};
+  var items=[
+    {nm:'Caffeine',tier:'worth',why:'3–6 mg/kg ~45 min pre-training → a reliable ~2–7% performance boost. Mind your sleep.'},
+    {nm:'Vitamin D',tier:'worth',why:'Only if a blood test says you’re low — then it corrects a real deficit. No benefit if you’re already replete.'},
+    {nm:'Whey protein powder',tier:'worth',why:'Not magic — just convenient food to help you hit your daily protein target.'},
+    {nm:'Beta-alanine',tier:'situational',why:'4–6 g/day; buffers acid for efforts ~1–4 min. Minor for general lifting; causes harmless tingling.'},
+    {nm:'Omega-3 (fish oil)',tier:'situational',why:'~2–3 g/day EPA/DHA; general-health play, weak direct muscle/recovery signal.'},
+    {nm:'Citrulline malate',tier:'situational',why:'~6–8 g pre-workout; small, inconsistent rep/pump evidence.'},
+    {nm:'BCAAs',tier:'skip',why:'Redundant if your protein is adequate — whole protein is superior and you already hit ~180 g.'},
+    {nm:'"Testosterone boosters"',tier:'skip',why:'No credible evidence they raise testosterone or muscle. Save your money.'},
+    {nm:'Fancy creatine (HCl, ethyl ester)',tier:'skip',why:'Zero proven advantage over plain monohydrate — just more expensive.'}
+  ];
+  var done=0;
+  items.forEach(function(it){
+    var card=document.createElement('div');
+    card.className='item';
+    var opts='';
+    ['worth','situational','skip'].forEach(function(t){
+      opts+='<button data-t="'+t+'">'+TIERS[t]+'</button>';
+    });
+    card.innerHTML='<div class="nm">'+it.nm+'</div><div class="opts">'+opts+'</div><div class="verdict"></div>';
+    root.appendChild(card);
+    var btns=card.querySelectorAll('.opts button');
+    btns.forEach(function(b){
+      b.addEventListener('click',function(){
+        if(card.classList.contains('done')) return;
+        card.classList.add('done','t-'+it.tier);
+        btns.forEach(function(x){ if(x.getAttribute('data-t')===it.tier) x.classList.add('answer'); });
+        var right=b.getAttribute('data-t')===it.tier;
+        card.querySelector('.verdict').innerHTML=(right?'<b style="color:#245c30">✓ Yes — </b>':'<b style="color:#8d2f1a">Actually: '+TIERS[it.tier]+'. </b>')+it.why;
+        done++; scoreEl.textContent=done+' / '+items.length+' sorted';
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

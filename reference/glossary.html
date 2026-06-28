@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossary · dad-mod Course</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<style>
+  /* Reference-specific: tight definition list, jump nav, category labels */
+  .glossary-entry { border-bottom:1px solid var(--rule); padding:1.05rem 0; scroll-margin-top:5rem; }
+  .glossary-entry:target { background:#fffdf4; box-shadow:-1rem 0 0 #fffdf4, 1rem 0 0 #fffdf4; }
+  .glossary-term { font-family:var(--sans); font-weight:700; font-size:1.06rem; color:var(--abyss); display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap; }
+  .glossary-term .sym { font-family:var(--mono); font-size:.78rem; color:var(--ocean); background:var(--paper-2); padding:.1rem .45rem; border-radius:5px; font-weight:600; }
+  .glossary-def { margin:.4rem 0 0; color:var(--ink-soft); }
+  .glossary-def .xref { font-family:var(--sans); font-size:.85em; }
+  .glossary-def .avoid { font-family:var(--sans); font-size:.8rem; color:var(--ink-faint); margin-top:.3rem; }
+  .jump { position:sticky; top:0; z-index:5; background:rgba(251,250,245,.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--rule); padding:.55rem 0; margin-bottom:1rem; }
+  .jump .wrap { display:flex; flex-wrap:wrap; gap:.25rem .4rem; font-family:var(--sans); font-size:.8rem; padding-inline:0; }
+  .jump a { text-decoration:none; padding:.12rem .4rem; border-radius:5px; color:var(--ocean-deep); }
+  .jump a:hover { background:var(--paper-2); }
+  .cat { font-family:var(--sans); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint); margin:2.2rem 0 .3rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="program-card.html">Program</a>
+      <a href="glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">Reference</p>
+  <h1 class="lesson-title">Glossary</h1>
+  <p class="lesson-sub">The shared vocabulary of the course. Every lesson links here; every term means exactly
+  this. Bookmark it.</p>
+  <p class="muted" style="font-family:var(--sans);font-size:.85rem">Grouped by theme, roughly in the order you
+  meet them. <code>↗</code> marks a cross-reference; <em>avoid</em> lists looser words we don't use.</p>
+
+  <nav class="jump" aria-label="Jump to term">
+    <div class="wrap">
+      <a href="#rep">Rep</a>
+      <a href="#set">Set</a>
+      <a href="#compound">Compound</a>
+      <a href="#isolation">Isolation</a>
+      <a href="#full-body">Full-body</a>
+      <a href="#hypertrophy">Hypertrophy</a>
+      <a href="#recomposition">Recomposition</a>
+      <a href="#anabolic-resistance">Anabolic resistance</a>
+      <a href="#mechanotransduction">Mechanotransduction</a>
+      <a href="#muscle-protein-synthesis">MPS</a>
+      <a href="#motor-unit-recruitment">Size principle</a>
+      <a href="#volume">Volume</a>
+      <a href="#counting-sets">Counting sets</a>
+      <a href="#frequency">Frequency</a>
+      <a href="#1rm">1RM</a>
+      <a href="#rir">RIR</a>
+      <a href="#rpe">RPE</a>
+      <a href="#progressive-overload">Progressive overload</a>
+      <a href="#double-progression">Double progression</a>
+      <a href="#linear-progression">Linear progression</a>
+      <a href="#hinge">Hinge</a>
+      <a href="#neutral-grip">Neutral grip</a>
+      <a href="#moment-arm">Moment arm</a>
+      <a href="#strength-curve">Strength curve</a>
+      <a href="#range-of-motion">Range of motion</a>
+      <a href="#bracing">Bracing</a>
+      <a href="#scapular-retraction">Scapular set</a>
+      <a href="#glut4">GLUT4</a>
+      <a href="#insulin-sensitivity">Insulin sensitivity</a>
+      <a href="#myokine">Myokine</a>
+      <a href="#energy-balance">Energy balance</a>
+      <a href="#recovery">Recovery (SRA)</a>
+      <a href="#leucine">Leucine</a>
+      <a href="#creatine">Creatine</a>
+    </div>
+  </nav>
+
+  <!-- ===================== THE BASICS ===================== -->
+  <p class="cat">The basics</p>
+
+  <div class="glossary-entry" id="rep">
+    <div class="glossary-term">Rep <span class="sym">repetition</span></div>
+    <p class="glossary-def">One complete execution of an exercise — the lift and the return.
+    <span class="avoid">Avoid: count, movement.</span></p>
+  </div>
+
+  <div class="glossary-entry" id="set">
+    <div class="glossary-term">Set</div>
+    <p class="glossary-def">A group of consecutive reps with no rest. In this course "set" always means a
+    <em>working set</em>; warm-up sets are tracked separately.
+    <span class="avoid">Avoid: round.</span></p>
+  </div>
+
+  <div class="glossary-entry" id="compound">
+    <div class="glossary-term">Compound lift</div>
+    <p class="glossary-def">A multi-joint exercise training several muscles at once (squat, row, press). The
+    backbone of a time-efficient programme — see the <a class="xref" href="program-card.html">Program Card</a>.
+    <span class="avoid">Avoid: big lift.</span></p>
+  </div>
+
+  <div class="glossary-entry" id="isolation">
+    <div class="glossary-term">Isolation exercise</div>
+    <p class="glossary-def">A single-joint exercise targeting one muscle (e.g. a biceps curl). Accessory work,
+    not the backbone of the session.</p>
+  </div>
+
+  <div class="glossary-entry" id="full-body">
+    <div class="glossary-term">Full-body split</div>
+    <p class="glossary-def">A session structure where every workout trains the whole body. Suits 3 days/week —
+    each muscle gets trained ~2–3× without long sessions. See <a class="xref" href="#frequency">frequency</a>.</p>
+  </div>
+
+  <!-- ===================== GROWTH ===================== -->
+  <p class="cat">Growth &amp; adaptation</p>
+
+  <div class="glossary-entry" id="hypertrophy">
+    <div class="glossary-term">Hypertrophy</div>
+    <p class="glossary-def">Muscle growth, driven mainly by mechanical tension accumulated through hard sets over
+    time. <span class="avoid">Avoid: bulking, getting big, toning.</span></p>
+  </div>
+
+  <div class="glossary-entry" id="recomposition">
+    <div class="glossary-term">Recomposition <span class="sym">recomp</span></div>
+    <p class="glossary-def">Gaining muscle and losing fat at the same time. Most achievable for the untrained and
+    the overweight — exactly this learner's profile. <span class="avoid">Avoid: toning.</span></p>
+  </div>
+
+  <div class="glossary-entry" id="anabolic-resistance">
+    <div class="glossary-term">Anabolic resistance</div>
+    <p class="glossary-def">The blunted muscle-building response to training and protein seen mainly in older age
+    (65+). Largely overcome by the training stimulus itself; only a minor factor at 40.</p>
+  </div>
+
+  <div class="glossary-entry" id="mechanotransduction">
+    <div class="glossary-term">Mechanotransduction</div>
+    <p class="glossary-def">How a muscle fibre converts mechanical force (tension) into the chemical signals that
+    switch on growth — notably mTORC1 → <a class="xref" href="#muscle-protein-synthesis">protein synthesis</a>.
+    The reason mechanical tension, not soreness, is the real growth stimulus.</p>
+  </div>
+
+  <div class="glossary-entry" id="muscle-protein-synthesis">
+    <div class="glossary-term">Muscle protein synthesis <span class="sym">MPS</span></div>
+    <p class="glossary-def">The building of new muscle protein. A hard session raises MPS for ~24–48 h; net growth =
+    MPS minus protein breakdown, which dietary protein tips positive. The molecular reason behind the protein
+    target. <span class="avoid">Avoid: "the pump builds muscle".</span></p>
+  </div>
+
+  <div class="glossary-entry" id="motor-unit-recruitment">
+    <div class="glossary-term">Motor-unit recruitment <span class="sym">size principle</span></div>
+    <p class="glossary-def">Henneman's rule that the body recruits motor units small-to-large as effort rises. The
+    big, high-growth fibres only switch on near the end of a hard set — which is why training to
+    <a class="xref" href="#rir">RIR</a> 1–3 (or with heavy load) matters.</p>
+  </div>
+
+  <!-- ===================== THE DIALS ===================== -->
+  <p class="cat">The dials you turn</p>
+
+  <div class="glossary-entry" id="volume">
+    <div class="glossary-term">Volume <span class="sym">hard sets / muscle / week</span></div>
+    <p class="glossary-def">The total amount of hard work for a muscle, counted as hard sets per muscle per week.
+    The strongest lever for <a class="xref" href="#hypertrophy">hypertrophy</a> — start ~8–12, build toward 10–20.
+    <span class="avoid">Avoid: "how much you do".</span></p>
+  </div>
+
+  <div class="glossary-entry" id="counting-sets">
+    <div class="glossary-term">Counting hard sets <span class="sym">how to</span></div>
+    <p class="glossary-def">How you measure weekly <a class="xref" href="#volume">volume</a>. Count only
+    <em>hard working sets</em> (taken to ~1–3 <a class="xref" href="#rir">RIR</a>) — warm-ups don't count. Add them
+    up across the <strong>whole week and all sessions</strong>, not per workout. A <a class="xref" href="#compound">compound</a>
+    counts for <em>each</em> major muscle it trains (a row = 1 set for the back; a bench = 1 set for the chest).
+    Count primary movers fully; don't fuss over indirect work (biceps in rows, triceps in presses).</p>
+  </div>
+
+  <div class="glossary-entry" id="frequency">
+    <div class="glossary-term">Frequency</div>
+    <p class="glossary-def">How many times per week a muscle is trained. Mainly a way to <em>distribute</em> weekly
+    <a class="xref" href="#volume">volume</a> into recoverable, high-quality sessions.</p>
+  </div>
+
+  <div class="glossary-entry" id="1rm">
+    <div class="glossary-term">1RM <span class="sym">one-rep max</span></div>
+    <p class="glossary-def">The most weight you can lift for a single rep. Loads are often described as a
+    percentage of 1RM (e.g. ~70% 1RM ≈ a weight you could lift ~12 times).</p>
+  </div>
+
+  <div class="glossary-entry" id="rir">
+    <div class="glossary-term">RIR <span class="sym">reps in reserve</span></div>
+    <p class="glossary-def">How many more reps you could have done before failure. "Stop at 2 RIR" = stop with 2
+    reps left in the tank. The practical effort gauge in this course; most sets sit at
+    <strong>RIR 1–3</strong>. <span class="avoid">Avoid: "how hard it felt".</span></p>
+  </div>
+
+  <div class="glossary-entry" id="rpe">
+    <div class="glossary-term">RPE <span class="sym">rate of perceived exertion</span></div>
+    <p class="glossary-def">A 1–10 effort rating where 10 = failure. RPE 8 ≈ 2 <a class="xref" href="#rir">RIR</a>.
+    The inverse view of RIR. <span class="avoid">Avoid: effort score.</span></p>
+  </div>
+
+  <!-- ===================== PROGRESS ===================== -->
+  <p class="cat">Making progress</p>
+
+  <div class="glossary-entry" id="progressive-overload">
+    <div class="glossary-term">Progressive overload</div>
+    <p class="glossary-def">Systematically increasing the demand on a muscle over time — usually by adding load or
+    reps. The engine of all progress. <span class="avoid">Avoid: pushing harder, levelling up.</span></p>
+  </div>
+
+  <div class="glossary-entry" id="double-progression">
+    <div class="glossary-term">Double progression</div>
+    <p class="glossary-def">The progression rule used here: work within a rep range at a fixed load until you hit
+    the <em>top of the range on all sets</em>, then add the smallest load and rebuild. Self-regulating; outlasts
+    <a class="xref" href="#linear-progression">linear progression</a>.</p>
+  </div>
+
+  <div class="glossary-entry" id="linear-progression">
+    <div class="glossary-term">Linear progression</div>
+    <p class="glossary-def">Adding a fixed weight every session (e.g. +2.5 kg). Works briefly for novices, then
+    stalls — which is why this course uses <a class="xref" href="#double-progression">double progression</a>
+    instead.</p>
+  </div>
+
+  <!-- ===================== MOVEMENT ===================== -->
+  <p class="cat">Movement &amp; technique</p>
+
+  <div class="glossary-entry" id="hinge">
+    <div class="glossary-term">Hinge</div>
+    <p class="glossary-def">The hip-dominant movement pattern (deadlift, Romanian deadlift, hip thrust). Trains the
+    posterior chain — glutes, hamstrings, back. The trap-bar deadlift is this course's main hinge.</p>
+  </div>
+
+  <div class="glossary-entry" id="neutral-grip">
+    <div class="glossary-term">Neutral grip</div>
+    <p class="glossary-def">A palms-facing-each-other / hammer grip that keeps the wrist straight, with no
+    extension. The <strong>default grip for this learner</strong>, because a healed <em>scaphoid</em> (a wrist
+    bone) can't bear load in extension — so flat-palm push-ups and barbell pressing are out.
+    <span class="avoid">Avoid using "hammer grip" except as an alias.</span></p>
+  </div>
+
+  <div class="glossary-entry" id="moment-arm">
+    <div class="glossary-term">Moment arm <span class="sym">lever arm</span></div>
+    <p class="glossary-def">The perpendicular distance from a force's line of action to the joint.
+    <strong>Torque = force × moment arm</strong>, so a longer lever means more turning effort. A lift is hardest
+    where the weight's moment arm is longest (its <a class="xref" href="#strength-curve">sticking point</a>).</p>
+  </div>
+
+  <div class="glossary-entry" id="strength-curve">
+    <div class="glossary-term">Strength curve</div>
+    <p class="glossary-def">How a lift's difficulty changes through its range, set by the
+    <a class="xref" href="#moment-arm">moment arm</a>: <em>ascending</em> (hardest at the bottom — squat, press),
+    <em>descending</em> (hardest at the start — rows, pulldowns), or <em>bell-shaped</em> (hardest in the middle —
+    curls).</p>
+  </div>
+
+  <div class="glossary-entry" id="range-of-motion">
+    <div class="glossary-term">Range of motion <span class="sym">ROM</span></div>
+    <p class="glossary-def">How far a joint travels in a rep. Full ROM grows at least as much as partial ROM, and
+    loading the muscle at long (stretched) lengths is especially valuable. Default to full range, emphasising the
+    stretch.</p>
+  </div>
+
+  <div class="glossary-entry" id="bracing">
+    <div class="glossary-term">Bracing <span class="sym">360° / Valsalva</span></div>
+    <p class="glossary-def">Stiffening the trunk to protect the spine under load: breathe into the belly so it
+    expands all the way around (360°), brace the abs as if to take a punch, and hold through the hard part of the
+    rep. Used on every working rep of the big lifts.</p>
+  </div>
+
+  <div class="glossary-entry" id="scapular-retraction">
+    <div class="glossary-term">Scapular set <span class="sym">retraction</span></div>
+    <p class="glossary-def">Pulling the shoulder blades down and back ("into your back pockets") and holding them
+    before pressing or pulling. Gives a stable base on presses and engages and protects the shoulder on pulls.</p>
+  </div>
+
+  <!-- ===================== METABOLIC HEALTH ===================== -->
+  <p class="cat">Metabolic health</p>
+
+  <div class="glossary-entry" id="glut4">
+    <div class="glossary-term">GLUT4</div>
+    <p class="glossary-def">The transporter that opens a "door" to let glucose into a muscle cell. It is moved to
+    the cell surface by two separate signals — <strong>insulin</strong>, and (independently) <strong>muscle
+    contraction</strong> — which is why exercise clears glucose even when insulin isn't working well.</p>
+  </div>
+
+  <div class="glossary-entry" id="insulin-sensitivity">
+    <div class="glossary-term">Insulin sensitivity</div>
+    <p class="glossary-def">How readily insulin moves glucose out of the blood and into tissue — mostly muscle.
+    Higher is better; resistance training improves it both acutely (~24–72 h) and chronically. Low sensitivity
+    (insulin resistance) is the earliest step toward type 2 diabetes.</p>
+  </div>
+
+  <div class="glossary-entry" id="myokine">
+    <div class="glossary-term">Myokine</div>
+    <p class="glossary-def">A signalling molecule released by contracting muscle (e.g. IL-6) that acts on fat, liver
+    and brain — making muscle an endocrine organ. The transient, exercise-driven IL-6 spike is beneficial, unlike
+    chronically elevated IL-6 from fat tissue.</p>
+  </div>
+
+  <!-- ===================== FUEL, RECOVERY & SUPPLEMENTS ===================== -->
+  <p class="cat">Fuel, recovery &amp; supplements</p>
+
+  <div class="glossary-entry" id="energy-balance">
+    <div class="glossary-term">Energy balance</div>
+    <p class="glossary-def">Calories eaten minus calories burned. A <em>deficit</em> drives fat loss; a
+    <em>surplus</em> drives gain. A small deficit (~300–500 kcal) + high protein + lifting is the recipe for
+    <a class="xref" href="#recomposition">recomposition</a>.</p>
+  </div>
+
+  <div class="glossary-entry" id="recovery">
+    <div class="glossary-term">Recovery <span class="sym">stimulus–recovery–adaptation</span></div>
+    <p class="glossary-def">The principle that training is only a <em>stimulus</em> — muscle is built and adaptation
+    happens during the recovery after it (synthesis stays elevated ~24–48 h). Why rest days and sleep are part of
+    the programme, not time off it.</p>
+  </div>
+
+  <div class="glossary-entry" id="leucine">
+    <div class="glossary-term">Leucine</div>
+    <p class="glossary-def">An amino acid that acts as the trigger for
+    <a class="xref" href="#muscle-protein-synthesis">muscle protein synthesis</a>. A meal needs ~2.5–3 g leucine
+    (≈20–40 g of quality protein) to maximally switch on growth — the reason for ~0.4 g/kg protein per meal.</p>
+  </div>
+
+  <div class="glossary-entry" id="creatine">
+    <div class="glossary-term">Creatine <span class="sym">phosphocreatine</span></div>
+    <p class="glossary-def">A compound stored in muscle (as phosphocreatine) that rapidly recharges ATP for short,
+    hard efforts — letting you train slightly harder, which compounds into more muscle. Taken as <strong>3–5 g/day
+    of monohydrate</strong>; the most evidence-backed supplement for muscle and strength.</p>
+  </div>
+
+  <div class="crosslinks">
+    <b>Using the course:</b> terms here are defined once and reused everywhere.
+    See the <a href="../index.html">lesson map</a> · the <a href="../RESOURCES.md">resource list</a> backs every
+    claim with a primary source.
+  </div>
+
+  <p class="pagefoot">dad-mod course · Glossary · adheres across all lessons ·
+  <a href="../index.html">all lessons</a></p>
+</main>
+</body>
+</html>

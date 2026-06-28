@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L4 · Muscle, the Glucose Sink</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  /* Lesson-4-specific: the "two doors" muscle-cell simulator */
+  .sink { background:linear-gradient(180deg,#fff,#f7fbfc); border:1px solid var(--rule); border-top:4px solid var(--surface); border-radius:var(--radius); padding:1.1rem 1.2rem 1.3rem; margin:1.8rem 0; box-shadow:var(--shadow); }
+  .sink .calc-title { font-family:var(--sans); font-weight:700; font-size:.95rem; color:var(--ocean-deep); margin-bottom:.6rem; }
+  .sink svg { width:100%; height:auto; display:block; border-radius:8px; }
+  .sink .controls { display:grid; grid-template-columns:1fr 1fr; gap:.7rem 1.1rem; margin-top:.9rem; font-family:var(--sans); }
+  @media (max-width:40rem){ .sink .controls { grid-template-columns:1fr; } }
+  .sink .control label { display:flex; justify-content:space-between; font-size:.8rem; font-weight:600; color:var(--ink-soft); margin-bottom:.25rem; }
+  .sink .control output { color:var(--ocean-deep); font-weight:700; }
+  .sink input[type=range]{ width:100%; accent-color:var(--ocean); }
+  .sink .btn { font-family:var(--sans); font-weight:700; font-size:.85rem; cursor:pointer; padding:.55rem .7rem; border-radius:8px; border:1.5px solid var(--rule); background:var(--paper); color:var(--ink); width:100%; }
+  .sink .btn.insulin.on { border-color:#caa53a; background:#fff7e0; color:#7a5e12; }
+  .sink .btn.contract.on { border-color:var(--coral); background:#fdeee9; color:#8d2f1a; }
+  .sink .read { margin-top:.9rem; padding:.8rem .95rem; background:var(--abyss); color:#d8f1f5; border-radius:8px; font-family:var(--sans); font-size:.9rem; line-height:1.5; min-height:2.6em; }
+  .sink .read b { color:#ffd479; }
+  .sink .badges { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.7rem; }
+  .sink .badge { font-family:var(--sans); font-size:.72rem; font-weight:600; padding:.25rem .55rem; border-radius:999px; background:#e7f5f7; color:var(--ocean-deep); border:1px solid #bfe2e8; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">Foundations · L4 · The metabolic case</p>
+  <h1 class="lesson-title">Muscle, the Glucose Sink</h1>
+  <p class="lesson-sub">The other half of your mission. Your muscles are the biggest place your body parks blood
+  sugar — and exercise opens a door to them that doesn't even need insulin.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~12 minutes</span><span class="sep">•</span>
+    <span>🩸 The metabolic-health mechanism</span><span class="sep">•</span>
+    <span class="tag ocean">The lever you own</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p>"Improve metabolic health" can sound vague. It isn't. It comes down to one concrete thing you can change:
+    how well your muscles pull glucose out of your blood. At a BMI around 30, that system is the earliest to
+    struggle — and the one most directly in your hands. This lesson shows the machinery, so the
+    <a href="../reference/program-card.html">3×/week plan</a> reads as medicine, not just exercise.</p>
+  </div>
+
+  <!-- ===== 1. THE SINK ===== -->
+  <h2><span class="num">1</span>Muscle is where blood sugar goes</h2>
+  <p>Skeletal muscle is about <strong>40% of your body mass</strong>, and it's the destination for roughly
+  <strong>70–80% of the glucose your body clears under insulin</strong>.<span class="cite"><a href="#r1">1</a></span>
+  When people say "insulin sensitivity," they're mostly describing <em>muscle</em>. That's also why trouble starts
+  here: <strong>muscle insulin resistance is the earliest defect in type 2 diabetes</strong>, showing up a decade or
+  more before blood sugar officially climbs.<span class="cite"><a href="#r1">1</a></span> The biggest sink for blood
+  sugar is the one tissue you can directly rebuild.</p>
+
+  <!-- ===== 2. TWO DOORS ===== -->
+  <h2><span class="num">2</span>Two doors into the muscle</h2>
+  <p>Glucose can't drift into a muscle cell on its own — it needs a transporter called
+  <a href="../reference/glossary.html#glut4">GLUT4</a> to open a door in the cell wall. There are <em>two</em> ways
+  to open those doors:<span class="cite"><a href="#r2">2</a></span></p>
+  <ul>
+    <li>The <strong>insulin door</strong> — insulin signals the doors open. This is the door that <em>sticks</em> when you're insulin-resistant.</li>
+    <li>The <strong>contraction door</strong> — muscle contraction opens GLUT4 doors through a <em>separate</em> pathway that <strong>doesn't need insulin at all</strong>.</li>
+  </ul>
+  <p>Play with it. Crank up insulin resistance until the gold door jams — then hit <strong>Contract</strong> and
+  watch glucose drain anyway.</p>
+
+  <div class="sink">
+    <div class="calc-title">🚪 Two doors into muscle — drag, jam the insulin door, then contract</div>
+    <svg id="sinkSvg" viewBox="0 0 460 330" role="img" aria-label="Animated muscle cell with a bloodstream above it, showing glucose entering through an insulin door and a contraction door."></svg>
+    <div class="controls">
+      <div><button id="btnInsulin" class="btn insulin on">Insulin: ON</button></div>
+      <div><button id="btnContract" class="btn contract">Contract muscle</button></div>
+      <div class="control">
+        <label for="resist">Insulin resistance <output id="resistOut">60%</output></label>
+        <input type="range" id="resist" min="0" max="100" step="5" value="60">
+      </div>
+      <div class="control">
+        <label for="mass">Muscle mass / training <output id="massOut">low</output></label>
+        <input type="range" id="mass" min="0" max="100" step="5" value="30">
+      </div>
+    </div>
+    <div class="read" id="sinkRead">—</div>
+    <div class="badges">
+      <span class="badge">Acute: a door stays propped ~24–72 h after one session</span>
+      <span class="badge" id="chronicBadge">More muscle &amp; GLUT4 → bigger sink</span>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-label">★ The whole lesson in one line</div>
+    <p>Insulin opens one door, and it sticks when you're insulin-resistant. <strong>Contraction opens a second door
+    that always works</strong> — so every workout drains glucose <em>now</em>, even if your insulin barely
+    functions, and building muscle adds doors that drain it for good.<span class="cite"><a href="#r2">2</a></span></p>
+  </div>
+
+  <!-- ===== 3. ACUTE VS CHRONIC ===== -->
+  <h2><span class="num">3</span>Today's dose, and the lasting upgrade</h2>
+  <p>Two timescales are working for you:</p>
+  <ul>
+    <li><strong>Acute:</strong> a single session improves insulin sensitivity for roughly <strong>24–72
+    hours</strong>.<span class="cite"><a href="#r3">3</a></span> The benefit is real but it <em>fades</em> — which is
+    exactly why the prescription is <strong>frequency</strong>: train most days, and never leave two rest days in a
+    row.</li>
+    <li><strong>Chronic:</strong> repeated training raises the amount of GLUT4 in your muscle and builds muscle
+    <em>mass</em> — literally enlarging the sink and adding doors that work 24/7.<span class="cite"><a href="#r2">2</a></span></li>
+  </ul>
+  <div class="callout note">
+    <div class="callout-label">⌗ Why your plan is 3 days, spread out</div>
+    <p>For the glucose effect, <strong>frequency beats intensity</strong>. Three sessions spread across the week
+    (Mon/Wed/Fri) keep the acute door propped open more of the time than one heroic session ever could — while the
+    chronic muscle-building runs in the background. Your <a href="../reference/program-card.html">Program Card</a> is
+    built around exactly this.</p>
+  </div>
+
+  <!-- ===== 4. OUTCOMES ===== -->
+  <h2><span class="num">4</span>What resistance training actually moves</h2>
+  <p>This isn't theoretical. In trials, resistance training:</p>
+  <ul>
+    <li>Lowers <strong>HbA1c by ~0.3–0.4%</strong> in people with type 2 diabetes — comparable to a low-dose drug, and bigger when you get stronger.<span class="cite"><a href="#r4">4</a></span></li>
+    <li>Improves <strong>insulin sensitivity / HOMA-IR</strong>, best at ~2–3 sessions/week over 12–16 weeks.<span class="cite"><a href="#r4">4</a></span></li>
+    <li>Reduces <strong>visceral fat</strong> — though here, honestly, the evidence is strongest when you <em>combine</em> lifting with some cardio and a small calorie deficit.<span class="cite"><a href="#r4">4</a></span></li>
+  </ul>
+
+  <!-- ===== 5. MYOKINES ===== -->
+  <h2><span class="num">5</span>Muscle talks back: myokines</h2>
+  <p>Working muscle isn't just a sink — it's a gland. Contraction releases signalling molecules called
+  <a href="../reference/glossary.html#myokine">myokines</a> that talk to fat, liver and brain.<span class="cite"><a href="#r5">5</a></span>
+  The best-established is <strong>IL-6</strong>, which can spike up to ~100-fold during exercise. Here's the subtle
+  part: chronically high IL-6 from fat tissue is <em>inflammatory and bad</em>, but the brief, muscle-derived spike
+  <em>during</em> exercise is <em>beneficial</em> — it boosts glucose uptake and triggers anti-inflammatory signals
+  afterward. Same molecule, opposite meaning depending on source and timing.</p>
+  <div class="callout note">
+    <div class="callout-label">⌗ A myth flag: irisin</div>
+    <p>You may read that exercise releases "irisin" that turns white fat brown. Treat that as an <em>intriguing
+    hypothesis, not fact</em> — the human measurements are heavily contested.<span class="cite"><a href="#r6">6</a></span>
+    The glucose-sink mechanism above doesn't depend on it.</p>
+  </div>
+
+  <!-- ===== 6. FOR YOU ===== -->
+  <h2><span class="num">6</span>Why this is the lever you own</h2>
+  <p>At a BMI around 30, the likely picture is expanding fat → muscle insulin resistance → the insulin door
+  sticking → rising insulin and a drift toward prediabetes. Every part of that sits in the one tissue you can
+  remodel. The <strong>contraction door works regardless</strong> of how resistant you already are; building muscle
+  <strong>enlarges the sink</strong> for good; and it compounds into lower HbA1c and better insulin sensitivity.
+  Muscle is the lever you own — and you pull it three times a week.</p>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">7</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="Muscle is the main sink." data-explain-wrong="See §1.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">What share of insulin-driven glucose disposal happens in muscle?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — roughly 70–80%. Muscle is the body's main glucose sink, which is why its size and sensitivity dominate metabolic health.">About 70–80%</button>
+      <button class="opt" data-feedback="Far too low — muscle handles most insulin-driven glucose disposal, around 70–80%.">Under 5%</button>
+      <button class="opt" data-feedback="Too low — the figure is around 70–80%, not a tenth.">About 10%</button>
+      <button class="opt" data-feedback="More than that — muscle takes the large majority, roughly 70–80%.">About 50%</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="The contraction door." data-explain-wrong="See the simulator in §2.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">Why does exercise lower blood glucose even with insulin resistance?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Yes — contraction opens GLUT4 doors through an insulin-independent pathway, so glucose enters even when the insulin door is stuck.">Contraction opens a separate door</button>
+      <button class="opt" data-feedback="Exercise doesn't instantly repair insulin signalling; it uses a different, insulin-free pathway.">It instantly fixes insulin door</button>
+      <button class="opt" data-feedback="The main effect is muscle uptake via the contraction door, not changing the liver.">It stops the liver's glucose</button>
+      <button class="opt" data-feedback="You don't lose meaningful glucose in sweat; muscle takes it up through the contraction door.">It pushes glucose out as sweat</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Frequency — it fades." data-explain-wrong="See §3.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">Best way to dose training for the glucose benefit?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Correct — the acute benefit fades in 1–2 days, so frequent, spread-out sessions keep the door propped open.">Train often; it fades in days</button>
+      <button class="opt" data-feedback="One session a month leaves the door shut almost all the time — far too infrequent.">One hard session per month</button>
+      <button class="opt" data-feedback="It's not about maximal load; frequent moderate sessions drive the glucose effect.">Only very heavy max singles</button>
+      <button class="opt" data-feedback="Long gaps let the acute benefit fade. Don't leave two rest days in a row.">Rest several days between bouts</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li>Muscle is the body's main <strong>glucose sink</strong> (~70–80% of insulin-driven disposal).</li>
+      <li>GLUT4 opens via <strong>two doors</strong>: insulin (sticks when resistant) and <strong>contraction (insulin-independent)</strong>.</li>
+      <li>One session helps for <strong>24–72 h</strong>; training chronically <strong>builds a bigger sink</strong>.</li>
+      <li>Resistance training lowers <strong>HbA1c ~0.3–0.4%</strong> and improves insulin sensitivity.</li>
+      <li>For glucose, <strong>frequency beats intensity</strong> — which is why the plan is 3 spread-out days.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">📖</div>
+    <div>
+      <div class="label">Primary source · read this next</div>
+      <div class="title"><a href="https://journals.physiology.org/doi/full/10.1152/physrev.00038.2012" target="_blank" rel="noopener">Richter &amp; Hargreaves (2013) — “Exercise, GLUT4, and Skeletal Muscle Glucose Uptake”</a></div>
+      <div class="desc">The definitive review behind §2: the insulin and contraction pathways to GLUT4, and why exercise clears glucose even in insulin resistance. In <i>Physiological Reviews</i> — technical, but the introduction and figures carry the idea.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want to know what bloodwork to get as a baseline (fasting glucose,
+    HbA1c, insulin), how walking fits alongside lifting for the glucose effect, or how soon markers might move? Ask
+    in chat.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#glut4">GLUT4</a>,
+    <a href="../reference/glossary.html#insulin-sensitivity">insulin sensitivity</a>,
+    <a href="../reference/glossary.html#myokine">myokine</a>.
+    Completes the foundations → back to <a href="../index.html">all lessons</a>. Run it → the <a href="../reference/program-card.html">Program Card</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">DeFronzo &amp; Tripathy (2009). Skeletal muscle insulin resistance is the primary defect in T2D, <i>Diabetes Care</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2811436/" target="_blank" rel="noopener">PMC2811436</a>.</li>
+    <li id="r2">Richter &amp; Hargreaves (2013). Exercise, GLUT4, and skeletal muscle glucose uptake, <i>Physiol Rev</i>. <a href="https://journals.physiology.org/doi/full/10.1152/physrev.00038.2012" target="_blank" rel="noopener">Physiological Reviews</a>.</li>
+    <li id="r3">DiMenna &amp; Arad (2020). Acute vs chronic exercise effects on insulin sensitivity, <i>Cardiovasc Endocrinol Metab</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8352615/" target="_blank" rel="noopener">PMC8352615</a>.</li>
+    <li id="r4">Resistance training &amp; HbA1c meta-analysis (T2D) + dose-response. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8915309/" target="_blank" rel="noopener">PMC8915309</a> · <a href="https://www.frontiersin.org/journals/endocrinology/articles/10.3389/fendo.2023.1224161/full" target="_blank" rel="noopener">Front. Endocrinol. 2023</a>.</li>
+    <li id="r5">Pedersen &amp; Febbraio (2008). Muscle as an endocrine organ — IL-6 and myokines, <i>Physiol Rev</i>. <a href="https://journals.physiology.org/doi/full/10.1152/physrev.90100.2007" target="_blank" rel="noopener">Physiological Reviews</a>.</li>
+    <li id="r6">Maak et al. (2021). Progress and challenges in the biology of FNDC5 and irisin (the irisin caveat), <i>Endocr Rev</i>. <a href="https://academic.oup.com/edrv/article/42/4/436/6119545" target="_blank" rel="noopener">Endocrine Reviews</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="0003-levers-tension-wrist.html">
+      <div class="dir">← L3</div>
+      <div class="ttl">Levers, Tension &amp; Your Wrist</div>
+    </a>
+    <a class="next" href="../index.html">
+      <div class="dir">Foundations complete</div>
+      <div class="ttl">Back to all lessons →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L4 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+
+<script>
+/* ===== "Two doors into muscle" simulator ===== */
+(function(){
+  var svg=document.getElementById('sinkSvg');
+  if(!svg) return;
+  var NS='http://www.w3.org/2000/svg';
+  function el(tag,a,txt){ var e=document.createElementNS(NS,tag); for(var k in a) e.setAttribute(k,a[k]); if(txt!=null) e.textContent=txt; return e; }
+
+  // ---- static scene ----
+  var VESSEL={x:14,y:16,w:432,h:70};            // bloodstream band
+  var MEM=150;                                  // membrane y
+  var CELL={x:14,y:MEM,w:432,h:330-MEM-12};
+  var INS={x:150}, CON={x:312};                 // door centre x's
+
+  svg.appendChild(el('rect',{x:VESSEL.x,y:VESSEL.y,width:VESSEL.w,height:VESSEL.h,rx:10,fill:'#fdecec',stroke:'#f0cfc4'}));
+  svg.appendChild(el('text',{x:22,y:VESSEL.y+15,'font-family':'sans-serif','font-size':10,'font-weight':700,fill:'#b66',}, 'BLOODSTREAM'));
+  svg.appendChild(el('rect',{x:CELL.x,y:CELL.y,width:CELL.w,height:CELL.h,rx:12,fill:'#eef7ef',stroke:'#cfe6d3'}));
+  svg.appendChild(el('text',{x:22,y:CELL.y+CELL.h-10,'font-family':'sans-serif','font-size':10,'font-weight':700,fill:'#5a8a63'}, 'MUSCLE CELL'));
+  // membrane
+  svg.appendChild(el('line',{x1:CELL.x,y1:MEM,x2:CELL.x+CELL.w,y2:MEM,stroke:'#9ec9a6','stroke-width':3}));
+
+  var dyn=el('g',{}); svg.appendChild(dyn);
+
+  // fixed vessel-dot slots (stable positions so density doesn't flicker)
+  var slots=[];
+  for(var i=0;i<28;i++) slots.push({ x:VESSEL.x+18+Math.random()*(VESSEL.w-36), y:VESSEL.y+22+Math.random()*(VESSEL.h-30) });
+  // stored-glucose slots inside the cell
+  var store=[];
+  for(var j=0;j<40;j++) store.push({ x:CELL.x+24+Math.random()*(CELL.w-48), y:MEM+28+Math.random()*(CELL.h-40) });
+
+  // ---- state ----
+  var insulinOn=true, contractOn=false, resistance=60, mass=30, bg=72, stored=6;
+  var particles=[], spawnAcc=0, last=0;
+
+  var bIns=document.getElementById('btnInsulin'), bCon=document.getElementById('btnContract');
+  var resist=document.getElementById('resist'), massEl=document.getElementById('mass');
+  var resistOut=document.getElementById('resistOut'), massOut=document.getElementById('massOut');
+  var read=document.getElementById('sinkRead'), chronic=document.getElementById('chronicBadge');
+
+  bIns.addEventListener('click',function(){ insulinOn=!insulinOn; bIns.classList.toggle('on',insulinOn); bIns.textContent='Insulin: '+(insulinOn?'ON':'OFF'); });
+  bCon.addEventListener('click',function(){ contractOn=!contractOn; bCon.classList.toggle('on',contractOn); bCon.textContent=contractOn?'Contracting ✊':'Contract muscle'; });
+  resist.addEventListener('input',function(){ resistance=+resist.value; resistOut.textContent=resistance+'%'; });
+  massEl.addEventListener('input',function(){ mass=+massEl.value; massOut.textContent= mass<34?'low':mass<67?'building':'high'; });
+
+  function insulinOpen(){ return insulinOn ? (1-resistance/100) : 0; }   // 0..1
+  function gateMult(){ return 0.6 + (mass/100)*0.9; }                    // 0.6..1.5
+
+  function door(cx, open, kind){
+    // frame
+    var col = kind==='ins' ? '#caa53a' : '#c1492b';
+    var w = 30;
+    dyn.appendChild(el('rect',{x:cx-w/2,y:MEM-3,width:w,height:6,rx:3, fill: open>0.05? col : '#c7c2b2'}));
+    // label
+    var lbl = kind==='ins'
+      ? (insulinOn ? (resistance>55?'insulin · STICKY':'insulin · open') : 'insulin · OFF')
+      : (contractOn?'contraction · OPEN':'contraction · closed');
+    dyn.appendChild(el('text',{x:cx,y:MEM+18,'font-family':'sans-serif','font-size':9.5,'font-weight':700,'text-anchor':'middle', fill: open>0.05?col:'#9a9486'}, lbl));
+    if(kind==='con' && !contractOn)
+      dyn.appendChild(el('text',{x:cx,y:MEM-10,'font-family':'sans-serif','font-size':9,'text-anchor':'middle',fill:'#9a9486'},'no insulin needed'));
+    // little open-gap arrows
+    if(open>0.05){
+      var n=Math.max(1,Math.round(open*3));
+      for(var k=0;k<n;k++){
+        var ax=cx-8+k*8;
+        dyn.appendChild(el('path',{d:'M'+ax+' '+(MEM+2)+' l4 0 l-2 5 z', fill:col, 'fill-opacity':.8}));
+      }
+    }
+  }
+
+  function render(){
+    while(dyn.firstChild) dyn.removeChild(dyn.firstChild);
+    var io=insulinOpen(), co=contractOn?1:0;
+
+    // vessel glucose density ~ bg
+    var nShow=Math.round(bg/120*slots.length);
+    for(var i=0;i<nShow;i++) dyn.appendChild(el('circle',{cx:slots[i].x,cy:slots[i].y,r:4.2,fill:'#d24b2b','fill-opacity':.85}));
+
+    // doors
+    door(INS.x, io, 'ins');
+    door(CON.x, co, 'con');
+
+    // moving uptake particles
+    particles.forEach(function(p){
+      var t=p.t, x=p.x0+(p.x1-p.x0)*t, y=p.y0+(p.y1-p.y0)*t;
+      dyn.appendChild(el('circle',{cx:x,cy:y,r:4.2,fill:p.kind==='ins'?'#caa53a':'#c1492b'}));
+    });
+
+    // stored glucose inside cell (glycogen) ~ stored
+    var ns=Math.min(store.length, Math.round(stored));
+    for(var s=0;s<ns;s++) dyn.appendChild(el('circle',{cx:store[s].x,cy:store[s].y,r:3.4,fill:'#3f7d4e','fill-opacity':.7}));
+
+    // blood-glucose bar
+    var bx=300, bw=146;
+    dyn.appendChild(el('rect',{x:bx,y:VESSEL.y+8,width:bw,height:12,rx:6,fill:'#fff',stroke:'#f0cfc4'}));
+    var frac=Math.max(0,Math.min(1,(bg-15)/(120-15)));
+    var bc = bg>92?'#c1492b':bg>62?'#caa53a':'#3f7d4e';
+    dyn.appendChild(el('rect',{x:bx,y:VESSEL.y+8,width:(bw*frac).toFixed(1),height:12,rx:6,fill:bc}));
+    dyn.appendChild(el('text',{x:bx+bw,y:VESSEL.y+6,'font-family':'sans-serif','font-size':9,'text-anchor':'end',fill:'#b66'},'blood glucose'));
+  }
+
+  function step(dt){
+    var io=insulinOpen(), co=contractOn?1:0;
+    var clearCap=(io*0.6 + co*1.0)*gateMult();      // ~0..2.4
+    // blood glucose dynamics (illustrative units)
+    bg += (16 - clearCap*70)*dt;
+    if(bg>120) bg=120; if(bg<15) bg=15;
+    // chronic: training slowly grows the stored pool baseline
+    stored += ((6 + mass/100*30) - stored)*0.4*dt;
+    // spawn uptake particles through open doors
+    spawnAcc += clearCap*16*dt;
+    while(spawnAcc>=1){
+      spawnAcc-=1;
+      var useIns = (io>0 && (co===0 || Math.random()<io/(io+co)));
+      var src=slots[Math.floor(Math.random()*Math.max(1,Math.round(bg/120*slots.length)))]||slots[0];
+      var tgt=store[Math.floor(Math.random()*store.length)];
+      particles.push({ x0:src.x, y0:src.y, x1: useIns?INS.x:CON.x, y1:tgt.y, kind:useIns?'ins':'con', t:0, sp:1.1+Math.random()*0.5 });
+    }
+    particles.forEach(function(p){ p.t+=p.sp*dt; });
+    particles=particles.filter(function(p){ return p.t<1; });
+
+    // readout
+    var msg;
+    if(co){
+      msg='✊ <b>Contracting:</b> the contraction door is open and glucose is draining — <b>even with insulin resistance at '+resistance+'%</b>. This is the door insulin can’t jam.';
+    } else if(io<0.25){
+      msg='🚪 The insulin door is '+(insulinOn?'<b>stuck</b> (resistance '+resistance+'%)':'<b>off</b>')+', so glucose is piling up in the blood. Hit <b>Contract</b> to open the other door.';
+    } else {
+      msg='The insulin door is doing the work for now. Raise <b>insulin resistance</b> to jam it, then <b>Contract</b> to see the backup door.';
+    }
+    read.innerHTML=msg;
+    chronic.textContent = mass<34 ? 'Low muscle → small sink' : mass<67 ? 'Building muscle → bigger sink, more GLUT4' : 'High muscle → HbA1c ↓ ~0.3–0.4% over 12–16 wk';
+  }
+
+  function loop(ts){
+    if(!last) last=ts;
+    var dt=Math.min(0.05,(ts-last)/1000); last=ts;
+    step(dt); render();
+    requestAnimationFrame(loop);
+  }
+  render();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

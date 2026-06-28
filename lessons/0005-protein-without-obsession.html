@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L8 · Protein Without Obsession</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  /* Lesson-8-specific: protein calculator + meal plates */
+  .seg { display:flex; gap:.4rem; }
+  .seg button { flex:1; cursor:pointer; font-family:var(--sans); font-weight:700; font-size:.82rem; padding:.45rem .5rem; border-radius:7px; border:1.5px solid var(--rule); background:var(--paper); color:var(--ink); }
+  .seg button.active { border-color:var(--ocean); background:#e7f5f7; color:var(--ocean-deep); }
+  .plates { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.9rem; }
+  .plate { font-family:var(--sans); font-size:.82rem; font-weight:600; padding:.45rem .7rem; border-radius:8px; background:#fff; border:1px solid var(--rule); color:var(--abyss); }
+  .plate.ok { border-color:#cfe6d3; background:#f2faf3; }
+  .plate.ok::after { content:" ✓"; color:var(--kelp); }
+  .plate small { display:block; font-weight:400; color:var(--ink-faint); font-size:.72rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">Fuel &amp; Recover · L8</p>
+  <h1 class="lesson-title">Protein Without Obsession</h1>
+  <p class="lesson-sub">One number, spread across the day, from ordinary food. That's the whole job — no shakes
+  every two hours, no kidney scare, no anabolic-window panic.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~11 minutes</span><span class="sep">•</span>
+    <span>🍗 With a target calculator</span><span class="sep">•</span>
+    <span class="tag ocean">The bricks for growth</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p><a href="0002-how-muscle-grows.html">Lesson 2</a> showed training only flips the growth switch — you need
+    <a href="../reference/glossary.html#muscle-protein-synthesis">protein</a> as the raw material to actually build.
+    Protein is also the lever that lets you <em>lose fat while keeping muscle</em>, which is your exact situation.
+    Get one number right and most of "nutrition" is handled.</p>
+  </div>
+
+  <!-- ===== 1. WHY ===== -->
+  <h2><span class="num">1</span>Why protein is the one macro to nail</h2>
+  <p>Training raises both muscle protein synthesis and breakdown; growth is the <em>net</em>. Eating enough protein
+  is what tips that balance positive and keeps it there through the 24–48 h your muscles stay primed after a
+  session.<span class="cite"><a href="#r1">1</a></span> In a calorie deficit it does double duty: it's the single
+  biggest thing protecting your hard-won muscle while the fat comes off. Carbs and fats matter for energy and
+  health, but protein is the one with a hard target.</p>
+
+  <!-- ===== 2. THE NUMBER + CALC ===== -->
+  <h2><span class="num">2</span>Your number: about 180–200 g a day</h2>
+  <p>The evidence converges on roughly <strong>1.6 g of protein per kg of bodyweight per day</strong> to maximise
+  muscle, with up to ~2.2 g/kg sensible when dieting.<span class="cite"><a href="#r1">1</a><a href="#r2">2</a></span>
+  One refinement for you: scale it to a <strong>goal bodyweight (~86 kg)</strong>, not your current 105 kg — fat
+  tissue doesn't need feeding with protein. That lands you near <strong>180–200 g/day</strong>. Set the dials:</p>
+
+  <div class="calc">
+    <div class="calc-title">🧮 Your protein target</div>
+    <div class="controls">
+      <div class="control">
+        <label for="gw">Goal bodyweight <output id="gwOut">86 kg</output></label>
+        <input type="range" id="gw" min="70" max="110" step="1" value="86">
+      </div>
+      <div class="control">
+        <label for="meals">Meals per day <output id="mealsOut">4</output></label>
+        <input type="range" id="meals" min="3" max="6" step="1" value="4">
+      </div>
+      <div class="control" style="grid-column:1 / -1">
+        <label>Phase</label>
+        <div class="seg">
+          <button id="phMaintain" type="button">Maintaining</button>
+          <button id="phCut" type="button" class="active">Losing fat (your phase)</button>
+        </div>
+      </div>
+    </div>
+    <div class="readout">
+      <div><span class="big" id="dailyG">—</span> <span class="unit">g protein / day</span>
+        &nbsp;(<span id="factorTxt">2.2</span> g/kg of goal weight)</div>
+      <div id="perMealLine" style="font-size:.86rem;color:#8fb9c6;margin-top:.5rem">—</div>
+    </div>
+    <div id="plates" class="plates"></div>
+  </div>
+
+  <p class="muted" style="font-family:var(--sans);font-size:.8rem">A "✓" plate means that meal clears ~30 g — enough
+  quality protein to fully trigger muscle building (the <a href="../reference/glossary.html#leucine">leucine</a>
+  threshold).</p>
+
+  <!-- ===== 3. DISTRIBUTION ===== -->
+  <h2><span class="num">3</span>Spread it: ~0.4 g/kg across 4 meals</h2>
+  <p>To use protein well, aim for about <strong>0.4 g/kg per meal</strong> — roughly <strong>30–45 g, four times a
+  day</strong>.<span class="cite"><a href="#r3">3</a></span> Each of those meals needs ~2.5–3 g of the amino acid
+  <a href="../reference/glossary.html#leucine">leucine</a> to fully switch on synthesis, which you get from ~20–40 g
+  of quality protein. <strong>But don't over-engineer it:</strong> newer work shows hitting your <em>daily total</em>
+  matters far more than perfect spacing.<span class="cite"><a href="#r5">5</a></span> Four solid protein meals is a
+  sensible default, not a rule to stress over.</p>
+
+  <!-- ===== 4. SOURCES ===== -->
+  <h2><span class="num">4</span>Where it comes from — and hitting 40 g</h2>
+  <p>Animal proteins (meat, fish, eggs, dairy, whey) are "complete" and leucine-dense. Plant proteins tend to be
+  lower in leucine, so you need roughly <strong>20–30% more</strong>, or to blend sources (e.g. rice + pea) to match
+  the effect.<span class="cite"><a href="#r2">2</a></span> A protein <em>powder</em> isn't magic — it's just
+  convenient food to help you reach the number.</p>
+
+  <table>
+    <caption>Protein in common foods (cooked/edible portion) — mix and match to ~40 g a meal</caption>
+    <thead><tr><th>Food</th><th>Portion</th><th class="num">Protein</th></tr></thead>
+    <tbody>
+      <tr><td>Chicken breast</td><td>150 g fillet</td><td class="num">~46 g</td></tr>
+      <tr><td>Lean beef / canned tuna</td><td>100 g</td><td class="num">~26 g</td></tr>
+      <tr><td>Whey powder</td><td>1 scoop (~30 g)</td><td class="num">~24 g</td></tr>
+      <tr><td>Greek yogurt (nonfat)</td><td>170 g pot</td><td class="num">~17 g</td></tr>
+      <tr><td>Lentils (cooked)</td><td>1 cup</td><td class="num">~18 g</td></tr>
+      <tr><td>Eggs</td><td>1 large</td><td class="num">~6 g</td></tr>
+      <tr><td>Milk</td><td>1 cup</td><td class="num">~8 g</td></tr>
+      <tr><td>Tofu (firm)</td><td>100 g</td><td class="num">~9 g</td></tr>
+    </tbody>
+  </table>
+  <p class="muted" style="font-family:var(--sans);font-size:.8rem">"Hit 40 g" in one meal: 130 g chicken · or 1 scoop
+  whey + 1 cup milk + an egg · or 170 g Greek yogurt + a scoop of whey.</p>
+
+  <!-- ===== 5. MYTHS ===== -->
+  <h2><span class="num">5</span>Two myths to put down</h2>
+  <div class="callout note">
+    <div class="callout-label">⌗ "High protein wrecks your kidneys"</div>
+    <p>Not in healthy people. A meta-analysis of 28 trials found higher-protein diets <strong>do not impair kidney
+    function</strong> in healthy adults.<span class="cite"><a href="#r4">4</a></span> The caveat applies only to
+    <em>pre-existing</em> kidney disease — if that's you, check with a doctor. Otherwise, 180–200 g is fine.</p>
+  </div>
+  <div class="callout note">
+    <div class="callout-label">⌗ "Slam a shake in the 30-minute window or it's wasted"</div>
+    <p>The post-workout "anabolic window" is hours wide, not minutes.<span class="cite"><a href="#r3">3</a></span>
+    Total daily protein and reasonable spacing win; a shake within the hour is convenient, not magic. A pre-bed
+    protein (e.g. Greek yogurt or casein) is a small genuine bonus, mostly by helping you hit the total.</p>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">6</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="Goal weight, ~1.6–2.2 g/kg." data-explain-wrong="See §2 and the calculator.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">Your daily protein target lands around…</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — ~1.6–2.2 g/kg of a goal bodyweight (~86 kg) gives roughly 180–200 g/day.">180–200 g per day</button>
+      <button class="opt" data-feedback="Too low to maximise muscle or protect it in a deficit. Aim ~180–200 g.">60–80 g per day</button>
+      <button class="opt" data-feedback="More than needed — benefits plateau by ~2.2 g/kg. Around 180–200 g is the target.">350–400 g per day</button>
+      <button class="opt" data-feedback="Under target. Scale ~1.6–2.2 g/kg of goal weight → ~180–200 g.">100–120 g per day</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Total matters most." data-explain-wrong="See §3.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">What matters most for protein distribution?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Correct — hitting the daily total dominates; ~4 meals of 30–45 g is a sensible default, not a strict rule.">Hitting the daily total</button>
+      <button class="opt" data-feedback="The 30-minute window is a myth — it's hours wide. Daily total matters more.">A 30-minute post-workout shake</button>
+      <button class="opt" data-feedback="One huge serving isn't required; spreading is fine, but total is what counts.">One very large protein meal</button>
+      <button class="opt" data-feedback="Eating every two hours isn't necessary. Aim for the daily total over ~4 meals.">Eating protein every two hours</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="No harm in healthy people." data-explain-wrong="See §5.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">Does ~180 g protein/day harm healthy kidneys?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — meta-analyses show no impairment of kidney function in healthy adults. The caveat is pre-existing kidney disease.">No — not in healthy people</button>
+      <button class="opt" data-feedback="That's the myth. Trials show no kidney harm in healthy adults at these intakes.">Yes — it overloads them</button>
+      <button class="opt" data-feedback="It's not about water; protein simply doesn't damage healthy kidneys at these doses.">Only without enough water</button>
+      <button class="opt" data-feedback="The evidence is actually clear: no harm to healthy kidneys at these intakes.">No one really knows yet</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li>Protein is the <strong>raw material</strong> that turns training into muscle, and it protects muscle in a deficit.</li>
+      <li>Target ~<strong>1.6–2.2 g/kg of goal weight</strong> → roughly <strong>180–200 g/day</strong>.</li>
+      <li>Spread over ~<strong>4 meals of 30–45 g</strong>, but the <strong>daily total</strong> matters most.</li>
+      <li>Animal protein is leucine-dense; plant needs <strong>~20–30% more</strong> or blending.</li>
+      <li>It <strong>doesn't harm healthy kidneys</strong>, and the "anabolic window" is hours wide.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">📖</div>
+    <div>
+      <div class="label">Primary source · read this next</div>
+      <div class="title"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5867436/" target="_blank" rel="noopener">Morton et al. (2018) — protein dose-response meta-analysis (BJSM)</a></div>
+      <div class="desc">49 studies behind the ~1.6 g/kg target (with the upper bound near 2.2). The number this whole lesson rests on. A plain-English companion: Stronger By Science's <a href="https://www.strongerbyscience.com/protein-science/" target="_blank" rel="noopener">Protein Science</a>.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want me to sketch a day of meals that hits ~190 g around your
+    schedule, sort out vegetarian options, or check whether a protein powder is worth its price? Ask in chat.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#muscle-protein-synthesis">muscle protein synthesis</a>,
+    <a href="../reference/glossary.html#leucine">leucine</a>,
+    <a href="../reference/glossary.html#energy-balance">energy balance</a>.
+    Builds on → <a href="0002-how-muscle-grows.html">L2</a>. Next → <a href="0006-creatine-and-the-shelf.html">L9 Creatine &amp; the Evidence-Based Shelf</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">Morton et al. (2018). Protein dose-response meta-analysis, <i>BJSM</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5867436/" target="_blank" rel="noopener">PMC5867436</a>.</li>
+    <li id="r2">Jäger et al. (2017). ISSN Position Stand: Protein and Exercise, <i>JISSN</i>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5477153/" target="_blank" rel="noopener">PMC5477153</a>.</li>
+    <li id="r3">Schoenfeld &amp; Aragon (2018). How much protein per meal, <i>JISSN</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5828430/" target="_blank" rel="noopener">PMC5828430</a>.</li>
+    <li id="r4">Devries et al. (2018). Higher protein does not impair kidney function in healthy adults, <i>J Nutr</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6236074/" target="_blank" rel="noopener">PMC6236074</a>.</li>
+    <li id="r5">Stronger By Science — Protein Science (distribution vs total). <a href="https://www.strongerbyscience.com/protein-science/" target="_blank" rel="noopener">strongerbyscience.com</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="0004-muscle-glucose-sink.html">
+      <div class="dir">← L4</div>
+      <div class="ttl">Muscle, the Glucose Sink</div>
+    </a>
+    <a class="next" href="0006-creatine-and-the-shelf.html">
+      <div class="dir">Next · L9</div>
+      <div class="ttl">Creatine &amp; the Shelf →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L8 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+
+<script>
+/* ===== Protein-target calculator ===== */
+(function(){
+  var gw=document.getElementById('gw');
+  if(!gw) return;
+  var meals=document.getElementById('meals');
+  var gwOut=document.getElementById('gwOut'), mealsOut=document.getElementById('mealsOut');
+  var dailyG=document.getElementById('dailyG'), factorTxt=document.getElementById('factorTxt');
+  var perMealLine=document.getElementById('perMealLine'), plates=document.getElementById('plates');
+  var phMaintain=document.getElementById('phMaintain'), phCut=document.getElementById('phCut');
+  var cutting=true;
+
+  function update(){
+    var w=parseFloat(gw.value), n=parseInt(meals.value,10);
+    var factor=cutting?2.2:1.6;
+    var daily=Math.round(w*factor);
+    var floorMeal=Math.round(0.4*w);
+    var per=Math.max(Math.round(daily/n), floorMeal);
+    gwOut.textContent=w+' kg'; mealsOut.textContent=n;
+    factorTxt.textContent=factor.toFixed(1);
+    dailyG.textContent=daily;
+    perMealLine.innerHTML='≈ <b style="color:#ffd479">'+per+' g</b> per meal across '+n+' meals'
+      + (per<floorMeal?'':'') ;
+    plates.innerHTML='';
+    for(var i=0;i<n;i++){
+      var ok=per>=30;
+      var d=document.createElement('div');
+      d.className='plate'+(ok?' ok':'');
+      d.innerHTML='Meal '+(i+1)+'<small>'+per+' g</small>';
+      plates.appendChild(d);
+    }
+  }
+  function setPhase(c){ cutting=c; phCut.classList.toggle('active',c); phMaintain.classList.toggle('active',!c); update(); }
+  gw.addEventListener('input',update);
+  meals.addEventListener('input',update);
+  phMaintain.addEventListener('click',function(){setPhase(false);});
+  phCut.addEventListener('click',function(){setPhase(true);});
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L7 · Calibrating Effort</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  .sim3 { background:linear-gradient(180deg,#fff,#f7fbfc); border:1px solid var(--rule); border-top:4px solid var(--surface); border-radius:var(--radius); padding:1.1rem 1.2rem 1.3rem; margin:1.8rem 0; box-shadow:var(--shadow); }
+  .sim3 .calc-title { font-family:var(--sans); font-weight:700; font-size:.95rem; color:var(--ocean-deep); margin-bottom:.7rem; }
+  .reptrack { display:grid; gap:.35rem; min-height:60px; margin-bottom:.8rem; }
+  .reprow { display:grid; grid-template-columns:3.4rem 1fr auto; align-items:center; gap:.6rem; font-family:var(--sans); font-size:.8rem; }
+  .reprow .rl { font-weight:700; color:var(--ink-soft); }
+  .repbar { height:16px; border-radius:8px; background:#0a3340; overflow:hidden; }
+  .repbar > span { display:block; height:100%; border-radius:8px; }
+  .reprow .cue { font-size:.72rem; font-weight:700; white-space:nowrap; }
+  .sim3-controls { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .sim3-controls button { font-family:var(--sans); font-weight:700; font-size:.84rem; cursor:pointer; padding:.5rem .8rem; border-radius:8px; border:1.5px solid var(--ocean); background:#e7f5f7; color:var(--ocean-deep); }
+  .sim3-controls button.ghost { border-color:var(--rule); background:var(--paper); color:var(--ink-soft); }
+  .sim3-controls button:disabled { opacity:.45; cursor:default; }
+  .guessrow { display:flex; flex-wrap:wrap; align-items:center; gap:.4rem; margin-top:.8rem; font-family:var(--sans); font-size:.84rem; font-weight:600; color:var(--ink-soft); }
+  .guessrow button { cursor:pointer; font-family:var(--sans); font-weight:700; min-width:2.2rem; padding:.4rem .5rem; border-radius:7px; border:1.5px solid var(--rule); background:#fff; color:var(--abyss); }
+  .guessrow button:hover { border-color:var(--ocean); }
+  .sim3-read { margin-top:.9rem; padding:.85rem 1rem; background:var(--abyss); color:#d8f1f5; border-radius:8px; font-family:var(--sans); font-size:.9rem; line-height:1.55; }
+  .sim3-read b { color:#ffd479; }
+  .sim3-read.good { box-shadow:inset 4px 0 0 #3f7d4e; }
+  .sim3-read.trap { box-shadow:inset 4px 0 0 #c1492b; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">The Lifts · L7</p>
+  <h1 class="lesson-title">Calibrating Effort</h1>
+  <p class="lesson-sub">"Stop 1–3 reps short of failure" only works if you can <em>feel</em> where failure is — and
+  as a beginner, you almost certainly think it's closer than it is.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~12 minutes</span><span class="sep">•</span>
+    <span>🎚️ With a rep-by-rep simulator</span><span class="sep">•</span>
+    <span class="tag ocean">The skill that makes volume work</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p>Your whole program runs on <a href="../reference/glossary.html#rir">RIR</a> — "leave 1–3 reps in the tank."
+    But that instruction is useless if your internal "I'm done" alarm is wrong. The evidence says a beginner's alarm
+    goes off <em>way</em> too early. This lesson recalibrates it, so your hard sets are genuinely hard and your
+    <a href="0002-how-muscle-grows.html">volume</a> actually counts.</p>
+  </div>
+
+  <!-- ===== 1. RIR/RPE ===== -->
+  <h2><span class="num">1</span>RIR and RPE — one simple scale</h2>
+  <p><a href="../reference/glossary.html#rir">RIR</a> (Reps In Reserve) is how many more reps you <em>could</em> have
+  done. <a href="../reference/glossary.html#rpe">RPE</a> (Rate of Perceived Exertion) is just the flip side on a
+  1–10 scale.<span class="cite"><a href="#r1">1</a></span> Your "RIR 1–3" is simply <strong>RPE 7–9</strong>:</p>
+
+  <table>
+    <caption>The lifting RPE ↔ RIR scale (Zourdos / Helms)</caption>
+    <thead><tr><th>RPE</th><th>Reps in reserve</th><th>What it feels like</th></tr></thead>
+    <tbody>
+      <tr><td>10</td><td>0</td><td>Failure — last rep was an all-out grind</td></tr>
+      <tr><td>9</td><td>1</td><td>Definitely one left, no more</td></tr>
+      <tr><td>8</td><td>2</td><td>Two left; bar is clearly slowing</td></tr>
+      <tr><td>7</td><td>3</td><td>Three left; bar still moving well</td></tr>
+      <tr><td>5–6</td><td>4–6</td><td>Effort building, but reps still smooth</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===== 2. THE TRAP ===== -->
+  <h2><span class="num">2</span>The beginner trap: you stop too early</h2>
+  <p>Here's the finding that matters most. When untrained people are asked to predict how many reps they have left,
+  they <strong>massively underestimate</strong> — they feel "almost done" while several clean reps remain. In one
+  study of 141 people, less-experienced lifters underpredicted failure by <strong>~4–5 reps</strong>; even
+  experienced lifters were off by ~1–2.<span class="cite"><a href="#r2">2</a><a href="#r3">3</a></span></p>
+  <div class="callout warning">
+    <div class="callout-label">⚠ What this means for you</div>
+    <p>When you think "that's RPE 10, I'm done," you may actually be at <strong>RPE 5–6 with 4–5 reps left</strong>.
+    If you stop there, your "hard" sets aren't hard, and your training is quietly under-dosed. The fix isn't to
+    grind everything to failure — it's to <em>learn what the top of the scale really feels like</em>.</p>
+  </div>
+
+  <!-- ===== 3. SIMULATOR ===== -->
+  <h2><span class="num">3</span>Read the bar, not the feeling</h2>
+  <p>The most reliable signal of approaching failure is <strong>involuntary bar slowdown</strong>: as you near
+  failure the lifting phase gets slower <em>even though you're pushing as hard as you can</em>. Fast bar = reps in
+  the bank.<span class="cite"><a href="#r4">4</a></span> Play a set — lift reps, watch the speed, and rack when
+  <em>you'd</em> stop. Then see how many you really had left.</p>
+
+  <div class="sim3">
+    <div class="calc-title">🎚️ Last-rep cue simulator — when would YOU rack it?</div>
+    <div id="repTrack" class="reptrack"></div>
+    <div class="sim3-controls">
+      <button id="liftBtn">Lift the next rep ▸</button>
+      <button id="rackBtn">Rack it — how many left?</button>
+      <button id="resetBtn" class="ghost">New set ↻</button>
+    </div>
+    <div id="guessRow" class="guessrow" hidden>
+      <span>Reps you think you had left:</span>
+    </div>
+    <div id="sim3Read" class="sim3-read">Lift reps one at a time and watch the bar speed. Rack the set when you'd
+      normally stop — then guess your reps in reserve.</div>
+  </div>
+
+  <!-- ===== 4. CUES ===== -->
+  <h2><span class="num">4</span>The cues that tell you you're close</h2>
+  <ul>
+    <li><strong>Bar slows on the way up.</strong> The last 1–2 reps "grind" — the objective gold-standard cue.</li>
+    <li><strong>Form starts to drift.</strong> Range shortens, the path wobbles, hips shoot up on a squat.</li>
+    <li><strong>The "$100 test."</strong> At the point you want to stop, ask: <em>"If someone paid me $100, could I
+    get 2 more clean reps?"</em> If "easily" — you're at RIR 3+. If "maybe one, ugly" — you're at RIR ~1.</li>
+  </ul>
+
+  <!-- ===== 5. PROGRAMMING ===== -->
+  <h2><span class="num">5</span>How close to push — by goal</h2>
+  <table>
+    <caption>Your effort targets (ties back to the hypertrophy lessons)</caption>
+    <thead><tr><th>For…</th><th>RIR</th><th>RPE</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Most hypertrophy sets</td><td>1–2</td><td>8–9</td><td>Close enough to recruit the big fibres, without trashing recovery</td></tr>
+      <tr><td>Heavy strength compounds</td><td>2–4</td><td>6–8</td><td>Technical lifts + heavy load — keep quality reps, stay safe</td></tr>
+      <tr><td>True failure (0 RIR)</td><td>rare</td><td>10</td><td>Occasional machine/isolation work or a calibration test only</td></tr>
+    </tbody>
+  </table>
+  <p>True failure is rarely needed: once you're within a rep or two, you've got the
+  stimulus.<span class="cite"><a href="#r1">1</a></span> Grinding to failure on heavy compounds just adds fatigue
+  and risk.</p>
+
+  <!-- ===== 6. ROUTINE ===== -->
+  <h2><span class="num">6</span>Your calibration routine</h2>
+  <div class="callout build">
+    <div class="callout-label">✓ Recalibrate over a few weeks</div>
+    <p>Pick one <strong>safe machine</strong> (leg press, machine chest press). <strong>(1)</strong> Once, take a set
+    to <em>true</em> failure so you learn what 0 RIR feels like. <strong>(2)</strong> Each session after, predict the
+    rep where you'll hit RIR 2 — stop there — then do one more set and count how many you <em>actually</em> had left.
+    <strong>(3)</strong> Most beginners find they were stopping 2–4 reps early; over a few weeks the gap shrinks.
+    <strong>(4)</strong> Re-test to failure about monthly as you get stronger.<span class="cite"><a href="#r4">4</a></span></p>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">7</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="Too early — reps left." data-explain-wrong="See §2.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">Beginners usually misjudge a set by…</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — novices underestimate by ~4–5 reps, stopping well before failure while clean reps remain.">Stopping early, with reps left</button>
+      <button class="opt" data-feedback="The opposite — beginners stop short of failure, they don't blow past it.">Going far past true failure</button>
+      <button class="opt" data-feedback="Accuracy is poor early — most underpredict by several reps.">Guessing the number exactly right</button>
+      <button class="opt" data-feedback="Hard sets do feel hard — beginners just misread how close failure is.">Never feeling any real effort</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="The bar slows." data-explain-wrong="See §3–4.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">The most reliable cue you're near failure is…</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Yes — involuntary slowing of the lifting phase (the 'grind') is the objective gold-standard cue.">The bar slows down involuntarily</button>
+      <button class="opt" data-feedback="Sweating depends on many things and isn't a reliable failure cue.">You begin to sweat more</button>
+      <button class="opt" data-feedback="Heart rate is too noisy a signal — watch the bar speed instead.">Your heart rate climbs higher</button>
+      <button class="opt" data-feedback="Boredom isn't a proximity-to-failure cue; bar slowdown is.">The set starts feeling boring</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Two in the tank." data-explain-wrong="See the table in §1.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">RPE 8 means about how many reps left?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — RPE 8 = 2 RIR, the middle of your hypertrophy target.">About two reps left</button>
+      <button class="opt" data-feedback="That's RPE 10. RPE 8 leaves about two reps in reserve.">Zero — total failure</button>
+      <button class="opt" data-feedback="Five left is around RPE 5–6. RPE 8 is two left.">About five reps left</button>
+      <button class="opt" data-feedback="Ten left is barely any effort. RPE 8 means about two left.">About ten reps left</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li><strong>RIR 1–3 = RPE 7–9</strong> — leave one to three reps in the tank.</li>
+      <li>Beginners <strong>stop too early</strong>, underestimating reps left by ~4–5.</li>
+      <li>The reliable cue is the <strong>bar slowing</strong> involuntarily, plus form drift and the "$100 test".</li>
+      <li>Hypertrophy <strong>RIR 1–2</strong>; heavy compounds <strong>RIR 2–4</strong>; true failure rarely.</li>
+      <li><strong>Calibrate</strong>: meet failure once on a machine, then predict-and-check for a few weeks.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">📖</div>
+    <div>
+      <div class="label">Primary source · read this next</div>
+      <div class="title"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4961270/" target="_blank" rel="noopener">Helms et al. (2016) — Applying the RIR-based RPE scale to resistance training</a></div>
+      <div class="desc">The practical how-to: the full RPE/RIR table and the effort targets above. Plain-English companion:
+      Stronger By Science's <a href="https://www.strongerbyscience.com/reps-in-reserve/" target="_blank" rel="noopener">Reps In Reserve</a>.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want help reading whether a set was really RIR 2, designing your
+    first calibration test, or knowing which lifts are safe to take to failure? Ask in chat.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#rir">RIR</a>,
+    <a href="../reference/glossary.html#rpe">RPE</a>,
+    <a href="../reference/glossary.html#motor-unit-recruitment">size principle</a>.
+    Why near-failure works → <a href="0002-how-muscle-grows.html">L2</a>. Phase 2 complete → <a href="../index.html">all lessons</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">Helms et al. (2016). Application of the RIR-based RPE scale, <i>Strength Cond J</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4961270/" target="_blank" rel="noopener">PMC4961270</a>. Scale origin: Zourdos et al. (2016), <a href="https://pubmed.ncbi.nlm.nih.gov/26049792/" target="_blank" rel="noopener">PubMed 26049792</a>.</li>
+    <li id="r2">Steele et al. (2017). Predicting reps to failure improves with experience, <i>PeerJ</i>. <a href="https://peerj.com/articles/4105/" target="_blank" rel="noopener">peerj.com/articles/4105</a>.</li>
+    <li id="r3">Emanuel, Halperin et al. (2020). "Just one more rep!" — even trained lifters underpredict, <i>Front. Psychol.</i> <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.565416/full" target="_blank" rel="noopener">frontiersin.org</a>.</li>
+    <li id="r4">Stronger By Science — Reps In Reserve (calibration &amp; velocity cues). <a href="https://www.strongerbyscience.com/reps-in-reserve/" target="_blank" rel="noopener">strongerbyscience.com</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="0009-press-and-pull.html">
+      <div class="dir">← L6</div>
+      <div class="ttl">Press &amp; Pull, Wrist-Safe</div>
+    </a>
+    <a class="next" href="../index.html">
+      <div class="dir">The Lifts complete</div>
+      <div class="ttl">Back to all lessons →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L7 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+
+<script>
+/* ===== Last-rep cue simulator ===== */
+(function(){
+  var track=document.getElementById('repTrack');
+  if(!track) return;
+  var liftBtn=document.getElementById('liftBtn'), rackBtn=document.getElementById('rackBtn'), resetBtn=document.getElementById('resetBtn');
+  var guessRow=document.getElementById('guessRow'), read=document.getElementById('sim3Read');
+
+  var N, cur, vel, done;
+  var VTOP=0.70, VBOT=0.31;
+
+  function buildSet(){
+    N = 9 + Math.floor(Math.random()*4);   // 9–12 rep max
+    vel=[]; for(var i=1;i<=N;i++){ var f=(i-1)/(N-1); vel[i]=VTOP-(VTOP-VBOT)*Math.pow(f,1.5); }
+    cur=0; done=false;
+    track.innerHTML='';
+    guessRow.hidden=true;
+    liftBtn.disabled=false; rackBtn.disabled=true;
+    read.className='sim3-read';
+    read.innerHTML='A fresh set (unknown true max). Lift reps, watch the bar speed, and rack when you’d stop.';
+  }
+
+  function cueFor(loss){
+    if(loss<0.20) return {t:'smooth · fast', c:'#3f7d4e'};
+    if(loss<0.35) return {t:'working · slowing', c:'#caa53a'};
+    if(loss<0.48) return {t:'grinding', c:'#d2702b'};
+    return {t:'near failure', c:'#c1492b'};
+  }
+
+  function lift(){
+    if(done || cur>=N) return;
+    cur++;
+    var v=vel[cur], loss=(vel[1]-v)/vel[1];
+    var cue=cueFor(loss);
+    var w=Math.round(30+ (v-VBOT)/(VTOP-VBOT)*70);  // 30–100%
+    var row=document.createElement('div'); row.className='reprow';
+    row.innerHTML='<span class="rl">Rep '+cur+'</span>'+
+      '<span class="repbar"><span style="width:'+w+'%;background:'+cue.c+'"></span></span>'+
+      '<span class="cue" style="color:'+cue.c+'">'+v.toFixed(2)+' m/s · '+cue.t+'</span>';
+    track.appendChild(row);
+    rackBtn.disabled=false;
+    if(cur>=N){ liftBtn.disabled=true; read.innerHTML='That rep barely moved — you just hit <b>true failure (0 RIR)</b>. Now you know the top of the scale.'; }
+  }
+
+  function openGuess(){
+    if(done || cur<1) return;
+    guessRow.hidden=false;
+    read.innerHTML='How many <b>clean reps</b> do you think you had left at rep '+cur+'?';
+  }
+
+  function guess(g){
+    if(done) return;
+    done=true; guessRow.hidden=true; liftBtn.disabled=true; rackBtn.disabled=true;
+    var trueRIR=N-cur, v=vel[cur], loss=Math.round((vel[1]-v)/vel[1]*100);
+    var diff=g-trueRIR;
+    var base='At rep '+cur+' the bar moved at <b>'+v.toFixed(2)+' m/s</b> ('+loss+'% slower than rep 1) — you truly had <b>'+trueRIR+'</b> rep'+(trueRIR===1?'':'s')+' left.';
+    var verdict, cls;
+    if(diff<=-2){ cls='trap'; verdict=' <b>Classic beginner trap:</b> you felt closer to failure than you were. Most novices stop 2–4 reps early — trust the fast bar.'; }
+    else if(Math.abs(diff)<=1){ cls='good'; verdict=' <b>Well calibrated</b> — within a rep of the truth. That’s the skill.'; }
+    else { cls='trap'; verdict=' You <b>overshot</b> — fewer reps left than you guessed. Rare for beginners, but ease off next time.'; }
+    read.className='sim3-read '+cls;
+    read.innerHTML=base+verdict+' &nbsp;<span style="color:#8fb9c6">(Tap “New set” to try again.)</span>';
+  }
+
+  liftBtn.addEventListener('click',lift);
+  rackBtn.addEventListener('click',openGuess);
+  resetBtn.addEventListener('click',buildSet);
+  ['0','1','2','3','4','5+'].forEach(function(lbl,i){
+    var b=document.createElement('button'); b.textContent=lbl;
+    b.addEventListener('click',function(){ guess(i); });
+    guessRow.appendChild(b);
+  });
+  buildSet();
+})();
+</script>
+</body>
+</html>

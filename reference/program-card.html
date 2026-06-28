@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Program Card · 3-Day Full Body (Wrist-Sparing)</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  /* Reference-specific: workout cards + the day-letter badge */
+  .workout { scroll-margin-top:4rem; border:1px solid var(--rule); border-radius:var(--radius); border-top:4px solid var(--ocean); background:#fff; box-shadow:var(--shadow); padding:1.1rem 1.25rem 1.3rem; margin:1.4rem 0; }
+  .workout > h3 { margin:.1rem 0 .2rem; display:flex; align-items:center; gap:.6rem; }
+  .workout .badge { font-family:var(--sans); font-weight:800; color:#fff; background:var(--ocean); width:1.9rem; height:1.9rem; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-size:1rem; }
+  .workout table { margin:.5rem 0 0; }
+  .workout td .alt { display:block; color:var(--ocean-deep); font-size:.84em; margin-top:.15rem; }
+  .workout td.log { color:var(--ink-faint); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .ss { font-family:var(--sans); font-size:.66rem; font-weight:700; color:var(--kelp); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="program-card.html">Program</a>
+      <a href="glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">Reference · Program</p>
+  <h1 class="lesson-title">3-Day Full Body — Wrist-Sparing</h1>
+  <p class="lesson-sub">Print me. Bring me to the gym. Write your numbers in the margins. The <em>why</em>
+  behind every rule lives in <a href="../lessons/0001-the-big-rocks.html">Lesson 1</a>.</p>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Built for your mission</div>
+    <p>Muscle + metabolic health, 3×/week, ~45 minutes, <strong>neutral-wrist throughout</strong>. Two workouts,
+    <strong>A</strong> and <strong>B</strong>, alternated over 3 non-consecutive days. Every lift has a
+    wrist-friendly alternate so it survives whatever machines your gym actually has.</p>
+  </div>
+
+  <!-- ===== SCHEDULE ===== -->
+  <h2><span class="num">1</span>How to run the week</h2>
+  <table>
+    <caption>Alternate A/B across three non-consecutive days (e.g. Mon · Wed · Fri). Never two days back-to-back.</caption>
+    <thead><tr><th>Week</th><th>Day 1</th><th>Day 2</th><th>Day 3</th></tr></thead>
+    <tbody>
+      <tr><td>Odd weeks</td><td>A</td><td>B</td><td>A</td></tr>
+      <tr><td>Even weeks</td><td>B</td><td>A</td><td>B</td></tr>
+    </tbody>
+  </table>
+  <p class="muted" style="font-family:var(--sans);font-size:.85rem">This touches every major muscle 2–3× a week —
+  your target frequency — at ~8–12 hard sets each, the right starting volume.</p>
+
+  <div class="callout note">
+    <div class="callout-label">⌗ Rest between sets</div>
+    <p><strong>2–3 min</strong> after the big lifts (1–3), <strong>60–90 s</strong> on accessories (4–5). The
+    <span class="ss">⟂ superset</span> pairs can alternate back-to-back to save time. Don't rush the big lifts —
+    short rest just lowers the weights you can use.</p>
+  </div>
+
+  <!-- ===== WARM-UP ===== -->
+  <h2><span class="num">2</span>Warm-up — about 6 minutes</h2>
+  <p><strong>Raise (3–4 min):</strong> easy bike / row / incline walk, then bodyweight squats, leg swings, band
+  pull-aparts, gentle wrist circles. <strong>Ramp (2–3 min):</strong> on the <em>first</em> big lift only, do 2–3
+  build-up sets (light → ~60% → ~80% of your working weight, ~5 reps each). Skip long static stretches before
+  lifting.</p>
+
+  <!-- ===== WORKOUTS ===== -->
+  <h2><span class="num">3</span>The two workouts</h2>
+
+  <div class="workout" id="workout-a">
+    <h3><span class="badge">A</span> Workout A</h3>
+    <table>
+      <thead><tr><th>#</th><th>Exercise</th><th>Sets × reps</th><th>Log</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Goblet squat<span class="alt">alt: leg press / safety-bar squat</span></td><td>3 × 6–8</td><td class="log">___ kg</td></tr>
+        <tr><td>2</td><td>Neutral-grip DB bench press<span class="alt">alt: machine chest press</span></td><td>3 × 6–10</td><td class="log">___ kg</td></tr>
+        <tr><td>3</td><td>Neutral-grip lat pulldown<span class="alt">alt: assisted neutral pull-up</span></td><td>3 × 8–12</td><td class="log">___ kg</td></tr>
+        <tr><td><span class="ss">4 ⟂</span></td><td>Chest-supported neutral row<span class="alt">alt: seated cable row, neutral</span></td><td>2 × 10–12</td><td class="log">___ kg</td></tr>
+        <tr><td><span class="ss">5 ⟂</span></td><td>Forearm plank<span class="alt">alt: Pallof press</span></td><td>2 × 30–45 s</td><td class="log">___</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="workout" id="workout-b">
+    <h3><span class="badge">B</span> Workout B</h3>
+    <table>
+      <thead><tr><th>#</th><th>Exercise</th><th>Sets × reps</th><th>Log</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Trap-bar deadlift<span class="alt">alt: Romanian deadlift with straps</span></td><td>3 × 5–8</td><td class="log">___ kg</td></tr>
+        <tr><td>2</td><td>Neutral-grip DB shoulder press<span class="alt">alt: machine / landmine press</span></td><td>3 × 6–10</td><td class="log">___ kg</td></tr>
+        <tr><td>3</td><td>Hammer/neutral DB row<span class="alt">alt: neutral seated cable row</span></td><td>3 × 8–12</td><td class="log">___ kg</td></tr>
+        <tr><td><span class="ss">4 ⟂</span></td><td>Leg press<span class="alt">alt: hack squat / DB split squat (held by bells)</span></td><td>2 × 10–12</td><td class="log">___ kg</td></tr>
+        <tr><td><span class="ss">5 ⟂</span></td><td>Dead bug<span class="alt">alt: lying leg raise</span></td><td>2 × 10–12</td><td class="log">___</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="font-family:var(--sans);font-size:.85rem;margin:.6rem 0 0">Time left over? Hammer-grip
+    DB or EZ-bar curls, 2 × 10–15.</p>
+  </div>
+
+  <!-- ===== EFFORT + PROGRESSION ===== -->
+  <h2><span class="num">4</span>Effort &amp; progression — the two rules</h2>
+
+  <div class="callout key">
+    <div class="callout-label">★ Rule 1 — how hard</div>
+    <p>Stop every working set with <strong>1–3 reps left in the tank</strong>
+    (<a href="glossary.html#rir">RIR</a> 1–3). Hard, but not a grind to failure. Early on you'll overestimate how
+    close you are — that's normal; we'll calibrate it together.</p>
+  </div>
+
+  <div class="callout build">
+    <div class="callout-label">✓ Rule 2 — when to add weight (double progression)</div>
+    <p>Each lift has a rep range. When you hit the <strong>top of the range on all sets</strong> (still at 1–3
+    RIR), add the smallest load next time: <strong>+2.5 kg</strong> total for upper-body lifts,
+    <strong>+5 kg</strong> for lower-body. Reps drop back down — climb the range again. If a lift stalls for ~2–3
+    sessions, cut its load ~10% and rebuild.</p>
+  </div>
+
+  <!-- ===== WRIST ===== -->
+  <h2><span class="num">5</span>The wrist rules (scaphoid)</h2>
+
+  <div class="callout warning">
+    <div class="callout-label">⚠ Avoid</div>
+    <p>Barbell bench &amp; overhead press (the bar cocks the wrist back), front squat / low-bar back squat (the
+    rack position forces extension), flat-palm push-ups, and heavy bare-handed deadlifts, rows and carries.</p>
+  </div>
+
+  <div class="callout build">
+    <div class="callout-label">✓ Favour</div>
+    <p>Neutral / hammer grips, machine handles, the <strong>landmine</strong>, <strong>trap-bar</strong> &amp;
+    safety-squat bar, <strong>goblet</strong> holds and dumbbells held by the bells, <strong>forearm planks</strong>
+    (wrist off the floor), and <strong>lifting straps</strong> to take grip out of pulls. Push-ups only on fists /
+    handles / parallettes.</p>
+  </div>
+
+  <div class="callout note">
+    <div class="callout-label">⌗ Entry-point rule</div>
+    <p>Pick the variation where wrist symptoms stay <em>stable 24–48 h after</em> training. A clear symptom spike
+    = back off load or range, or swap the movement. Worth a one-time clearance from a hand physio given the
+    fracture history.</p>
+  </div>
+
+  <!-- ===== CONFIRM EQUIPMENT ===== -->
+  <h2><span class="num">6</span>Confirm at the gym</h2>
+  <p>Which of these you have decides the alternates above. Tap each one you find — then tell me the list and I'll
+  lock <strong>v2</strong> of this card to your exact gym.</p>
+
+  <div class="checklist-widget">
+    <ul class="checklist">
+      <li data-check><span class="ck-name">Leg press or hack squat</span> <span class="ck-spec">— for the squat / quad slot</span></li>
+      <li data-check><span class="ck-name">Chest-press machine</span> <span class="ck-spec">— neutral or angled handles?</span></li>
+      <li data-check><span class="ck-name">Shoulder-press machine</span> <span class="ck-spec">— or a landmine / corner</span></li>
+      <li data-check><span class="ck-name">Lat pulldown</span> <span class="ck-spec">— is a neutral (V) handle available?</span></li>
+      <li data-check><span class="ck-name">Seated cable row</span> <span class="ck-spec">— neutral handle?</span></li>
+      <li data-check><span class="ck-name">Trap (hex) bar</span> <span class="ck-spec">— for deadlifts, neutral grip</span></li>
+      <li data-check><span class="ck-name">Adjustable dumbbells</span> <span class="ck-spec">— and their maximum weight</span></li>
+      <li data-check><span class="ck-name">Back-support / adjustable bench</span> <span class="ck-spec">— for presses &amp; supported rows</span></li>
+    </ul>
+    <div class="checklist-bar">
+      <span data-checklist-progress></span>
+      <span>Tap items you have</span>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>Day-one nerves are normal.</b> Don't chase weight today — pick loads that leave you 3+ reps short, learn
+    the movements, and write down what you used. Ask me to walk you through any lift before you do it.
+  </div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> the theory behind this card → <a href="../lessons/0001-the-big-rocks.html">Lesson 1: The Big Rocks</a> ·
+    terms → <a href="glossary.html#double-progression">double progression</a>,
+    <a href="glossary.html#rir">RIR</a>,
+    <a href="glossary.html#hinge">hinge</a>,
+    <a href="glossary.html#neutral-grip">neutral grip</a>.
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="../lessons/0001-the-big-rocks.html">
+      <div class="dir">← Lesson 1</div>
+      <div class="ttl">The Big Rocks</div>
+    </a>
+    <a class="next" href="../index.html">
+      <div class="dir">Course home</div>
+      <div class="ttl">All lessons →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">dad-mod course · Program Card v1 ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="glossary.html">glossary</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L10 · Sleep, Recovery &amp; the Small Deficit</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  /* Lesson-10-specific: the recomp simulator */
+  .sim2 .controls { display:grid; grid-template-columns:1fr 1fr; gap:.8rem 1.1rem; }
+  @media (max-width:40rem){ .sim2 .controls { grid-template-columns:1fr; } }
+  .sim2 .control label { display:flex; justify-content:space-between; font-size:.8rem; font-weight:600; color:var(--ink-soft); margin-bottom:.25rem; font-family:var(--sans); }
+  .sim2 .control output { color:var(--ocean-deep); font-weight:700; }
+  .sim2 input[type=range]{ width:100%; accent-color:var(--ocean); }
+  .sim2 .rt { display:flex; gap:.4rem; }
+  .sim2 .rt button { flex:1; cursor:pointer; font-family:var(--sans); font-weight:700; font-size:.8rem; padding:.4rem; border-radius:7px; border:1.5px solid var(--rule); background:var(--paper); color:var(--ink-soft); }
+  .sim2 .rt button.active { border-color:var(--ocean); background:#e7f5f7; color:var(--ocean-deep); }
+  .outgrid { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin-top:1rem; }
+  @media (max-width:40rem){ .outgrid { grid-template-columns:1fr; } }
+  .stat { background:#fff; border:1px solid var(--rule); border-radius:8px; padding:.7rem .8rem; font-family:var(--sans); }
+  .stat .k { font-size:.74rem; color:var(--ink-faint); font-weight:600; }
+  .stat .v { font-size:1.25rem; font-weight:800; color:var(--abyss); font-variant-numeric:tabular-nums; }
+  .stat .v.good { color:var(--kelp); } .stat .v.bad { color:var(--coral); }
+  .scorebar { height:14px; border-radius:7px; background:#eee; overflow:hidden; margin:.4rem 0; }
+  .scorebar > span { display:block; height:100%; width:0; transition:width .12s, background .12s; }
+  .verdict2 { font-family:var(--sans); font-size:.9rem; font-weight:600; margin-top:.3rem; }
+  .flags { font-family:var(--sans); font-size:.82rem; margin-top:.7rem; }
+  .flags .flag { display:block; padding:.4rem .6rem; border-radius:6px; margin:.3rem 0; }
+  .flags .flag.warn { background:#fdf0ec; color:#8d2f1a; border:1px solid #f0cfc4; }
+  .flags .flag.ok { background:#eef7ef; color:#245c30; border:1px solid #cfe6d3; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">Fuel &amp; Recover · L10</p>
+  <h1 class="lesson-title">Sleep, Recovery &amp; the Small Deficit</h1>
+  <p class="lesson-sub">The work makes the signal; recovery makes the muscle. Get sleep and your calorie deficit
+  right and you can lose fat and build muscle at the same time — your best window to do it.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~12 minutes</span><span class="sep">•</span>
+    <span>😴 With a recomp simulator</span><span class="sep">•</span>
+    <span class="tag ocean">Where growth happens</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p>You're in the rare sweet spot — new to lifting <em>and</em> carrying fat to lose — where
+    <a href="../reference/glossary.html#recomposition">recomposition</a> really works. The two things that decide
+    whether it does are <strong>sleep</strong> and the <strong>size of your calorie deficit</strong>. This lesson
+    shows how they interact, with a simulator so you can find your own sweet spot.</p>
+  </div>
+
+  <!-- ===== 1. SRA ===== -->
+  <h2><span class="num">1</span>You don't grow in the gym</h2>
+  <p>Training is the <em>stimulus</em>; the muscle is actually rebuilt during
+  <a href="../reference/glossary.html#recovery">recovery</a>.<span class="cite"><a href="#r1">1</a></span> Protein
+  synthesis stays elevated for 24–48 h after a session, which is why your
+  <a href="../reference/program-card.html">plan</a> leaves about <strong>48 hours between training a muscle</strong>
+  and spreads three sessions across the week. Rest days aren't time off from progress — they're <em>when the
+  progress is made</em>. Train hard, then get out of your own way.</p>
+
+  <!-- ===== 2. SLEEP ===== -->
+  <h2><span class="num">2</span>Sleep is non-negotiable infrastructure</h2>
+  <p>Aim for <strong>7–9 hours</strong>. This isn't a soft "be well-rested" — short sleep directly attacks the
+  machinery you're training:</p>
+  <ul>
+    <li>One night of deprivation cut muscle protein synthesis <strong>~18%</strong>, dropped testosterone
+    <strong>~24%</strong>, and raised cortisol <strong>~21%</strong>.<span class="cite"><a href="#r2">2</a></span></li>
+    <li>Dieting on short sleep is the cruel one: in a controlled study, cutting sleep from 8.5 to 5.5 h flipped
+    weight loss the wrong way — <strong>~55% less fat lost and ~60% more muscle lost</strong> for the same
+    calories.<span class="cite"><a href="#r3">3</a></span></li>
+    <li>Sleep loss also lowers <a href="../reference/glossary.html#insulin-sensitivity">insulin sensitivity</a> —
+    working directly against the <a href="0004-muscle-glucose-sink.html">metabolic-health goal</a> from L4.</li>
+  </ul>
+  <div class="callout warning">
+    <div class="callout-label">⚠ The blunt version</div>
+    <p>Under-sleep while dieting and your body burns <em>muscle</em> and keeps <em>fat</em> — the exact opposite of
+    the plan. No supplement or training tweak out-runs this. Sleep is the first thing to fix, not the last.</p>
+  </div>
+
+  <!-- ===== 3. RECOMP SIM ===== -->
+  <h2><span class="num">3</span>The small deficit — find your sweet spot</h2>
+  <p>Because you're an ideal recomp candidate, the recipe is gentle: a <strong>small calorie deficit
+  (~300–500 kcal/day)</strong>, plenty of <a href="0005-protein-without-obsession.html">protein</a>, hard training,
+  and sleep.<span class="cite"><a href="#r4">4</a></span> Aim to lose only about <strong>0.5–0.7% of bodyweight a
+  week</strong> — fast crash diets strip muscle.<span class="cite"><a href="#r5">5</a></span> Play with the dials and
+  watch fat loss trade off against keeping muscle:</p>
+
+  <div class="calc sim2">
+    <div class="calc-title">⚖️ Recomp simulator <span style="font-weight:400;color:var(--ink-faint)">(you, ~105 kg)</span></div>
+    <div class="controls">
+      <div class="control">
+        <label for="deficit">Daily calorie deficit <output id="defOut">500 kcal</output></label>
+        <input type="range" id="deficit" min="200" max="800" step="50" value="500">
+      </div>
+      <div class="control">
+        <label for="sleep">Sleep <output id="sleepOut">8.0 h</output></label>
+        <input type="range" id="sleep" min="5" max="9" step="0.5" value="8">
+      </div>
+      <div class="control">
+        <label for="protein">Protein <output id="protOut">2.2 g/kg</output></label>
+        <input type="range" id="protein" min="1.0" max="2.6" step="0.1" value="2.2">
+      </div>
+      <div class="control">
+        <label>Resistance training</label>
+        <div class="rt">
+          <button id="rtOn" type="button" class="active">3×/week</button>
+          <button id="rtOff" type="button">None</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="outgrid">
+      <div class="stat"><div class="k">Weekly fat loss</div><div class="v" id="oFat">—</div></div>
+      <div class="stat"><div class="k">Weekly muscle change</div><div class="v" id="oMuscle">—</div></div>
+    </div>
+
+    <div style="margin-top:.9rem;font-family:var(--sans)">
+      <div style="display:flex;justify-content:space-between;font-size:.8rem;font-weight:700;color:var(--ink-soft)">
+        <span>Muscle-retention score</span><span id="scoreNum">—</span></div>
+      <div class="scorebar"><span id="scoreFill"></span></div>
+      <div class="verdict2" id="verdict2">—</div>
+    </div>
+    <div class="flags" id="flags"></div>
+  </div>
+
+  <!-- ===== 4. SEQUENCING ===== -->
+  <h2><span class="num">4</span>The plan over the year</h2>
+  <p><strong>Cut now.</strong> You have fat to spare, so a modest deficit gets you leaner <em>and</em> lets you build
+  newbie muscle at the same time. Once you're noticeably leaner (around a healthy bodyweight), switch to a
+  <strong>slight surplus</strong> — a "lean bulk", ~150–300 kcal over maintenance — to keep adding muscle with
+  minimal fat regain.<span class="cite"><a href="#r4">4</a></span> The recomp window is widest right now; use it.</p>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">5</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="Recovery, not the session." data-explain-wrong="See §1.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">When is muscle actually built?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — the session is the signal; the building happens during recovery, which is why rest days and sleep matter.">During recovery between sessions</button>
+      <button class="opt" data-feedback="The workout is only the stimulus; growth happens afterward, in recovery.">During the workout itself</button>
+      <button class="opt" data-feedback="The warm-up just prepares you; building happens in recovery after hard sets.">Mostly while you warm up</button>
+      <button class="opt" data-feedback="It's not tied to 'heavy days' — recovery between all sessions is when you adapt.">Only on heavy lifting days</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="You lose the wrong thing." data-explain-wrong="See §2.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">Dieting on too little sleep mainly makes you…</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Correct — short sleep while dieting shifts loss toward muscle and spares fat. Sleep protects muscle.">Lose muscle instead of fat</button>
+      <button class="opt" data-feedback="The opposite — short sleep slows fat loss and costs you muscle.">Lose fat much faster instead</button>
+      <button class="opt" data-feedback="Sleep loss is catabolic — it doesn't build extra muscle overnight.">Build extra muscle overnight</button>
+      <button class="opt" data-feedback="Spot reduction isn't a thing; the real effect is losing muscle, not belly fat.">Burn only belly fat off</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Slow and steady." data-explain-wrong="See §3.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">Best fat-loss pace to keep your muscle?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Yes — ~0.5–0.7% of bodyweight per week (a small deficit) keeps muscle while the fat comes off.">About 0.5–0.7% bodyweight per week</button>
+      <button class="opt" data-feedback="Crash diets strip muscle. A small, steady deficit protects it.">As fast as you possibly can</button>
+      <button class="opt" data-feedback="That's far too aggressive — you'd lose a lot of muscle. Aim ~0.5–0.7%/week.">About 2–3% bodyweight per week</button>
+      <button class="opt" data-feedback="A surplus adds fat now; you have fat to lose, so a small deficit is right.">No deficit, only a surplus</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li>Muscle is built in <strong>recovery</strong>, not the gym — rest and ~48 h between sessions are part of the plan.</li>
+      <li><strong>7–9 h sleep</strong> is infrastructure; short sleep makes you lose muscle and keep fat.</li>
+      <li>For recomp: a <strong>small deficit (~300–500 kcal)</strong> + high protein + lifting + sleep.</li>
+      <li>Lose only ~<strong>0.5–0.7% of bodyweight per week</strong>; faster strips muscle.</li>
+      <li><strong>Cut now</strong> while it's easy; <strong>lean-bulk later</strong> once you're leaner.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">📖</div>
+    <div>
+      <div class="label">Primary source · read this next</div>
+      <div class="title"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4033492/" target="_blank" rel="noopener">Helms, Aragon &amp; Fitschen (2014) — evidence-based recommendations for natural physique (JISSN)</a></div>
+      <div class="desc">The practical, open-access basis for deficit size, the 0.5–1%/week loss rate, and high protein to keep muscle while dieting. The sleep evidence: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2951287/" target="_blank" rel="noopener">Nedeltcheva et al. (2010)</a>.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want a rough daily calorie estimate to hit a ~500 kcal deficit, a
+    couple of practical sleep fixes, or help reading whether the scale is dropping too fast? Ask in chat.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#recovery">recovery (SRA)</a>,
+    <a href="../reference/glossary.html#energy-balance">energy balance</a>,
+    <a href="../reference/glossary.html#recomposition">recomposition</a>,
+    <a href="../reference/glossary.html#insulin-sensitivity">insulin sensitivity</a>.
+    Completes Fuel &amp; Recover → back to <a href="../index.html">all lessons</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">Stimulus–recovery–adaptation &amp; the 24–48 h MPS window (training framework). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5023708/" target="_blank" rel="noopener">via Damas 2016</a>.</li>
+    <li id="r2">Lamon et al. (2021). Sleep deprivation: MPS −18%, testosterone −24%, cortisol +21%, <i>Physiol Rep</i>. <a href="https://physoc.onlinelibrary.wiley.com/doi/10.14814/phy2.14660" target="_blank" rel="noopener">Physiological Reports</a>.</li>
+    <li id="r3">Nedeltcheva et al. (2010). Sleep restriction shifts loss toward lean mass, <i>Ann Intern Med</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2951287/" target="_blank" rel="noopener">PMC2951287</a>.</li>
+    <li id="r4">Body recomposition — who can do it &amp; the deficit/surplus sequence. <a href="https://macrofactor.com/recomposition/" target="_blank" rel="noopener">MacroFactor / Stronger By Science</a>.</li>
+    <li id="r5">Helms, Aragon &amp; Fitschen (2014). 0.5–1%/week loss rate to retain muscle, <i>JISSN</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4033492/" target="_blank" rel="noopener">PMC4033492</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="0006-creatine-and-the-shelf.html">
+      <div class="dir">← L9</div>
+      <div class="ttl">Creatine &amp; the Shelf</div>
+    </a>
+    <a class="next" href="../index.html">
+      <div class="dir">Fuel &amp; Recover complete</div>
+      <div class="ttl">Back to all lessons →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L10 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+
+<script>
+/* ===== Recomp simulator ===== */
+(function(){
+  var def=document.getElementById('deficit');
+  if(!def) return;
+  var sleep=document.getElementById('sleep'), protein=document.getElementById('protein');
+  var defOut=document.getElementById('defOut'), sleepOut=document.getElementById('sleepOut'), protOut=document.getElementById('protOut');
+  var rtOn=document.getElementById('rtOn'), rtOff=document.getElementById('rtOff');
+  var oFat=document.getElementById('oFat'), oMuscle=document.getElementById('oMuscle');
+  var scoreNum=document.getElementById('scoreNum'), scoreFill=document.getElementById('scoreFill'), verdict2=document.getElementById('verdict2');
+  var flags=document.getElementById('flags');
+  var BW=105, rt=true;
+
+  function clamp(x,a,b){ return Math.max(a,Math.min(b,x)); }
+
+  function update(){
+    var d=parseFloat(def.value), s=parseFloat(sleep.value), p=parseFloat(protein.value);
+    defOut.textContent=d+' kcal'; sleepOut.textContent=s.toFixed(1)+' h'; protOut.textContent=p.toFixed(1)+' g/kg';
+
+    var weeklyLoss = d*7/7700;                 // kg/week
+    var weeklyPct  = weeklyLoss/BW*100;
+    var fatFrac = clamp(0.25 + (s-5.5)/(8.5-5.5)*0.31 + (p>=1.6?0.10:0) + (rt?0.15:0), 0, 1.12);
+    var fatLoss = weeklyLoss*fatFrac;
+    var muscleChange = weeklyLoss*(fatFrac-1);  // + = gain, - = loss
+
+    oFat.textContent='−'+fatLoss.toFixed(2)+' kg';
+    if(muscleChange>=0){ oMuscle.textContent='+'+muscleChange.toFixed(2)+' kg'; oMuscle.className='v good'; }
+    else { oMuscle.textContent='−'+Math.abs(muscleChange).toFixed(2)+' kg'; oMuscle.className='v bad'; }
+
+    var score = 40
+      + (p>=1.6?20:0) + (p>=2.0?5:0)
+      + (s>=7?20: s>=6?5:-25)
+      + (weeklyPct<=0.7?15: weeklyPct>1.0?-20:0)
+      + (rt?15:0);
+    score=clamp(score,0,100);
+    scoreNum.textContent=Math.round(score)+' / 100';
+    scoreFill.style.width=score+'%';
+    var col = score>=80?'#3f7d4e': score>=50?'#caa53a':'#c1492b';
+    scoreFill.style.background=col;
+    verdict2.style.color=col;
+    verdict2.textContent = score>=80 ? '✓ Recomp zone — losing fat while keeping (or gaining) muscle.'
+                         : score>=50 ? 'Okay, but leaving muscle on the table — tighten one dial.'
+                         : '✗ Lean-loss risk — you’re burning muscle, not just fat.';
+
+    var f='';
+    if(weeklyPct>1.0) f+='<span class="flag warn">Deficit too aggressive ('+weeklyPct.toFixed(2)+'%/wk) — crash pace strips muscle. Ease off.</span>';
+    if(s<6) f+='<span class="flag warn">Sleep is sabotaging this — under 6 h flips loss toward muscle (Nedeltcheva).</span>';
+    if(p<1.6) f+='<span class="flag warn">Protein below ~1.6 g/kg — your muscle isn’t protected in a deficit.</span>';
+    if(!rt) f+='<span class="flag warn">No resistance training — without the signal, a deficit costs muscle.</span>';
+    if(score>=80 && weeklyPct<=0.7) f+='<span class="flag ok">This is your sweet spot — sustainable, muscle-sparing, and it fits the plan.</span>';
+    flags.innerHTML=f;
+  }
+  function setRT(v){ rt=v; rtOn.classList.toggle('active',v); rtOff.classList.toggle('active',!v); update(); }
+  def.addEventListener('input',update); sleep.addEventListener('input',update); protein.addEventListener('input',update);
+  rtOn.addEventListener('click',function(){setRT(true);}); rtOff.addEventListener('click',function(){setRT(false);});
+  update();
+})();
+</script>
+</body>
+</html>

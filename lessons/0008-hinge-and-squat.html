@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L5 · The Hinge &amp; the Squat</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  .figpair { background:#fff; border:1px solid var(--rule); border-radius:var(--radius); padding:1rem 1.1rem; margin:1.6rem 0; box-shadow:var(--shadow); }
+  .figpair svg { width:100%; height:auto; display:block; }
+  .figpair figcaption { font-family:var(--sans); font-size:.8rem; color:var(--ink-faint); margin-top:.5rem; }
+  .twocol { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+  @media (max-width:42rem){ .twocol { grid-template-columns:1fr; } }
+  .twocol h3 { margin-top:.3rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">The Lifts · L5</p>
+  <h1 class="lesson-title">The Hinge &amp; the Squat</h1>
+  <p class="lesson-sub">Your two biggest lower-body lifts, built from one distinction — hips or knees — and kept
+  entirely off your wrist.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~14 minutes</span><span class="sep">•</span>
+    <span>🏋 Cues, faults &amp; a fault-finder</span><span class="sep">•</span>
+    <span class="tag ocean">Form, wrist-safe</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p>You understand the <a href="0003-levers-tension-wrist.html">mechanics</a> and the
+    <a href="../reference/program-card.html">plan</a>. Now the skill: performing the trap-bar deadlift and the
+    goblet/leg-press squat well enough to load them safely and progress. Good form isn't about looking pretty —
+    it's how you keep adding weight for years without getting hurt.</p>
+  </div>
+
+  <!-- ===== 1. HINGE VS SQUAT ===== -->
+  <h2><span class="num">1</span>One distinction: hips or knees</h2>
+  <p>Every lower-body lift is mostly one of two patterns. Learn to tell them apart and the cues click into place:</p>
+  <ul>
+    <li>A <a href="../reference/glossary.html#hinge"><strong>hinge</strong></a> (trap-bar deadlift, Romanian
+    deadlift) is <em>hip-dominant</em>: hips travel <strong>back</strong>, shins stay near vertical, the torso folds
+    forward. It trains the back of the body — glutes, hamstrings, back.</li>
+    <li>A <strong>squat</strong> (goblet, leg press) is <em>knee-dominant</em>: knees travel <strong>forward and
+    out</strong>, the torso stays more upright. It trains the quads and glutes.</li>
+  </ul>
+
+  <figure class="figpair">
+    <svg viewBox="0 0 640 320" role="img" aria-label="Side-view stick figures comparing a hip hinge (shins vertical, hips back, torso folded) with a squat (knees forward, torso upright).">
+      <defs></defs>
+      <!-- HINGE -->
+      <text x="40" y="26" font-family="sans-serif" font-size="14" font-weight="700" fill="#0a3d5c">HINGE — hips back, shins ~vertical</text>
+      <line x1="30" y1="300" x2="300" y2="300" stroke="#444" stroke-width="3"/>
+      <line x1="150" y1="300" x2="150" y2="190" stroke="#8fb9c6" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <line x1="150" y1="300" x2="160" y2="212" stroke="#1d2228" stroke-width="6" stroke-linecap="round"/>
+      <line x1="160" y1="212" x2="120" y2="198" stroke="#1d2228" stroke-width="6" stroke-linecap="round"/>
+      <line x1="120" y1="198" x2="215" y2="140" stroke="#1d2228" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="231" cy="126" r="13" fill="#fff" stroke="#1d2228" stroke-width="4"/>
+      <line x1="215" y1="140" x2="200" y2="215" stroke="#1d2228" stroke-width="6" stroke-linecap="round"/>
+      <rect x="183" y="214" width="34" height="10" rx="2" fill="#0b6b7a"/>
+      <circle cx="150" cy="300" r="5" fill="#c1492b"/><circle cx="160" cy="212" r="5" fill="#c1492b"/><circle cx="120" cy="198" r="5" fill="#c1492b"/>
+      <text x="44" y="270" font-family="sans-serif" font-size="11" fill="#44515b">shin ≈ vertical</text>
+      <text x="186" y="112" font-family="sans-serif" font-size="11" fill="#44515b">torso folded forward</text>
+      <!-- SQUAT -->
+      <text x="360" y="26" font-family="sans-serif" font-size="14" font-weight="700" fill="#0a3d5c">SQUAT — knees forward, torso upright</text>
+      <line x1="340" y1="300" x2="610" y2="300" stroke="#444" stroke-width="3"/>
+      <line x1="445" y1="300" x2="445" y2="190" stroke="#8fb9c6" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <line x1="445" y1="300" x2="478" y2="216" stroke="#1d2228" stroke-width="6" stroke-linecap="round"/>
+      <line x1="478" y1="216" x2="436" y2="212" stroke="#1d2228" stroke-width="6" stroke-linecap="round"/>
+      <line x1="436" y1="212" x2="446" y2="128" stroke="#1d2228" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="448" cy="114" r="13" fill="#fff" stroke="#1d2228" stroke-width="4"/>
+      <line x1="446" y1="128" x2="470" y2="170" stroke="#1d2228" stroke-width="6" stroke-linecap="round"/>
+      <rect x="460" y="162" width="20" height="16" rx="3" fill="#0b6b7a"/>
+      <circle cx="445" cy="300" r="5" fill="#c1492b"/><circle cx="478" cy="216" r="5" fill="#c1492b"/><circle cx="436" cy="212" r="5" fill="#c1492b"/>
+      <text x="486" y="266" font-family="sans-serif" font-size="11" fill="#44515b">shin angled forward</text>
+      <text x="470" y="120" font-family="sans-serif" font-size="11" fill="#44515b">torso upright</text>
+    </svg>
+    <figcaption>The dashed line is vertical at each ankle. Notice the shin: near-vertical in the hinge, clearly
+    angled forward in the squat. That single difference drives everything else.</figcaption>
+  </figure>
+
+  <!-- ===== 2. BRACE ===== -->
+  <h2><span class="num">2</span>The brace you'll use on every rep</h2>
+  <div class="callout key">
+    <div class="callout-label">★ The 360° brace</div>
+    <p>Before each hard rep: take a <strong>big breath into your belly</strong> (not your chest) so it expands all
+    the way around — front, sides, low back. <strong>Brace your abs as if about to take a punch</strong>, hold the
+    breath through the hard part, and exhale at the top.<span class="cite"><a href="#r1">1</a></span> This stiff
+    cylinder protects your spine under load. (If you have uncontrolled high blood pressure, clear breath-holding
+    with a doctor and exhale through the sticking point instead.)</p>
+  </div>
+
+  <!-- ===== 3. THE LIFTS ===== -->
+  <h2><span class="num">3</span>The two lifts, step by step</h2>
+
+  <div class="twocol">
+    <div>
+      <h3>Trap-bar deadlift <span class="tag ocean">main hinge</span></h3>
+      <ol class="steps">
+        <li><div class="step-title">Stand &amp; grip</div><div class="step-detail">Centre of the bar, feet hip-width. Use the <strong>high handles</strong> to start — neutral grip, wrists straight.</div></li>
+        <li><div class="step-title">Set the hips back</div><div class="step-detail">Push hips back to reach the handles; shins near-vertical, chest up, flat back. Hips higher than a squat.</div></li>
+        <li><div class="step-title">Take the slack out</div><div class="step-detail">Pull lightly up until you feel tension and your body tightens. Big brace.</div></li>
+        <li><div class="step-title">Push the floor away</div><div class="step-detail">Drive with the legs; hips and chest rise <em>together</em>. Don't let the hips shoot up first.</div><div class="step-tip"><b>Lockout:</b> stand tall, squeeze glutes — no leaning back.</div></li>
+      </ol>
+    </div>
+    <div>
+      <h3>Goblet squat <span class="tag ocean">main squat</span></h3>
+      <ol class="steps">
+        <li><div class="step-title">Hold it wrist-safe</div><div class="step-detail">Cradle a dumbbell vertically against your chest, or a kettlebell by the horns. <strong>Wrists stacked and neutral</strong>, elbows down.</div></li>
+        <li><div class="step-title">Stance &amp; brace</div><div class="step-detail">Feet shoulder-width, toes out ~15–30°. 360° brace.</div></li>
+        <li><div class="step-title">Sit down between the hips</div><div class="step-detail">Knees travel forward <em>and out</em>, tracking over the toes. "Spread the floor."</div><div class="step-tip"><b>Depth:</b> thighs ~parallel, as deep as you keep a neutral spine and heels down.</div></li>
+        <li><div class="step-title">Drive up</div><div class="step-detail">Push through the whole foot, chest up, exhale near the top.</div></li>
+      </ol>
+    </div>
+  </div>
+  <p class="muted" style="font-family:var(--sans);font-size:.85rem">The goblet teaches the pattern but soon gets
+  limited by how much you can hold at your chest — that's your cue to load the squat pattern heavier on the
+  <strong>leg press</strong> (back flat to the pad, stop before your hips curl off the seat). The
+  <strong>Romanian deadlift</strong> is the pure hinge: soft knees fixed, push the hips straight back, feel the
+  hamstring stretch, stand tall.</p>
+
+  <!-- ===== 4. FAULT FINDER ===== -->
+  <h2><span class="num">4</span>Fault-finder: what's going wrong?</h2>
+  <p>Tap the thing you notice — get the likely cause and the fix.</p>
+
+  <div class="faultfinder">
+    <div class="ff-q">Pick a symptom</div>
+    <ul class="ff-list">
+      <li class="ff-item" data-cause="Hips were set too low at the start (you squatted it), so the legs can't drive — or you lost the brace." data-fix="Set the hips HIGHER — it's a hinge, not a squat. 'Push the floor away' so hips and chest rise together. Take the slack out first.">My hips shoot up first, the bar lags <span class="ff-tag">Hinge</span></li>
+      <li class="ff-item" data-cause="Lost brace, load too heavy, hips set too low, or limited mobility." data-fix="Re-brace 360° before lifting, drop the weight, set a flat neutral back first, and keep the load close to your legs.">My lower back rounds <span class="ff-tag">Hinge</span></li>
+      <li class="ff-item" data-cause="The old 'look up to lift up' myth — it cranks the neck into extension." data-fix="Neutral neck: gaze at the floor 6–10 ft ahead and 'pack the chin'. Your head follows your spine.">I look up / crank my neck back <span class="ff-tag">Hinge</span></li>
+      <li class="ff-item" data-cause="Under-cued glutes and hip rotators — usually a motor-control issue, not pure weakness." data-fix="'Knees out / spread the floor / screw your feet into the ground.' A light band around the knees gives feedback.">My knees cave inward <span class="ff-tag">Squat</span></li>
+      <li class="ff-item" data-cause="Limited ankle mobility or weight pitching forward; stance may be too narrow." data-fix="Sit into the whole foot, widen the stance and turn the toes out, or elevate the heels slightly (small plates).">My heels lift off the floor <span class="ff-tag">Squat</span></li>
+      <li class="ff-item" data-cause="Going deeper than your current hip/ankle mobility allows, chasing depth." data-fix="Squat only as deep as you keep a neutral pelvis. Widen stance and toes out; build mobility over time.">My tailbone tucks under at the bottom <span class="ff-tag">Squat</span></li>
+      <li class="ff-item" data-cause="The persistent myth that knees-over-toes is dangerous, so you cut depth or shift into a good-morning." data-fix="It's normal and safe for healthy knees — let the knees travel forward so you can stay upright.">I'm scared my knees pass my toes <span class="ff-tag">Squat</span></li>
+      <li class="ff-item" data-cause="Going too deep on the leg press, so the low back flexes and the hips curl off the pad." data-fix="Shorten the range — stop before the pelvis tucks off the seat. Keep a soft knee at the top, never slam lockout.">My hips curl off the leg-press pad <span class="ff-tag">Leg press</span></li>
+    </ul>
+    <div class="ff-panel">
+      <div class="ff-cause"></div>
+      <div class="ff-fix"></div>
+    </div>
+  </div>
+
+  <!-- ===== 5. WRIST + SAFETY ===== -->
+  <h2><span class="num">5</span>Wrist &amp; starting safely</h2>
+  <div class="callout build">
+    <div class="callout-label">✓ Wrist-safe by design</div>
+    <p>The <strong>trap-bar</strong> is ideal — neutral handles, the load just hangs, zero wrist extension. The
+    <strong>goblet</strong> is safe held by the bell with a stacked wrist. <strong>Avoid</strong> the front-rack and
+    low-bar back squat (both force the wrist into extension); if you ever pull from a straight bar, use
+    <strong>straps</strong> so the grip never becomes the limit.<span class="cite"><a href="#r2">2</a></span></p>
+  </div>
+  <div class="callout note">
+    <div class="callout-label">⌗ First weeks: groove it light</div>
+    <p>Warm up (5 min easy cardio + bodyweight squats/hinges), then <a href="0007-sleep-recovery-deficit.html">ramp</a>
+    up in sets. Spend the first week or two <strong>sub-maximal (3–4 reps in reserve)</strong>, technique first. Add
+    load only when reps feel easy <em>with clean form</em>, and back off the moment form breaks. Skill before
+    weight.</p>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Get a real form check</div>
+    <p>You can't see your own back round. Film a side-on set and post it to a moderated community — the fastest way
+    to fix faults: <a href="https://www.reddit.com/r/Fitness/" target="_blank" rel="noopener">r/Fitness</a> (daily
+    thread) or the rehab-aware <a href="https://forum.barbellmedicine.com/" target="_blank" rel="noopener">Barbell
+    Medicine forum</a>. Or send me a description and I'll talk you through it.</p>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">6</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="Hips back, shins vertical." data-explain-wrong="See §1.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">In a hip hinge, your shins stay roughly…</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — a hinge keeps the shins near-vertical while the hips travel back and the torso folds forward.">Vertical, with hips traveling back</button>
+      <button class="opt" data-feedback="That's a squat — knees and shins travel forward. A hinge keeps shins vertical.">Angled far forward over the toes</button>
+      <button class="opt" data-feedback="A hinge has only a slight knee bend; deep knee bend is the squat.">Bent deeply, like a squat</button>
+      <button class="opt" data-feedback="The knees keep a soft bend in a hinge — not locked rigid.">Locked dead straight throughout</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Normal and safe." data-explain-wrong="See the fault-finder.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">Knees traveling past your toes in a squat is…</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Correct — for healthy knees it's normal and necessary to stay upright. Don't cut depth to avoid it.">Normal and safe for healthy knees</button>
+      <button class="opt" data-feedback="That's the myth. For healthy knees, knees-over-toes is fine and often required.">Always dangerous and to avoid</button>
+      <button class="opt" data-feedback="Ankle mobility affects it, but knees passing toes is normal, not a fault by itself.">Only ever a bad-ankle sign</button>
+      <button class="opt" data-feedback="It's fine in free squats too — the knees should travel over the toes.">Acceptable only on machines</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Neutral, by the bells." data-explain-wrong="See §5.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">Which squat keeps your wrist safest?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Yes — held by the bell with a stacked wrist, the goblet keeps the wrist neutral. Front-rack and low-bar force extension.">Goblet held by the bells</button>
+      <button class="opt" data-feedback="The front rack forces loaded wrist extension — exactly what to avoid.">Front-rack barbell squat</button>
+      <button class="opt" data-feedback="Low-bar loads the wrist supporting the bar in extension — avoid it.">Low-bar back squat</button>
+      <button class="opt" data-feedback="Overhead holding extends and loads the wrist — not for you.">Overhead barbell squat</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li>A <strong>hinge</strong> is hip-dominant (shins vertical); a <strong>squat</strong> is knee-dominant (upright torso).</li>
+      <li>Use the <strong>360° brace</strong> on every working rep.</li>
+      <li>Trap-bar: hips set high, take slack out, <strong>push the floor away</strong> — hips and chest rise together.</li>
+      <li>Goblet: <strong>sit between the hips</strong>, knees out, full pain-free depth; load heavier on the leg press.</li>
+      <li>Stay <strong>neutral-wrist</strong>, groove it light first, and get a form check on video.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">🎥</div>
+    <div>
+      <div class="label">Primary source · watch this</div>
+      <div class="title"><a href="https://www.youtube.com/watch?v=TU2xZ7s4jus" target="_blank" rel="noopener">Alan Thrall — “The Trap Bar Deadlift”</a></div>
+      <div class="desc">A clear, no-nonsense walkthrough of your main hinge. Also useful:
+      <a href="https://www.youtube.com/watch?v=MeIiIdhvXT4" target="_blank" rel="noopener">goblet squat</a>,
+      <a href="https://www.youtube.com/watch?v=uhghy9pFIPY" target="_blank" rel="noopener">RDL (E3 Rehab)</a>, and
+      the evidence-based <a href="https://www.barbellmedicine.com/blog/how-to-squat/" target="_blank" rel="noopener">Barbell Medicine squat guide</a>.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want starting-weight suggestions, a cue for a fault that won't go
+    away, or whether to free-squat or leg-press on a given day? Describe what's happening and I'll coach you.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#hinge">hinge</a>,
+    <a href="../reference/glossary.html#bracing">bracing</a>,
+    <a href="../reference/glossary.html#range-of-motion">range of motion</a>.
+    Mechanics behind it → <a href="0003-levers-tension-wrist.html">L3</a>. Next → <a href="0009-press-and-pull.html">L6 Press &amp; Pull, Wrist-Safe</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">Barbell Medicine — How to Squat (bracing, stance, depth). <a href="https://www.barbellmedicine.com/blog/how-to-squat/" target="_blank" rel="noopener">barbellmedicine.com</a>; Stronger By Science — <a href="https://www.strongerbyscience.com/how-to-squat/" target="_blank" rel="noopener">How to Squat</a>.</li>
+    <li id="r2">Squat University — knee-cave is a motor-control issue (cueing fixes). <a href="https://squatuniversity.com/2017/07/20/how-to-fix-knee-cave/" target="_blank" rel="noopener">squatuniversity.com</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="../index.html">
+      <div class="dir">← Course home</div>
+      <div class="ttl">All lessons</div>
+    </a>
+    <a class="next" href="0009-press-and-pull.html">
+      <div class="dir">Next · L6</div>
+      <div class="ttl">Press &amp; Pull, Wrist-Safe →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L5 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+</body>
+</html>

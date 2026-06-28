@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L6 · Press &amp; Pull, Wrist-Safe</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  .wristmini { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.4rem 0; }
+  @media (max-width:34rem){ .wristmini { grid-template-columns:1fr; } }
+  .wristmini figure { margin:0; background:#fff; border:1px solid var(--rule); border-radius:var(--radius); padding:.8rem; box-shadow:var(--shadow); text-align:center; }
+  .wristmini svg { width:100%; max-width:200px; height:auto; }
+  .wristmini figcaption { font-family:var(--sans); font-size:.82rem; margin-top:.4rem; font-weight:600; }
+  .wristmini .good { color:#245c30; } .wristmini .bad { color:#8d2f1a; }
+  .moves { display:grid; grid-template-columns:1fr 1fr; gap:1.3rem 1.6rem; margin:1.2rem 0; }
+  @media (max-width:42rem){ .moves { grid-template-columns:1fr; } }
+  .moves h3 { font-size:1rem; margin:.2rem 0 .3rem; color:var(--abyss); }
+  .moves .mv { background:#fff; border:1px solid var(--rule); border-radius:var(--radius); padding:.8rem 1rem; box-shadow:var(--shadow); }
+  .moves .mv ul { margin:.3rem 0 0; padding-left:1.1rem; font-family:var(--sans); font-size:.88rem; color:var(--ink-soft); }
+  .moves .mv li { margin:.25rem 0; }
+  .grouphead { font-family:var(--sans); font-weight:800; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ocean); margin:1.4rem 0 .2rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">The Lifts · L6</p>
+  <h1 class="lesson-title">Press &amp; Pull, Wrist-Safe</h1>
+  <p class="lesson-sub">Four upper-body lifts, two rules that run through all of them — set the shoulder blades,
+  keep the wrist straight — and your scaphoid never takes the load.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~13 minutes</span><span class="sep">•</span>
+    <span>💪 Cues, faults &amp; a fault-finder</span><span class="sep">•</span>
+    <span class="tag ocean">Neutral-grip, shoulder-safe</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p>Your upper body builds through pressing and pulling — and for you, <em>how you grip</em> decides whether the
+    work is safe. This lesson keeps every press and pull on a <strong>neutral grip with a straight wrist</strong>,
+    so you build chest, shoulders and back without ever loading the healed scaphoid in
+    <a href="0003-levers-tension-wrist.html">extension</a>.</p>
+  </div>
+
+  <!-- ===== 1. TWO RULES ===== -->
+  <h2><span class="num">1</span>Two rules for every rep</h2>
+  <p><strong>Rule one — set the shoulder blades.</strong> Before the weight moves, pull your
+  <a href="../reference/glossary.html#scapular-retraction">shoulder blades down and into your back pockets</a> and
+  hold them there. On presses it gives a stable shelf; on pulls it switches the back on and protects the
+  shoulder.<span class="cite"><a href="#r1">1</a></span></p>
+  <p><strong>Rule two — keep the wrist straight and stacked.</strong> Grip in the <em>meaty heel of the palm</em>,
+  knuckles pointing at the ceiling, wrist in a straight line with the forearm — never cocked back. A
+  <a href="../reference/glossary.html#neutral-grip">neutral grip</a> (palms facing) stacks the knuckles over the
+  forearm naturally, so the load runs down the bones instead of bending the
+  joint.<span class="cite"><a href="#r2">2</a></span></p>
+
+  <div class="wristmini">
+    <figure>
+      <svg viewBox="0 0 200 150" role="img" aria-label="A straight, neutral wrist with load running down the forearm.">
+        <line x1="60" y1="20" x2="60" y2="95" stroke="#cdbf9f" stroke-width="22" stroke-linecap="round"/>
+        <line x1="60" y1="95" x2="60" y2="135" stroke="#cdbf9f" stroke-width="20" stroke-linecap="round"/>
+        <circle cx="60" cy="95" r="7" fill="#fff" stroke="#3f7d4e" stroke-width="3"/>
+        <line x1="92" y1="22" x2="92" y2="128" stroke="#3f7d4e" stroke-width="4"/>
+        <path d="M87 126 L97 126 L92 137 Z" fill="#3f7d4e"/>
+      </svg>
+      <figcaption class="good">✓ Neutral — wrist straight</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 200 150" role="img" aria-label="A wrist bent back into extension under load.">
+        <line x1="60" y1="20" x2="60" y2="95" stroke="#cdbf9f" stroke-width="22" stroke-linecap="round"/>
+        <line x1="60" y1="95" x2="120" y2="68" stroke="#cdbf9f" stroke-width="20" stroke-linecap="round"/>
+        <circle cx="60" cy="95" r="7" fill="#fff" stroke="#c1492b" stroke-width="3"/>
+        <line x1="120" y1="28" x2="120" y2="62" stroke="#1d2228" stroke-width="3"/>
+        <path d="M115 58 L125 58 L120 68 Z" fill="#1d2228"/>
+        <path d="M44 84 A20 20 0 0 1 80 80" fill="none" stroke="#c1492b" stroke-width="4"/>
+      </svg>
+      <figcaption class="bad">✗ Extended — scaphoid loads here</figcaption>
+    </figure>
+  </div>
+
+  <!-- ===== 2. THE LIFTS ===== -->
+  <h2><span class="num">2</span>The four lifts</h2>
+
+  <p class="grouphead">Pressing — elbows tucked ~45°, not flared</p>
+  <div class="moves">
+    <div class="mv">
+      <h3>Neutral-grip DB bench <span class="tag ocean">horizontal</span></h3>
+      <ul>
+        <li>Palms facing, wrists stacked over elbows.</li>
+        <li>Lower to mid-chest with elbows at <strong>~45°</strong> — never flared to 90°.</li>
+        <li>Press up, stop just short of lockout; don't let the wrists fold back.</li>
+      </ul>
+    </div>
+    <div class="mv">
+      <h3>Neutral DB / landmine press <span class="tag ocean">vertical</span></h3>
+      <ul>
+        <li>Seated with back support; palms facing, elbows under wrists.</li>
+        <li><strong>Brace hard</strong> so the lower back doesn't arch.</li>
+        <li>Landmine option: press up &amp; slightly forward on a diagonal — easy on the shoulder.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="grouphead">Pulling — set the blades first, lead with the elbows</p>
+  <div class="moves">
+    <div class="mv">
+      <h3>Chest-supported row <span class="tag ocean">horizontal</span></h3>
+      <ul>
+        <li>Chest on an incline pad (kills momentum). Palms facing.</li>
+        <li>Set the scapula, then <strong>lead with the elbows</strong> to your lower ribs.</li>
+        <li>Use straps if grip fails before the back does.</li>
+      </ul>
+    </div>
+    <div class="mv">
+      <h3>Neutral lat pulldown <span class="tag ocean">vertical</span></h3>
+      <ul>
+        <li>Neutral (V) handle, straight wrists, sit tall.</li>
+        <li>Pull shoulder blades down, drive elbows to the floor, bar to <strong>upper chest</strong>.</li>
+        <li>Only a slight lean — <strong>don't turn it into a lean-back row</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 3. FAULT FINDER ===== -->
+  <h2><span class="num">3</span>Fault-finder: what's going wrong?</h2>
+  <p>Tap what you notice — get the cause and the fix.</p>
+
+  <div class="faultfinder">
+    <div class="ff-q">Pick a symptom</div>
+    <ul class="ff-list">
+      <li class="ff-item" data-cause="Weight held high in the fingers, a pronated grip, or simply too heavy — forcing the wrist into extension." data-fix="Neutral grip only; grip in the heel of the palm with knuckles stacked over the forearm; lighten the load; add light wrist support.">My wrist bends back / aches under load <span class="ff-tag">Press</span></li>
+      <li class="ff-item" data-cause="Copying the flat-bar bench or cueing 'elbows out'." data-fix="Tuck the elbows to about 45° with forearms vertical — 'elbows toward the lats'. This protects the shoulder and keeps the wrist neutral.">My elbows flare straight out to the sides <span class="ff-tag">Press</span></li>
+      <li class="ff-item" data-cause="No scapular set; pressing/pulling with the traps; or the load is too heavy." data-fix="Reset 'blades down and into the back pockets' before each rep and keep the shoulders down, away from the ears.">My shoulders creep up toward my ears <span class="ff-tag">Both</span></li>
+      <li class="ff-item" data-cause="Weak or absent brace, ego load, or ribs flaring up on the overhead press." data-fix="Ribs down, brace the abs hard, glutes tight, use a back-supported seat — or switch to the landmine press. Lighten the weight.">My lower back arches when I press overhead <span class="ff-tag">Press</span></li>
+      <li class="ff-item" data-cause="Weight too heavy and you're pulling with the torso, not the back." data-fix="Use the chest-supported row; pause at the bottom; lead with the elbows; lighten the load until the back does the work.">I swing / use momentum on rows <span class="ff-tag">Pull</span></li>
+      <li class="ff-item" data-cause="Too heavy, so you heave the torso back to move the weight." data-fix="Sit tall, cap the lean at 15–30°, drive the elbows down to the upper chest; reduce the weight until the torso stays quiet.">My pulldown becomes a lean-back row <span class="ff-tag">Pull</span></li>
+      <li class="ff-item" data-cause="You're not setting the scapula and you're gripping/pulling arms-first." data-fix="Set the shoulder blades first, then lead with the elbows. Use straps so the grip — not the back — isn't the limit.">My arms/forearms fatigue, not my back <span class="ff-tag">Pull</span></li>
+    </ul>
+    <div class="ff-panel">
+      <div class="ff-cause"></div>
+      <div class="ff-fix"></div>
+    </div>
+  </div>
+
+  <!-- ===== 4. WRIST + SHOULDER ===== -->
+  <h2><span class="num">4</span>Protecting wrist and shoulder</h2>
+  <div class="callout build">
+    <div class="callout-label">✓ Why neutral grip is your default</div>
+    <p>Palms-facing stacks your knuckles over the forearm, so load runs straight down the bones and the wrist stays
+    neutral — instead of the bent-back extension a pronated barbell forces.<span class="cite"><a href="#r2">2</a></span>
+    Cue it every set: "<strong>straight, stacked wrist — punch/pull through a flat fist</strong>." Use straps on
+    heavier pulls so your hand never becomes the weak link. The one thing to avoid is the
+    <strong>flared-elbow, pronated barbell press</strong> — worst shoulder angle <em>and</em> forced wrist extension.</p>
+  </div>
+  <div class="callout note">
+    <div class="callout-label">⌗ Shoulder care at 40</div>
+    <p>Warm the shoulders first (band pull-aparts, face pulls, a couple of light ramp sets). Don't ego-load
+    overhead — vertical pressing is the least forgiving pattern, so favour the landmine and neutral dumbbells. Work
+    a <strong>full but pain-free</strong> range; sharp pinching means reduce range or load, not push through.</p>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Get a real form check</div>
+    <p>Film a set from the side and the front and post it for feedback:
+    <a href="https://www.reddit.com/r/Fitness/" target="_blank" rel="noopener">r/Fitness</a> or the rehab-aware
+    <a href="https://forum.barbellmedicine.com/" target="_blank" rel="noopener">Barbell Medicine forum</a> — or
+    describe it to me in chat.</p>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">5</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="About 45°." data-explain-wrong="See §2.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">Where should your elbows be when pressing?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — tucked to about 45° with forearms vertical. It protects the shoulder and keeps the wrist neutral.">Tucked to about 45 degrees</button>
+      <button class="opt" data-feedback="Flaring to 90° is the barbell-style position to avoid — hard on the shoulder and wrist.">Flared straight out to ninety</button>
+      <button class="opt" data-feedback="Pinned tight to the ribs over-restricts the press; ~45° is the sweet spot.">Pinned tight against the ribs</button>
+      <button class="opt" data-feedback="Elbows behind the torso strains the shoulder; keep them tucked ~45°.">Pulled behind the torso line</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Blades first." data-explain-wrong="See §2.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">How do you start a row or pulldown?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Correct — set the shoulder blades down and back first, then pull. Every rep starts from the scapula.">Set the shoulder blades first</button>
+      <button class="opt" data-feedback="Yanking with the arms skips the back. Set the blades first.">Yank with the arms first</button>
+      <button class="opt" data-feedback="Leaning back first turns it into momentum cheating. Set the scapula first.">Lean the torso back first</button>
+      <button class="opt" data-feedback="Shrugging up is a fault — start by setting the blades down, not up.">Shrug the shoulders up first</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Straight, stacked wrist." data-explain-wrong="See §4.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">Why is a neutral grip your default?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Yes — it stacks the knuckles over the forearm, keeping the wrist straight so load runs down the bones, not across the scaphoid.">It keeps the wrist straight and stacked</button>
+      <button class="opt" data-feedback="It's not about lifting heavier — it's about protecting the wrist.">It lets you lift much heavier</button>
+      <button class="opt" data-feedback="The opposite — neutral grip avoids extension; a pronated bar forces it.">It forces the wrist into extension</button>
+      <button class="opt" data-feedback="You still brace every rep; the grip just protects the wrist.">It removes the need to brace</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li>Every rep: <strong>set the shoulder blades</strong>, then move the weight.</li>
+      <li>Keep a <strong>straight, stacked wrist</strong> — neutral grip routes load down the forearm.</li>
+      <li>Press with elbows <strong>~45°</strong>, brace hard overhead, stop short of lockout.</li>
+      <li>Pull by <strong>leading with the elbows</strong> to the lower ribs / upper chest — no lean-back rowing.</li>
+      <li>Warm the shoulders, use <strong>straps</strong> on heavy pulls, avoid the flared pronated press.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">🎥</div>
+    <div>
+      <div class="label">Primary source · read &amp; watch</div>
+      <div class="title"><a href="https://barbellrehab.com/overhead-press-grip/" target="_blank" rel="noopener">Barbell Rehab — “Optimize Your Overhead Press Grip” (neutral, in-line wrist)</a></div>
+      <div class="desc">A physio's breakdown of the exact wrist position you need. Demos:
+      <a href="https://barbend.com/neutral-grip-dumbbell-bench-press/" target="_blank" rel="noopener">neutral DB bench</a>,
+      <a href="https://www.youtube.com/shorts/OmlKl6oeeMk" target="_blank" rel="noopener">chest-supported row (Nippard)</a>,
+      <a href="https://www.catalystathletics.com/exercise/861/Neutral-Grip-Lat-Pulldown/" target="_blank" rel="noopener">neutral lat pulldown</a>.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want a neutral-grip swap for a specific machine, a cue for flaring
+    elbows, or whether a shoulder twinge means stop? Ask in chat.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#scapular-retraction">scapular retraction</a>,
+    <a href="../reference/glossary.html#neutral-grip">neutral grip</a>,
+    <a href="../reference/glossary.html#range-of-motion">range of motion</a>.
+    Mechanics → <a href="0003-levers-tension-wrist.html">L3</a>. Next → <a href="0010-calibrating-effort.html">L7 Calibrating Effort</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">Barbell Medicine — How to Bench Press (scapular set, bar path). <a href="https://www.barbellmedicine.com/blog/how-to-bench-press/" target="_blank" rel="noopener">barbellmedicine.com</a>; NASM — <a href="https://blog.nasm.org/biomechanics-of-the-lat-pulldown" target="_blank" rel="noopener">Biomechanics of the Lat Pulldown</a>.</li>
+    <li id="r2">Barbell Rehab — Overhead-press grip: keep a neutral wrist in line with the forearm. <a href="https://barbellrehab.com/overhead-press-grip/" target="_blank" rel="noopener">barbellrehab.com</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="0008-hinge-and-squat.html">
+      <div class="dir">← L5</div>
+      <div class="ttl">The Hinge &amp; the Squat</div>
+    </a>
+    <a class="next" href="0010-calibrating-effort.html">
+      <div class="dir">Next · L7</div>
+      <div class="ttl">Calibrating Effort →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L6 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+</body>
+</html>

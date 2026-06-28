@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L2 · How Muscle Actually Grows</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<script defer src="../assets/widgets.js"></script>
+<style>
+  /* Lesson-2-specific: signal flow, mechanism cards, the Damas scrubber chart */
+  .flow { display:flex; flex-wrap:wrap; align-items:stretch; gap:.45rem; margin:1.4rem 0; font-family:var(--sans); }
+  .flow .step { background:#fff; border:1px solid var(--rule); border-radius:8px; padding:.55rem .7rem; font-size:.82rem; font-weight:600; color:var(--abyss); display:flex; align-items:center; box-shadow:var(--shadow); flex:1 1 auto; min-width:0; }
+  .flow .step small { display:block; font-weight:400; color:var(--ink-faint); font-size:.74rem; }
+  .flow .arrow { align-self:center; color:var(--ocean); font-weight:800; }
+  .flow .step.t0 { border-left:4px solid var(--coral); }
+  .flow .step.t1 { border-left:4px solid var(--ocean); }
+  .flow .step.t2 { border-left:4px solid var(--surface); }
+  .flow .step.t3 { border-left:4px solid var(--kelp); }
+
+  .mechgrid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.8rem; margin:1.4rem 0; }
+  .mechgrid .mech { background:#fff; border:1px solid var(--rule); border-radius:var(--radius); padding:.9rem 1rem; box-shadow:var(--shadow); }
+  .mechgrid .mech .h { font-family:var(--sans); font-weight:700; font-size:.9rem; color:var(--abyss); }
+  .mechgrid .mech .verdict { font-family:var(--sans); font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-top:.3rem; display:inline-block; padding:.1rem .45rem; border-radius:999px; }
+  .mechgrid .mech p { font-size:.86rem; color:var(--ink-soft); margin:.45rem 0 0; }
+  .v-primary { background:#eef7ef; color:var(--kelp); border:1px solid #cfe6d3; }
+  .v-minor   { background:#fff7e6; color:#8a6d1e; border:1px solid #ecdcae; }
+  .v-out     { background:#fdf0ec; color:var(--coral); border:1px solid #f0cfc4; }
+  @media (max-width:40rem){ .mechgrid { grid-template-columns:1fr; } }
+
+  .chart-card { background:linear-gradient(180deg,#fff,#f7fbfc); border:1px solid var(--rule); border-top:4px solid var(--surface); border-radius:var(--radius); padding:1.1rem 1.2rem 1.3rem; margin:1.8rem 0; box-shadow:var(--shadow); }
+  .chart-card .calc-title { font-family:var(--sans); font-weight:700; font-size:.95rem; color:var(--ocean-deep); margin-bottom:.7rem; }
+  .chart-card svg { width:100%; height:auto; display:block; }
+  .scrub { display:flex; align-items:center; gap:.8rem; margin-top:.7rem; font-family:var(--sans); font-size:.82rem; }
+  .scrub input[type=range]{ flex:1; accent-color:var(--ocean); }
+  .chart-read { margin-top:.9rem; padding:.85rem 1rem; background:var(--abyss); color:#d8f1f5; border-radius:8px; font-family:var(--sans); font-size:.92rem; line-height:1.55; }
+  .chart-read b { color:#ffd479; }
+  .lgnd { display:flex; gap:1.1rem; flex-wrap:wrap; font-family:var(--sans); font-size:.76rem; color:var(--ink-soft); margin-top:.5rem; }
+  .lgnd span::before { content:"■ "; }
+  .lgnd .l-meas::before { color:var(--ocean); }
+  .lgnd .l-true::before { color:var(--kelp); }
+  .lgnd .l-gap::before  { color:#e3b7ab; }
+
+  .ladder { font-family:var(--sans); margin:1.3rem 0; }
+  .ladder .rung { display:flex; align-items:center; gap:.7rem; margin:.35rem 0; }
+  .ladder .bar { height:14px; border-radius:7px; background:var(--ocean); }
+  .ladder .lab { font-size:.8rem; color:var(--ink-soft); }
+  .ladder .small .bar{ background:#bfe2e8; } .ladder .small .lab b{ color:var(--ink-faint); }
+  .ladder .mid .bar{ background:var(--surface); }
+  .ladder .big .bar{ background:var(--coral); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap-wide">
+    <a class="brand" href="../index.html"><span class="dot">◉</span> dad-mod</a>
+    <nav>
+      <a href="../index.html">Lessons</a>
+      <a href="../reference/program-card.html">Program</a>
+      <a href="../reference/glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="kicker">Foundations · L2 · The science</p>
+  <h1 class="lesson-title">How Muscle Actually Grows</h1>
+  <p class="lesson-sub">What's happening inside the muscle between your sets — and why the first weeks of
+  "gains" are mostly a lie the tape measure tells.</p>
+  <div class="lesson-meta">
+    <span>⏱ ~12 minutes</span><span class="sep">•</span>
+    <span>🔬 Mechanism, with one myth busted</span><span class="sep">•</span>
+    <span class="tag ocean">Why the levers work</span>
+  </div>
+
+  <div class="callout mission">
+    <div class="callout-label">◎ Why this lesson</div>
+    <p><a href="0001-the-big-rocks.html">Lesson 1</a> told you <em>what</em> to do — volume, near-failure effort,
+    protein. This one shows you <em>why</em> those work, by following a single hard set down to the molecule. Get
+    this and the plan stops being a list of rules and starts being something you understand. It also sets honest
+    expectations for what your mirror will show in month one.</p>
+  </div>
+
+  <!-- ===== 1. TENSION ===== -->
+  <h2><span class="num">1</span>The signal is mechanical tension</h2>
+  <p>A muscle doesn't grow because it's "tired" or "pumped". It grows because its fibres were put under
+  <strong>high mechanical tension</strong> — a hard pull — and that physical force is converted into a chemical
+  growth signal, a process called <a href="../reference/glossary.html#mechanotransduction">mechanotransduction</a>.
+  Strain on the fibre's internal scaffolding (the filamin-C / BAG3 complex is the leading
+  candidate<span class="cite"><a href="#r1">1</a></span>) switches on <strong>mTORC1</strong>, the master control
+  for building new muscle protein.</p>
+
+  <div class="flow">
+    <div class="step t0">Hard set, near failure<small>high tension on fibres</small></div>
+    <div class="arrow">→</div>
+    <div class="step t1">Mechanotransduction<small>force → chemical signal</small></div>
+    <div class="arrow">→</div>
+    <div class="step t2">mTORC1 switches on<small>the growth master-switch</small></div>
+    <div class="arrow">→</div>
+    <div class="step t3">Protein synthesis ↑<small>+ dietary protein = growth</small></div>
+  </div>
+
+  <p>That last arrow matters: tension flips the switch, but you only build new tissue if the raw material —
+  <a href="../reference/glossary.html#muscle-protein-synthesis">protein</a> — is there. Tension without protein is
+  a builder with no bricks.</p>
+
+  <!-- ===== 2. THREE MECHANISMS ===== -->
+  <h2><span class="num">2</span>The famous "three mechanisms", corrected</h2>
+  <p>You'll read everywhere that muscle grows from three things: mechanical tension, metabolic stress ("the burn"),
+  and muscle damage ("the soreness"). That 2010 framework<span class="cite"><a href="#r5">5</a></span> is a useful
+  map, but the science has since moved on<span class="cite"><a href="#r1">1</a></span>:</p>
+
+  <div class="mechgrid">
+    <div class="mech">
+      <div class="h">Mechanical tension</div>
+      <span class="verdict v-primary">Primary driver</span>
+      <p>The real signal. Heavy, hard reps create it. This is the one you train for.</p>
+    </div>
+    <div class="mech">
+      <div class="h">Metabolic stress</div>
+      <span class="verdict v-minor">Minor / uncertain</span>
+      <p>"The burn." Probably matters mostly because high-rep sets drive fibres toward failure — not magic on its own.</p>
+    </div>
+    <div class="mech">
+      <div class="h">Muscle damage</div>
+      <span class="verdict v-out">Not a driver</span>
+      <p>Soreness is a <em>side-effect</em>, not a goal. It can even divert resources to repair. Chasing soreness is a mistake.</p>
+    </div>
+  </div>
+
+  <div class="callout note">
+    <div class="callout-label">⌗ So: don't chase soreness or the burn</div>
+    <p>If a session leaves you wrecked and sore, that's damage, not a better growth signal. Aim for hard, controlled
+    tension across your <a href="../reference/glossary.html#volume">weekly sets</a> — and recover. Feeling fine the
+    next day does <em>not</em> mean the session "didn't work".</p>
+  </div>
+
+  <!-- ===== 3. MPS ===== -->
+  <h2><span class="num">3</span>Synthesis up, breakdown down — net is what counts</h2>
+  <p>After a hard session, <a href="../reference/glossary.html#muscle-protein-synthesis">muscle protein synthesis</a>
+  (MPS) rises and stays elevated for roughly <strong>24–48 hours</strong>.<span class="cite"><a href="#r2">2</a></span>
+  But training also raises muscle protein <em>breakdown</em>. Growth is the <strong>net balance</strong>:</p>
+  <p style="text-align:center;font-family:var(--sans);font-weight:700;color:var(--ocean-deep)">
+    growth&nbsp;=&nbsp;(protein synthesised)&nbsp;−&nbsp;(protein broken down)</p>
+  <p>Fasted, that balance stays slightly negative even after training. Eating protein flips it
+  <strong>positive</strong> — which is the whole reason behind the <strong>~1.6–2.2 g/kg/day</strong> target, and
+  why spreading it across the day keeps you topped up through that 24–48 h
+  window.<span class="cite"><a href="#r4">4</a></span> This is the molecular cash-out of Lesson 1's protein rule.</p>
+
+  <!-- ===== 4. THE DAMAS SCRUBBER ===== -->
+  <h2><span class="num">4</span>Why the scale lies in month one</h2>
+  <p>Here's the result that re-calibrates every beginner. When untrained men started lifting, their measured muscle
+  size jumped early — but biopsies showed that early jump was mostly <strong>swelling and repair</strong>, not new
+  contractile muscle. True fibre growth only became the main story after about
+  <strong>three to ten weeks</strong>, once the early damage settled down.<span class="cite"><a href="#r3">3</a></span>
+  Drag through the weeks:</p>
+
+  <div class="chart-card">
+    <div class="calc-title">📉 Measured size vs. real muscle — first 10 weeks of training</div>
+    <svg id="damasChart" viewBox="0 0 640 340" role="img" aria-label="Chart: measured muscle size rises early but is mostly swelling; real muscle growth lags."></svg>
+    <div class="lgnd">
+      <span class="l-meas">Tape-measure size (ultrasound)</span>
+      <span class="l-true">Real contractile muscle</span>
+      <span class="l-gap">Swelling &amp; repair (the gap)</span>
+    </div>
+    <div class="scrub">
+      <label for="weekSlider">Week</label>
+      <input type="range" id="weekSlider" min="0" max="10" step="0.25" value="3">
+      <output id="weekOut">3</output>
+    </div>
+    <div class="chart-read" id="damasRead">—</div>
+  </div>
+
+  <p class="muted" style="font-family:var(--sans);font-size:.78rem">Anchored to Damas et&nbsp;al. 2016: whole-muscle
+  size rose ~+2.7% by week 3 and ~+10.4% by week 10, while a damage/edema marker spiked ~+17% at week 3. The
+  synthesis you measure in week 1 tracks <em>damage repair</em>, not growth; only later does it track real
+  hypertrophy.<span class="cite"><a href="#r3">3</a></span> The split shown is an illustrative decomposition.</p>
+
+  <div class="callout key">
+    <div class="callout-label">★ The expectation this sets</div>
+    <p>Month one will feel amazing — fast strength, a fuller look, the scale moving. Enjoy it, but know that the
+    <em>visible</em> size is largely fluid. The <em>real</em> muscle is being laid down underneath and shows up over
+    months. This is exactly why the <a href="0001-the-big-rocks.html">honest year-one goal</a> is ~5–9 kg, not the
+    overnight transformation the internet sells.</p>
+  </div>
+
+  <!-- ===== 5. RECRUITMENT ===== -->
+  <h2><span class="num">5</span>Why "1–3 reps short" still hits the big fibres</h2>
+  <p>Your nervous system recruits motor units (a nerve plus the fibres it controls) in a fixed order — small and
+  weak first, large and powerful last. This is <strong>Henneman's size
+  principle</strong>.<span class="cite"><a href="#r1">1</a></span> The big, high-threshold fibres — the ones with
+  the most growth potential — only switch on when the effort gets genuinely hard:</p>
+
+  <div class="ladder">
+    <div class="rung small"><div class="bar" style="width:28%"></div><span class="lab"><b>Easy early reps</b> — small fibres only</span></div>
+    <div class="rung mid"><div class="bar" style="width:60%"></div><span class="lab"><b>Mid set</b> — medium fibres join in</span></div>
+    <div class="rung big"><div class="bar" style="width:90%"></div><span class="lab"><b>Last hard reps (≈1–3 from failure)</b> — big fibres finally recruited</span></div>
+  </div>
+
+  <p>So you reach the muscle-building fibres in the <em>final few reps before failure</em> — which is exactly why
+  stopping at <a href="../reference/glossary.html#rir">RIR 1–3</a> works, and why grinding all the way to failure
+  adds lots of fatigue for barely any extra recruitment. Heavy loads get you there immediately; lighter loads get
+  you there if you take the set close to failure.</p>
+
+  <!-- ===== 6. NUCLEI ===== -->
+  <h2><span class="num">6</span>Two footnotes worth knowing</h2>
+  <p><strong>Myonuclei &amp; "muscle memory."</strong> Muscle fibres are built from many nuclei, and big growth
+  needs <em>more</em> of them, donated by resident stem cells (satellite cells). In animals these extra nuclei seem
+  to stick around during time off, a proposed basis for "muscle memory" — but whether that holds in humans is
+  <em>not settled</em>.<span class="cite"><a href="#r6">6</a></span> Either way, re-building lost muscle is faster
+  than the first time.</p>
+  <p><strong>Myofibrillar vs. sarcoplasmic.</strong> The growth that lasts and adds force is
+  <em>myofibrillar</em> (more actin/myosin). A separate "sarcoplasmic" growth (more fluid and glycogen) is real but
+  debated and probably minor for you.<span class="cite"><a href="#r7">7</a></span> Train for tension; you'll get the
+  kind that counts.</p>
+
+  <!-- ===== QUIZ ===== -->
+  <h2><span class="num">7</span>Check yourself</h2>
+
+  <div class="quiz" data-explain-right="Tension is the signal." data-explain-wrong="Re-read §1–2.">
+    <div class="q-kicker">Question 1 of 3</div>
+    <div class="q-text">What is the primary signal that drives muscle growth?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Right — high mechanical tension on the fibres is the signal; it's converted into a growth response via mechanotransduction.">Mechanical tension on fibres</button>
+      <button class="opt" data-feedback="Soreness is muscle damage — a side-effect, not a driver. Don't chase it.">Soreness from muscle damage</button>
+      <button class="opt" data-feedback="'The burn' is metabolic stress — minor and uncertain, not the main driver.">The burn of metabolic stress</button>
+      <button class="opt" data-feedback="Time in the gym isn't the signal; hard tension across your weekly sets is.">Hours spent in the gym</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="Exactly — mostly fluid." data-explain-wrong="See the scrubber in §4.">
+    <div class="q-kicker">Question 2 of 3</div>
+    <div class="q-text">In the first ~3 weeks, your measured size jumps mostly from…</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Correct — early measured size is largely swelling and repair; true fibre growth shows up over the following weeks.">Fluid swelling and repair</button>
+      <button class="opt" data-feedback="Real contractile tissue is built, but it lags — it isn't the bulk of the early measured change.">Real new muscle tissue</button>
+      <button class="opt" data-feedback="Fat loss isn't what the early size signal is measuring here; it's mostly swelling.">Lasting fat loss nearby</button>
+      <button class="opt" data-feedback="Bone doesn't change on this timescale. The early jump is swelling and repair.">Extra bone in the limb</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="quiz" data-explain-right="The size principle." data-explain-wrong="See the recruitment ladder in §5.">
+    <div class="q-kicker">Question 3 of 3</div>
+    <div class="q-text">Why does stopping 1–3 reps short still build muscle?</div>
+    <div class="q-options">
+      <button class="opt" data-correct data-feedback="Yes — by the last hard reps the big, high-threshold fibres are finally recruited, so you get the growth stimulus without the cost of true failure.">Late hard reps recruit big units</button>
+      <button class="opt" data-feedback="Glycogen depletion isn't the mechanism here; it's recruitment of high-threshold motor units.">Easy early reps drain glycogen</button>
+      <button class="opt" data-feedback="Damage isn't the driver — recruitment of big motor units near the end of the set is.">Light reps damage most fibres</button>
+      <button class="opt" data-feedback="Tempo doesn't spike hormones meaningfully; it's the size principle at work.">Slow reps spike testosterone</button>
+    </div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="recap">
+    <h3>What you can now say</h3>
+    <ol>
+      <li>Growth's real signal is <strong>mechanical tension</strong>, sensed and converted to a build order (mTORC1 → synthesis).</li>
+      <li><strong>Soreness and "the burn" aren't the goal</strong> — tension is; damage is just a side-effect.</li>
+      <li>Training lifts synthesis for <strong>24–48 h</strong>; <strong>protein</strong> turns the net balance positive.</li>
+      <li>Early measured size is mostly <strong>swelling</strong>; real muscle accrues over <strong>weeks to months</strong>.</li>
+      <li>The <strong>last few reps before failure</strong> recruit the big fibres — why RIR 1–3 works.</li>
+    </ol>
+  </div>
+
+  <div class="sourcebox">
+    <div class="icon">📖</div>
+    <div>
+      <div class="label">Primary source · read this next</div>
+      <div class="title"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5023708/" target="_blank" rel="noopener">Damas et al. (2016) — “Resistance training-induced changes in integrated myofibrillar protein synthesis are related to hypertrophy only after attenuation of muscle damage”</a></div>
+      <div class="desc">The study behind §4: early synthesis is repair, real growth comes later. Open-access in <i>The Journal of Physiology</i>. Dense but landmark — skim the abstract and figures.</div>
+    </div>
+  </div>
+
+  <div class="ask-teacher">
+    💬 <b>I'm your teacher — ask me anything.</b> Want the mTORC1 pathway in more depth, unsure what "near failure"
+    feels like, or wondering whether your lack of soreness means a session was wasted (it doesn't)? Ask in chat.</div>
+
+  <div class="crosslinks">
+    <b>Linked:</b> Glossary →
+    <a href="../reference/glossary.html#mechanotransduction">mechanotransduction</a>,
+    <a href="../reference/glossary.html#muscle-protein-synthesis">muscle protein synthesis</a>,
+    <a href="../reference/glossary.html#motor-unit-recruitment">size principle</a>,
+    <a href="../reference/glossary.html#rir">RIR</a>.
+    Builds on → <a href="0001-the-big-rocks.html">L1 The Big Rocks</a>. Next → <a href="0003-levers-tension-wrist.html">L3 Levers, Tension &amp; Your Wrist</a>.
+  </div>
+
+  <h2 id="refs"><span class="num">§</span>References</h2>
+  <ol style="font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);line-height:1.5">
+    <li id="r1">Wackerhage et al. (2019). Stimuli and sensors that initiate skeletal muscle hypertrophy, <i>J Appl Physiol</i>. <a href="https://pubmed.ncbi.nlm.nih.gov/30335577/" target="_blank" rel="noopener">PubMed 30335577</a>.</li>
+    <li id="r2">Resistance exercise &amp; the 24–48 h MPS response (review). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5023708/" target="_blank" rel="noopener">via Damas 2016, J Physiol</a>.</li>
+    <li id="r3">Damas et al. (2016). Early CSA increases reflect edema/damage; true hypertrophy after damage attenuates, <i>J Physiol</i> / <i>Eur J Appl Physiol</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5023708/" target="_blank" rel="noopener">PMC5023708</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/26280652/" target="_blank" rel="noopener">PubMed 26280652</a>.</li>
+    <li id="r4">Morton et al. (2018). Protein dose-response meta-analysis, <i>BJSM</i>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5867436/" target="_blank" rel="noopener">PMC5867436</a>.</li>
+    <li id="r5">Schoenfeld (2010). The mechanisms of muscle hypertrophy (the original three-mechanism model), <i>JSCR</i>. <a href="https://pubmed.ncbi.nlm.nih.gov/20847704/" target="_blank" rel="noopener">PubMed 20847704</a>.</li>
+    <li id="r6">Rahmati et al. (2022). Myonuclear permanence — retained in rodents, unclear in humans, <i>J Cachexia Sarcopenia Muscle</i>. <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/jcsm.13043" target="_blank" rel="noopener">Wiley</a>.</li>
+    <li id="r7">Roberts et al. (2020). Sarcoplasmic hypertrophy — a scientific “unicorn”? <i>Front. Physiol.</i> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7372125/" target="_blank" rel="noopener">PMC7372125</a>.</li>
+  </ol>
+
+  <nav class="lesson-nav">
+    <a href="0001-the-big-rocks.html">
+      <div class="dir">← L1</div>
+      <div class="ttl">The Big Rocks</div>
+    </a>
+    <a class="next" href="0003-levers-tension-wrist.html">
+      <div class="dir">Next · L3</div>
+      <div class="ttl">Levers, Tension &amp; Your Wrist →</div>
+    </a>
+  </nav>
+
+  <p class="pagefoot">Lesson L2 of the dad-mod course ·
+  <a href="../index.html">all lessons</a> ·
+  <a href="../reference/glossary.html">glossary</a></p>
+</main>
+
+<script>
+/* ===== The Damas "measured size vs real muscle" scrubber ===== */
+(function(){
+  var svg = document.getElementById('damasChart');
+  if(!svg) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var W=640, H=340, m={l:54,r:20,t:20,b:46};
+  var pw=W-m.l-m.r, ph=H-m.t-m.b, maxX=10, maxY=12;
+  function X(w){ return m.l + (w/maxX)*pw; }
+  function Y(p){ return m.t + (1-p/maxY)*ph; }
+
+  function interp(anchors){
+    return function(w){
+      if(w<=anchors[0][0]) return anchors[0][1];
+      for(var i=1;i<anchors.length;i++){
+        if(w<=anchors[i][0]){
+          var a=anchors[i-1], b=anchors[i], t=(w-a[0])/(b[0]-a[0]);
+          return a[1]+t*(b[1]-a[1]);
+        }
+      }
+      return anchors[anchors.length-1][1];
+    };
+  }
+  var measured = interp([[0,0],[3,2.7],[6,6.4],[10,10.4]]);
+  var truth    = interp([[0,0],[1,0.2],[3,0.9],[6,4.8],[10,9.6]]);
+
+  function el(tag, attrs){
+    var e=document.createElementNS(NS, tag);
+    for(var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function sample(fn){
+    var pts=[];
+    for(var w=0; w<=maxX+0.001; w+=0.25) pts.push([X(w), Y(fn(w))]);
+    return pts;
+  }
+  function pathD(pts){ return pts.map(function(p,i){ return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1); }).join(' '); }
+
+  // gridlines + y labels
+  for(var p=0; p<=maxY; p+=3){
+    svg.appendChild(el('line',{x1:m.l, y1:Y(p), x2:W-m.r, y2:Y(p), stroke:'#e3ded2', 'stroke-width':1}));
+    var yl=el('text',{x:m.l-8, y:Y(p)+4, 'text-anchor':'end', 'font-family':'sans-serif','font-size':11, fill:'#76838d'});
+    yl.textContent='+'+p+'%'; svg.appendChild(yl);
+  }
+  // x labels
+  for(var wx=0; wx<=10; wx+=2){
+    var xl=el('text',{x:X(wx), y:H-m.b+20, 'text-anchor':'middle','font-family':'sans-serif','font-size':11, fill:'#76838d'});
+    xl.textContent='wk '+wx; svg.appendChild(xl);
+  }
+  svg.appendChild(el('line',{x1:m.l,y1:Y(0),x2:W-m.r,y2:Y(0),stroke:'#bbb3a1','stroke-width':1.5}));
+
+  // shaded gap (measured above, truth below)
+  var mPts=sample(measured), tPts=sample(truth);
+  var band='M'+mPts.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' L ');
+  band+=' L '+tPts.slice().reverse().map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' L ')+' Z';
+  svg.appendChild(el('path',{d:band, fill:'#e3b7ab', 'fill-opacity':0.45, stroke:'none'}));
+
+  // curves
+  svg.appendChild(el('path',{d:pathD(tPts), fill:'none', stroke:'#3f7d4e', 'stroke-width':3}));
+  svg.appendChild(el('path',{d:pathD(mPts), fill:'none', stroke:'#0b6b7a', 'stroke-width':3}));
+
+  // marker line + dots
+  var mk = el('line',{stroke:'#c1492b','stroke-width':2,'stroke-dasharray':'4 3'}); svg.appendChild(mk);
+  var dotM = el('circle',{r:5, fill:'#0b6b7a', stroke:'#fff','stroke-width':1.5}); svg.appendChild(dotM);
+  var dotT = el('circle',{r:5, fill:'#3f7d4e', stroke:'#fff','stroke-width':1.5}); svg.appendChild(dotT);
+
+  var slider=document.getElementById('weekSlider');
+  var weekOut=document.getElementById('weekOut');
+  var read=document.getElementById('damasRead');
+
+  function update(){
+    var w=parseFloat(slider.value);
+    weekOut.textContent = (w%1===0)? w : w.toFixed(2);
+    var mv=measured(w), tv=truth(w), gap=Math.max(0, mv-tv);
+    mk.setAttribute('x1',X(w)); mk.setAttribute('x2',X(w));
+    mk.setAttribute('y1',m.t); mk.setAttribute('y2',Y(0));
+    dotM.setAttribute('cx',X(w)); dotM.setAttribute('cy',Y(mv));
+    dotT.setAttribute('cx',X(w)); dotT.setAttribute('cy',Y(tv));
+    var pctFake = mv>0 ? Math.round(gap/mv*100) : 0;
+    read.innerHTML = 'Week <b>'+ (Math.round(w*10)/10) +'</b>: the tape measure reads <b>+'+mv.toFixed(1)+
+      '%</b>, but real contractile muscle is only <b>+'+tv.toFixed(1)+'%</b>. About <b>'+pctFake+
+      '%</b> of what you can "see" is still swelling &amp; repair.';
+  }
+  slider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>
