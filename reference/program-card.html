@@ -14,6 +14,7 @@
   .workout table { margin:.5rem 0 0; }
   .workout td .alt { display:block; color:var(--ocean-deep); font-size:.84em; margin-top:.15rem; }
   .workout td.log { color:var(--ink-faint); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .workout td.start { color:var(--ocean-deep); font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; }
   .ss { font-family:var(--sans); font-size:.66rem; font-weight:700; color:var(--kelp); }
 </style>
 </head>
@@ -76,13 +77,13 @@
   <div class="workout" id="workout-a">
     <h3><span class="badge">A</span> Workout A</h3>
     <table>
-      <thead><tr><th>#</th><th>Exercise</th><th>Sets × reps</th><th>Log</th></tr></thead>
+      <thead><tr><th>#</th><th>Exercise</th><th>Sets × reps</th><th>Start</th><th>Log</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>Goblet squat<span class="alt">alt: leg press / safety-bar squat</span></td><td>3 × 6–8</td><td class="log">___ kg</td></tr>
-        <tr><td>2</td><td>Neutral-grip DB bench press<span class="alt">alt: machine chest press</span></td><td>3 × 6–10</td><td class="log">___ kg</td></tr>
-        <tr><td>3</td><td>Neutral-grip lat pulldown<span class="alt">alt: assisted neutral pull-up</span></td><td>3 × 8–12</td><td class="log">___ kg</td></tr>
-        <tr><td><span class="ss">4 ⟂</span></td><td>Chest-supported neutral row<span class="alt">alt: seated cable row, neutral</span></td><td>2 × 10–12</td><td class="log">___ kg</td></tr>
-        <tr><td><span class="ss">5 ⟂</span></td><td>Forearm plank<span class="alt">alt: Pallof press</span></td><td>2 × 30–45 s</td><td class="log">___</td></tr>
+        <tr><td>1</td><td>Goblet squat<span class="alt">alt: leg press / safety-bar squat</span></td><td>3 × 6–8</td><td class="start">20 kg</td><td class="log">___ kg</td></tr>
+        <tr><td>2</td><td>Neutral-grip DB bench press<span class="alt">alt: machine chest press</span></td><td>3 × 6–10</td><td class="start">22 kg ea</td><td class="log">___ kg</td></tr>
+        <tr><td>3</td><td>Neutral-grip lat pulldown<span class="alt">alt: assisted neutral pull-up</span></td><td>3 × 8–12</td><td class="start">~40 kg †</td><td class="log">___ kg</td></tr>
+        <tr><td><span class="ss">4 ⟂</span></td><td>Chest-supported neutral row<span class="alt">alt: seated cable row, neutral</span></td><td>2 × 10–12</td><td class="start">18 kg ea</td><td class="log">___ kg</td></tr>
+        <tr><td><span class="ss">5 ⟂</span></td><td>Forearm plank<span class="alt">alt: Pallof press</span></td><td>2 × 30–45 s</td><td class="start">body</td><td class="log">___</td></tr>
       </tbody>
     </table>
   </div>
@@ -90,17 +91,27 @@
   <div class="workout" id="workout-b">
     <h3><span class="badge">B</span> Workout B</h3>
     <table>
-      <thead><tr><th>#</th><th>Exercise</th><th>Sets × reps</th><th>Log</th></tr></thead>
+      <thead><tr><th>#</th><th>Exercise</th><th>Sets × reps</th><th>Start</th><th>Log</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>Trap-bar deadlift<span class="alt">alt: Romanian deadlift with straps</span></td><td>3 × 5–8</td><td class="log">___ kg</td></tr>
-        <tr><td>2</td><td>Neutral-grip DB shoulder press<span class="alt">alt: machine / landmine press</span></td><td>3 × 6–10</td><td class="log">___ kg</td></tr>
-        <tr><td>3</td><td>Hammer/neutral DB row<span class="alt">alt: neutral seated cable row</span></td><td>3 × 8–12</td><td class="log">___ kg</td></tr>
-        <tr><td><span class="ss">4 ⟂</span></td><td>Leg press<span class="alt">alt: hack squat / DB split squat (held by bells)</span></td><td>2 × 10–12</td><td class="log">___ kg</td></tr>
-        <tr><td><span class="ss">5 ⟂</span></td><td>Dead bug<span class="alt">alt: lying leg raise</span></td><td>2 × 10–12</td><td class="log">___</td></tr>
+        <tr><td>1</td><td>Trap-bar deadlift<span class="alt">alt: Romanian deadlift with straps</span></td><td>3 × 5–8</td><td class="start">60 kg</td><td class="log">___ kg</td></tr>
+        <tr><td>2</td><td>Neutral-grip DB shoulder press<span class="alt">alt: machine / landmine press</span></td><td>3 × 6–10</td><td class="start">14 kg ea</td><td class="log">___ kg</td></tr>
+        <tr><td>3</td><td>Hammer/neutral DB row<span class="alt">alt: neutral seated cable row</span></td><td>3 × 8–12</td><td class="start">22 kg ea</td><td class="log">___ kg</td></tr>
+        <tr><td><span class="ss">4 ⟂</span></td><td>Leg press<span class="alt">alt: hack squat / DB split squat (held by bells)</span></td><td>2 × 10–12</td><td class="start">~90 kg †</td><td class="log">___ kg</td></tr>
+        <tr><td><span class="ss">5 ⟂</span></td><td>Dead bug<span class="alt">alt: lying leg raise</span></td><td>2 × 10–12</td><td class="start">body</td><td class="log">___</td></tr>
       </tbody>
     </table>
     <p class="muted" style="font-family:var(--sans);font-size:.85rem;margin:.6rem 0 0">Time left over? Hammer-grip
-    DB or EZ-bar curls, 2 × 10–15.</p>
+    DB or EZ-bar curls, 2 × 10–15 — start ~11 kg ea.</p>
+  </div>
+
+  <div class="callout note">
+    <div class="callout-label">⌗ Using the Start column</div>
+    <p>Conservative week-1 loads for a reasonably strong beginner — <strong>"ea" = per dumbbell</strong>,
+    <strong>"body" = bodyweight</strong>. On your first set, dial each to <strong>~2–3
+    <a href="glossary.html#rir">RIR</a> at the top of the rep range</strong>: if you reach the top with more than
+    three reps to spare, go up a step. Then write your real working weight in <strong>Log</strong> and climb it with
+    the progression rule below. <strong>† machine-dependent</strong> (pulldown, leg press) — the figure is a
+    ballpark, so trust the rep-feel. Trap-bar and leg press usually climb fastest.</p>
   </div>
 
   <!-- ===== EFFORT + PROGRESSION ===== -->
