@@ -7,10 +7,20 @@
 
 ## Hard constraints
 - **Scaphoid fracture history** → no loaded wrist extension, no flat-palm push-ups.
-  Favour: neutral/hammer grips, machine handles, landmine, trap-bar, goblet (held by bells),
-  forearm planks, lifting straps to cut grip. Push-ups only on fists / handles / parallettes.
+  Favour: neutral/hammer grips, machine handles, goblet (held by bells), barbell RDL (bar hangs,
+  wrists straight), forearm planks. Push-ups only on fists / handles / parallettes.
   Wrist wraps stabilise but do NOT remove the extension demand — choose neutral tools instead.
-- 3 days/week, ~45 min/session. Equipment = basic free weights + a few machines (TBC tomorrow).
+- 3 days/week, ~45 min/session.
+
+## Gym equipment — CONFIRMED (day one, ~2026-06-30)
+- **Machines (Technogym):** lat pulldown · leg press · leg extension/curl.
+- **Free weights:** barbell + plates · dumbbells **max 30 kg** · kettlebells · benches.
+- **Cardio:** treadmills + bikes (warm-up).
+- **NOT present:** trap/hex bar, chest-press machine, shoulder-press machine, seated cable row,
+  lifting straps. → hinge = **barbell RDL** (no trap bar); pulls use a **mixed grip** (no straps);
+  press/row are the **dumbbell** versions (not machine backups). DB 30 kg cap → goblet goes higher-rep
+  then → DB split squat; leg press is the main heavy quad lift. Leg curl added → fixes the v1 hamstring gap.
+- Program Card is now **v2**, locked to this list.
 
 ## Teaching preferences
 - **Be extremely concise** (his global instruction). Sacrifice grammar for concision in chat.
@@ -18,7 +28,7 @@
 - Wants to *understand the why*, not just follow a plan.
 
 ## Open items / next sessions
-- [ ] Confirm exact machines available → finalise the program card substitutions.
+- [x] Confirm exact machines available → done; Program Card v2 locked to the real gym.
 - [ ] Teach the main lifts' form (one per session) — start with hinge & squat.
 - [ ] Calibrate RIR (how "near failure" actually feels) — needs hands-on.
 - [ ] Recommend baseline check-up + bloodwork (glucose/HbA1c, lipids, BP, vit D) — none done yet.
