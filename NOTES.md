@@ -12,15 +12,20 @@
   Wrist wraps stabilise but do NOT remove the extension demand — choose neutral tools instead.
 - 3 days/week, ~45 min/session.
 
-## Gym equipment — CONFIRMED (day one, ~2026-06-30)
-- **Machines (Technogym):** lat pulldown · leg press · leg extension/curl.
+## Gym equipment — CONFIRMED (day one ~2026-06-30; +3 machines ~2026-07-22)
+- **Machines (Technogym):** lat pulldown · leg press · leg extension/curl · **multi press** (chest+shoulder,
+  neutral grips, weight stack) · **hip abductor**.
+- **Cables:** **Vision dual-pulley functional trainer** (rows · pull-throughs · face pulls · Pallof · pushdowns).
 - **Free weights:** barbell + plates · dumbbells **max 30 kg** · kettlebells · benches.
 - **Cardio:** treadmills + bikes (warm-up).
-- **NOT present:** trap/hex bar, chest-press machine, shoulder-press machine, seated cable row,
-  lifting straps. → hinge = **barbell RDL** (no trap bar); pulls use a **mixed grip** (no straps);
-  press/row are the **dumbbell** versions (not machine backups). DB 30 kg cap → goblet goes higher-rep
-  then → DB split squat; leg press is the main heavy quad lift. Leg curl added → fixes the v1 hamstring gap.
-- Program Card is now **v2**, locked to this list.
+- **NOT present:** trap/hex bar, lifting straps. → hinge = **barbell RDL** (no trap bar), cable pull-through =
+  grip-free fallback; pulls use a **mixed grip** (no straps). DB 30 kg cap → goblet goes higher-rep then → DB
+  split squat; **multi press** now lets pressing escape the DB cap (wrist-safe on neutral handles); leg press is
+  the main heavy quad lift; leg curl fixes the v1 hamstring gap.
+- Program Card is now **v4**: split from 2 alternating workouts into **3 distinct full-body sessions A/B/C**
+  (one per training day). Full-body ×3 keeps each muscle at 2–3×/week — a body-part split can't at 3 days/week.
+  A = squat + horizontal push/pull; B = hinge + overhead push/pull; C = single-leg + cable/machine day (multi
+  press as main press, cable row, cable pull-through, hip abductor, Pallof — showcases the new kit).
 
 ## Teaching preferences
 - **Be extremely concise** (his global instruction). Sacrifice grammar for concision in chat.
