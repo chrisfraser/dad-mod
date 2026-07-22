@@ -22,7 +22,10 @@
   grip-free fallback; pulls use a **mixed grip** (no straps). DB 30 kg cap → goblet goes higher-rep then → DB
   split squat; **multi press** now lets pressing escape the DB cap (wrist-safe on neutral handles); leg press is
   the main heavy quad lift; leg curl fixes the v1 hamstring gap.
-- Program Card is now **v3** (v2 + the three new machines).
+- Program Card is now **v4**: split from 2 alternating workouts into **3 distinct full-body sessions A/B/C**
+  (one per training day). Full-body ×3 keeps each muscle at 2–3×/week — a body-part split can't at 3 days/week.
+  A = squat + horizontal push/pull; B = hinge + overhead push/pull; C = single-leg + cable/machine day (multi
+  press as main press, cable row, cable pull-through, hip abductor, Pallof — showcases the new kit).
 
 ## Teaching preferences
 - **Be extremely concise** (his global instruction). Sacrifice grammar for concision in chat.
